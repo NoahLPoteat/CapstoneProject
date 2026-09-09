@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://vyvnt6xkcn2d"]
+
+[node name="GamePrototype" type="Node"]
+
+[node name="SceneController" type="Node2D" parent="."]
+
+[node name="BattleMap" type="Node2D" parent="SceneController"]
+
+[node name="WorldMap" type="Node2D" parent="SceneController"]
