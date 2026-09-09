@@ -1,0 +1,6 @@
+[gd_resource type="Resource" script_class="AbilityBase" load_steps=2 format=3 uid="uid://x7ob4hxxtqn"]
+
+[ext_resource type="Script" uid="uid://mpukm3krw8pq" path="res://src/gameplay/resources/ability_res/ability_base.gd" id="1_fgl2p"]
+
+[resource]
+script = ExtResource("1_fgl2p")

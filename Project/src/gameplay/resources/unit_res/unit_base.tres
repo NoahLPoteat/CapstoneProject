@@ -1,3 +1,7 @@
-[gd_resource type="Resource" format=3 uid="uid://d0oh88upwiom3"]
+[gd_resource type="Resource" load_steps=2 format=3 uid="uid://d0oh88upwiom3"]
+
+[ext_resource type="Script" uid="uid://dw5p03i0ckv2i" path="res://src/gameplay/resources/unit_res/unit_base_script.gd" id="1_wccjq"]
 
 [resource]
+script = ExtResource("1_wccjq")
+unit_name = null

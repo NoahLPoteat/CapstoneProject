@@ -1,3 +1,7 @@
-[gd_resource type="Resource" format=3 uid="uid://cy1xetydep3p8"]
+[gd_resource type="Resource" script_class="UnitClass" load_steps=3 format=3 uid="uid://cy1xetydep3p8"]
+
+[ext_resource type="Script" uid="uid://mpukm3krw8pq" path="res://src/gameplay/resources/ability_res/ability_base.gd" id="1_811qt"]
+[ext_resource type="Script" uid="uid://b82mi6vslf5gs" path="res://src/gameplay/resources/class_res/class_base.gd" id="2_vvovu"]
 
 [resource]
+script = ExtResource("2_vvovu")

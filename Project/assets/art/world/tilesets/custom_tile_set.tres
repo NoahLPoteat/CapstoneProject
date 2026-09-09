@@ -1,0 +1,28 @@
+[gd_resource type="TileSet" load_steps=3 format=3 uid="uid://byqahne7l5q25"]
+
+[ext_resource type="Texture2D" uid="uid://fxyo5og8k1dq" path="res://assets/art/world/tilesets/TileSet4x.png" id="1_c3je4"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_7g1sm"]
+texture = ExtResource("1_c3je4")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+0:0/0/texture_origin = Vector2i(0, 8)
+1:0/0 = 0
+1:0/0/texture_origin = Vector2i(0, 8)
+1:0/0/custom_data_0 = -8
+0:1/0 = 0
+0:1/0/texture_origin = Vector2i(0, 8)
+0:1/0/custom_data_0 = -8
+1:1/0 = 0
+1:1/0/texture_origin = Vector2i(0, 8)
+0:2/0 = 0
+1:2/0 = 0
+0:3/0 = 0
+1:3/0 = 0
+
+[resource]
+tile_shape = 1
+tile_size = Vector2i(32, 16)
+custom_data_layer_0/name = "SpriteSitPos"
+custom_data_layer_0/type = 2
+sources/0 = SubResource("TileSetAtlasSource_7g1sm")
