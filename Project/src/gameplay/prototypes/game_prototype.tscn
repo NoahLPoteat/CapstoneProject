@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=4 uid="uid://vyvnt6xkcn2d"]
+[gd_scene load_steps=17 format=4 uid="uid://vyvnt6xkcn2d"]
 
 [ext_resource type="Script" uid="uid://dsqrh11elmfx5" path="res://src/gameplay/prototypes/game.gd" id="1_4dq4k"]
 [ext_resource type="TileSet" uid="uid://byqahne7l5q25" path="res://assets/art/world/tilesets/custom_tile_set.tres" id="1_rot2c"]
@@ -9,9 +9,26 @@
 [ext_resource type="Texture2D" uid="uid://bistwo6yjxmqh" path="res://icon.svg" id="5_mqqr1"]
 [ext_resource type="Script" uid="uid://0etskjq4ec44" path="res://src/gameplay/prototypes/map_node_controller.gd" id="5_qwj7d"]
 [ext_resource type="Script" uid="uid://b0p1qotwa48bv" path="res://src/gameplay/world_maps/map_node.gd" id="6_4dq4k"]
+[ext_resource type="Shader" uid="uid://bvp114koaqxce" path="res://shaders/dither_trans.gdshader" id="10_3ykrj"]
+[ext_resource type="Script" uid="uid://dlakwuuc8rn70" path="res://src/gameplay/prototypes/transition_node.gd" id="10_yhlpg"]
+
+[sub_resource type="PackedScene" id="PackedScene_yhlpg"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_mqqr1"]
 radius = 7.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_3ykrj"]
+shader = ExtResource("10_3ykrj")
+shader_parameter/intensity = 1.0
+
+[sub_resource type="Gradient" id="Gradient_yhlpg"]
+offsets = PackedFloat32Array(0)
+colors = PackedColorArray(0.05882353, 0.019607844, 0.1764706, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_wyd14"]
+gradient = SubResource("Gradient_yhlpg")
+width = 320
+height = 180
 
 [node name="root" type="Node"]
 
@@ -30,6 +47,7 @@ mouse_filter = 1
 script = ExtResource("1_4dq4k")
 
 [node name="BattleScreenController" type="Control" parent="Game"]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -59,7 +77,7 @@ offset_bottom = 169.0
 disable_3d = true
 handle_input_locally = false
 size = Vector2i(228, 158)
-render_target_update_mode = 4
+render_target_update_mode = 0
 
 [node name="ColorRect" type="ColorRect" parent="Game/BattleScreenController/SubViewportContainer/SubViewport"]
 anchors_preset = 15
@@ -110,7 +128,6 @@ grow_vertical = 2
 texture = ExtResource("2_utvfa")
 
 [node name="WorldMapController" type="Control" parent="Game"]
-visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -146,6 +163,7 @@ script = ExtResource("5_qwj7d")
 [node name="TestMapNode" type="Node2D" parent="Game/WorldMapController/MapNodeController"]
 position = Vector2(71, 61)
 script = ExtResource("6_4dq4k")
+linked_battle_map = SubResource("PackedScene_yhlpg")
 
 [node name="MapNodeIcon" type="Sprite2D" parent="Game/WorldMapController/MapNodeController/TestMapNode"]
 scale = Vector2(0.05, 0.05)
@@ -154,6 +172,20 @@ texture = ExtResource("5_mqqr1")
 [node name="ClickDetection" type="Area2D" parent="Game/WorldMapController/MapNodeController/TestMapNode"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Game/WorldMapController/MapNodeController/TestMapNode/ClickDetection"]
+shape = SubResource("CircleShape2D_mqqr1")
+
+[node name="TestMapNode2" type="Node2D" parent="Game/WorldMapController/MapNodeController"]
+position = Vector2(96, 93)
+script = ExtResource("6_4dq4k")
+linked_battle_map = SubResource("PackedScene_yhlpg")
+
+[node name="MapNodeIcon" type="Sprite2D" parent="Game/WorldMapController/MapNodeController/TestMapNode2"]
+scale = Vector2(0.05, 0.05)
+texture = ExtResource("5_mqqr1")
+
+[node name="ClickDetection" type="Area2D" parent="Game/WorldMapController/MapNodeController/TestMapNode2"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Game/WorldMapController/MapNodeController/TestMapNode2/ClickDetection"]
 shape = SubResource("CircleShape2D_mqqr1")
 
 [node name="MainMenu" type="Control" parent="Game"]
@@ -166,10 +198,30 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 1
 
-[node name="TransitionHandler" type="Control" parent="Game"]
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+[node name="TransitionNode" type="Control" parent="Game"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("10_yhlpg")
+trans_time = 1.5
+ease_type = 2
+trans_type = 5
 
+[node name="TextureRect" type="TextureRect" parent="Game/TransitionNode"]
+material = SubResource("ShaderMaterial_3ykrj")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture2D_wyd14")
+
+[connection signal="map_node_clicked" from="Game/WorldMapController" to="Game" method="_on_world_map_controller_map_node_clicked"]
 [connection signal="node_clicked" from="Game/WorldMapController/MapNodeController" to="Game/WorldMapController" method="_on_map_node_controller_node_clicked"]
 [connection signal="input_event" from="Game/WorldMapController/MapNodeController/TestMapNode/ClickDetection" to="Game/WorldMapController/MapNodeController/TestMapNode" method="_on_click_detection_input_event"]
+[connection signal="input_event" from="Game/WorldMapController/MapNodeController/TestMapNode2/ClickDetection" to="Game/WorldMapController/MapNodeController/TestMapNode2" method="_on_click_detection_input_event"]

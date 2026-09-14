@@ -11,6 +11,7 @@ config_version=5
 [application]
 
 config/name="Untitled T-RPG"
+run/main_scene="uid://vyvnt6xkcn2d"
 config/features=PackedStringArray("4.5", "GL Compatibility")
 config/icon="res://icon.svg"
 
