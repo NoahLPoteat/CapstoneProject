@@ -1,4 +1,4 @@
-class_name UnitBase extends Resource
+class_name UnitBaseDep extends Resource
 
 @export var unit_name: String = "Enter Name..."
 @export var unit_class : UnitClass

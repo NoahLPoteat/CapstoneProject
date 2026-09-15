@@ -1,8 +1,8 @@
-[gd_scene load_steps=17 format=4 uid="uid://vyvnt6xkcn2d"]
+[gd_scene load_steps=17 format=3 uid="uid://vyvnt6xkcn2d"]
 
 [ext_resource type="Script" uid="uid://dsqrh11elmfx5" path="res://src/gameplay/prototypes/game.gd" id="1_4dq4k"]
-[ext_resource type="TileSet" uid="uid://byqahne7l5q25" path="res://assets/art/world/tilesets/custom_tile_set.tres" id="1_rot2c"]
 [ext_resource type="Texture2D" uid="uid://clt1e2g8xluai" path="res://assets/art/ui/battle_map_gui/BattleGUIFrame-Empty.png" id="2_utvfa"]
+[ext_resource type="PackedScene" uid="uid://cu0oyqg0re8sc" path="res://src/gameplay/prototypes/battle_map_controller.tscn" id="2_yhlpg"]
 [ext_resource type="Texture2D" uid="uid://cxh3p0hntn5kn" path="res://assets/art/ui/world_map_gui/WorldMap_proto_inner.png" id="3_e6p4r"]
 [ext_resource type="Script" uid="uid://b67ca813sx6pc" path="res://src/gameplay/prototypes/world_map_controller.gd" id="3_qwj7d"]
 [ext_resource type="Texture2D" uid="uid://b53aq5ur204uh" path="res://assets/art/ui/world_map_gui/WorldMap_proto_frame.png" id="4_r4dsk"]
@@ -79,7 +79,7 @@ handle_input_locally = false
 size = Vector2i(228, 158)
 render_target_update_mode = 0
 
-[node name="ColorRect" type="ColorRect" parent="Game/BattleScreenController/SubViewportContainer/SubViewport"]
+[node name="BgRect" type="ColorRect" parent="Game/BattleScreenController/SubViewportContainer/SubViewport"]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -87,36 +87,7 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.05882353, 0.019607844, 0.1764706, 1)
 
-[node name="BattleMapController" type="Node2D" parent="Game/BattleScreenController/SubViewportContainer/SubViewport"]
-
-[node name="BattleMapContainer" type="Node2D" parent="Game/BattleScreenController/SubViewportContainer/SubViewport/BattleMapController"]
-
-[node name="TestMap" type="Node2D" parent="Game/BattleScreenController/SubViewportContainer/SubViewport/BattleMapController/BattleMapContainer"]
-texture_filter = 1
-
-[node name="TileMapLayer-2" type="TileMapLayer" parent="Game/BattleScreenController/SubViewportContainer/SubViewport/BattleMapController/BattleMapContainer/TestMap"]
-y_sort_enabled = true
-tile_map_data = PackedByteArray("AAADAA4AAAAAAAAAAAADAA0AAAAAAAAAAAAEAAwAAAAAAAAAAAADAA8AAAAAAAAAAAAEAA4AAAAAAAAAAAAEAA0AAAAAAAAAAAAFAAwAAAAAAAAAAAAEABAAAAAAAAAAAAAEAA8AAAAAAAAAAAAFAA4AAAAAAAAAAAAFAA8AAAAAAAAAAAAGAA4AAAAAAAAAAAAFAA0AAAAAAAAAAAAFABAAAAAAAAAAAAAEABEAAAAAAAAAAAAFABEAAAAAAAAAAAAGABAAAAAAAAAAAAAGAA8AAAAAAAAAAAAHABAAAAAAAAAAAAAGABEAAAAAAAAAAAAGABIAAAAAAAAAAAAFABIAAAAAAAAAAAAFABMAAAAAAAAAAAACAA0AAAAAAAAAAAACAAwAAAAAAAAAAAABAAsAAAAAAAAAAAABAAoAAAAAAAAAAAAAAAkAAAAAAAAAAAAAAAgAAAAAAAAAAAD//wcAAAAAAAAAAAAHAA8AAAAAAAAAAAAIAA4AAAAAAAAAAAAIAA0AAAAAAAAAAAAJAAwAAAAAAAAAAAA=")
-tile_set = ExtResource("1_rot2c")
-y_sort_origin = 2
-
-[node name="TileMapLayer-1" type="TileMapLayer" parent="Game/BattleScreenController/SubViewportContainer/SubViewport/BattleMapController/BattleMapContainer/TestMap"]
-y_sort_enabled = true
-tile_map_data = PackedByteArray("AAADAAYAAAAAAAAAAAADAAgAAAAAAAAAAAACAAkAAAAAAAAAAAACAAoAAAAAAAAAAAACAAsAAAAAAAEAAAADAAoAAAAAAAEAAAADAAkAAAAAAAEAAAABAAkAAAAAAAAAAAABAAgAAAAAAAAAAAAAAAcAAAAAAAAAAAAAAAYAAAAAAAAAAAD//wUAAAAAAAAAAAADAAcAAAAAAAAAAAAEAAgAAAAAAAAAAAAEAAYAAAAAAAAAAAAEAAUAAAAAAAAAAAAFAAQAAAAAAAAAAAAFAAMAAAAAAAAAAAAFAAYAAAAAAAAAAAAFAAUAAAAAAAAAAAAGAAQAAAAAAAAAAAAGAAUAAAAAAAAAAAAGAAYAAAAAAAAAAAAFAAcAAAAAAAAAAAAHAAYAAAAAAAAAAAAGAAcAAAAAAAAAAAAGAAgAAAAAAAAAAAAEAAcAAAAAAAAAAAAFAAgAAAAAAAAAAAAGAAkAAAAAAAAAAAAHAAgAAAAAAAAAAAAHAAcAAAAAAAAAAAAIAAgAAAAAAAAAAAAHAAkAAAAAAAAAAAAIAAoAAAAAAAAAAAAHAAsAAAAAAAAAAAAHAAoAAAAAAAAAAAAIAAkAAAAAAAAAAAAJAAoAAAAAAAAAAAAIAAsAAAAAAAAAAAAIAAwAAAAAAAAAAAAFAAkAAAABAAAAAAAGAAoAAAABAAAAAAAGAAsAAAABAAAAAAAHAAwAAAABAAAAAAAHAA0AAAABAAAAAAAEAAkAAAABAAEAAAA=")
-tile_set = ExtResource("1_rot2c")
-y_sort_origin = -1
-
-[node name="TileMapLayerB" type="TileMapLayer" parent="Game/BattleScreenController/SubViewportContainer/SubViewport/BattleMapController/BattleMapContainer/TestMap"]
-y_sort_enabled = true
-tile_map_data = PackedByteArray("AAAAAAEAAAAAAAAAAAABAAIAAAAAAAAAAAAAAAMAAAAAAAAAAAABAAMAAAAAAAAAAAACAAQAAAAAAAAAAAACAAMAAAAAAAAAAAACAAIAAAAAAAAAAAABAAEAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAUAAAAAAAAAAAABAAYAAAAAAAAAAAABAAcAAAAAAAEAAAACAAYAAAAAAAEAAAABAAUAAAAAAAAAAAABAAQAAAAAAAAAAAACAAUAAAAAAAEAAAD//wMAAAAAAAAAAAADAAIAAAAAAAAAAAADAAEAAAAAAAAAAAAEAAAAAAAAAAAAAAAEAP//AAAAAAAAAAAEAP7/AAAAAAAAAAADAP3/AAAAAAAAAAADAPz/AAAAAAAAAAACAP3/AAAAAAAAAAACAP7/AAAAAAAAAAABAP//AAAAAAAAAAACAAAAAAAAAAAAAAACAP//AAAAAAAAAAADAP7/AAAAAAAAAAADAP//AAAAAAAAAAADAAAAAAAAAAAAAAACAAEAAAAAAAAAAAADAAQAAAAAAAEAAAADAAMAAAAAAAAAAAAEAAIAAAAAAAAAAAAEAAEAAAAAAAAAAAAFAAAAAAAAAAAAAAAEAAMAAAABAAEAAAAFAAIAAAABAAEAAAAFAAEAAAABAAEAAAAFAAMAAAABAAEAAAAGAAIAAAABAAEAAAAGAAMAAAABAAEAAAAHAAQAAAABAAEAAAAHAAUAAAABAAEAAAA=")
-tile_set = ExtResource("1_rot2c")
-
-[node name="TileMapLayer+1" type="TileMapLayer" parent="Game/BattleScreenController/SubViewportContainer/SubViewport/BattleMapController/BattleMapContainer/TestMap"]
-y_sort_enabled = true
-tile_set = ExtResource("1_rot2c")
-y_sort_origin = 1
-
-[node name="UnitContainer" type="Node2D" parent="Game/BattleScreenController/SubViewportContainer/SubViewport/BattleMapController/BattleMapContainer/TestMap"]
+[node name="BattleMapController" parent="Game/BattleScreenController/SubViewportContainer/SubViewport" instance=ExtResource("2_yhlpg")]
 
 [node name="BattleOverlayBG" type="TextureRect" parent="Game/BattleScreenController"]
 layout_mode = 1
