@@ -1,7 +1,8 @@
-[gd_scene load_steps=17 format=3 uid="uid://vyvnt6xkcn2d"]
+[gd_scene load_steps=18 format=3 uid="uid://vyvnt6xkcn2d"]
 
 [ext_resource type="Script" uid="uid://dsqrh11elmfx5" path="res://src/gameplay/prototypes/game.gd" id="1_4dq4k"]
 [ext_resource type="Texture2D" uid="uid://clt1e2g8xluai" path="res://assets/art/ui/battle_map_gui/BattleGUIFrame-Empty.png" id="2_utvfa"]
+[ext_resource type="Script" uid="uid://cyfqqttarqlg6" path="res://src/gameplay/prototypes/battle_screen_controller.gd" id="2_wyd14"]
 [ext_resource type="PackedScene" uid="uid://cu0oyqg0re8sc" path="res://src/gameplay/prototypes/battle_map_controller.tscn" id="2_yhlpg"]
 [ext_resource type="Texture2D" uid="uid://cxh3p0hntn5kn" path="res://assets/art/ui/world_map_gui/WorldMap_proto_inner.png" id="3_e6p4r"]
 [ext_resource type="Script" uid="uid://b67ca813sx6pc" path="res://src/gameplay/prototypes/world_map_controller.gd" id="3_qwj7d"]
@@ -32,10 +33,6 @@ height = 180
 
 [node name="root" type="Node"]
 
-[node name="SceneController" type="Node2D" parent="."]
-
-[node name="WorldMapController" type="Node2D" parent="SceneController"]
-
 [node name="Game" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 15
@@ -54,6 +51,8 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 1
+script = ExtResource("2_wyd14")
 
 [node name="TrueBG" type="ColorRect" parent="Game/BattleScreenController"]
 layout_mode = 1
@@ -62,6 +61,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 1
 color = Color(0.05882353, 0.019607844, 0.1764706, 1)
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="Game/BattleScreenController"]
@@ -74,18 +74,11 @@ offset_right = 309.0
 offset_bottom = 169.0
 
 [node name="SubViewport" type="SubViewport" parent="Game/BattleScreenController/SubViewportContainer"]
-disable_3d = true
+transparent_bg = true
 handle_input_locally = false
+canvas_item_default_texture_filter = 0
 size = Vector2i(228, 158)
 render_target_update_mode = 0
-
-[node name="BgRect" type="ColorRect" parent="Game/BattleScreenController/SubViewportContainer/SubViewport"]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0.05882353, 0.019607844, 0.1764706, 1)
 
 [node name="BattleMapController" parent="Game/BattleScreenController/SubViewportContainer/SubViewport" instance=ExtResource("2_yhlpg")]
 
@@ -176,7 +169,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-mouse_filter = 2
+mouse_filter = 1
 script = ExtResource("10_yhlpg")
 trans_time = 1.5
 ease_type = 2

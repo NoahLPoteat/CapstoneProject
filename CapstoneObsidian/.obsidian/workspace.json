@@ -34,9 +34,29 @@
               "icon": "lucide-file",
               "title": "Unit & Class System (Friendly & Enemy)"
             }
+          },
+          {
+            "id": "96364d2f985e0643",
+            "type": "leaf",
+            "state": {
+              "type": "kanban",
+              "state": {
+                "file": "Bugs & Issues.md",
+                "kanbanViewState": {
+                  "kanban-plugin": "board",
+                  "list-collapse": [
+                    false,
+                    false,
+                    false
+                  ]
+                }
+              },
+              "icon": "lucide-trello",
+              "title": "Bugs & Issues"
+            }
           }
         ],
-        "currentTab": 1
+        "currentTab": 2
       }
     ],
     "direction": "vertical"
@@ -200,19 +220,21 @@
       "daily-notes:Open today's daily note": false,
       "templates:Insert template": false,
       "command-palette:Open command palette": false,
-      "bases:Create new base": false
+      "bases:Create new base": false,
+      "obsidian-kanban:Create new board": false
     }
   },
-  "active": "683fd3be774fc214",
+  "active": "9d782606c5a02092",
   "lastOpenFiles": [
-    "DevNotes/World Map.md",
-    "Untitled.md",
+    "General Ideas.md",
+    "Bugs & Issues.md",
+    "BUGS & ISSUES.md",
     "DevNotes/Unit & Class System (Friendly & Enemy).md",
+    "DevNotes/World Map.md",
     "DevNotes/BattleMaps.md",
     "DevNotes/Party System.md",
     "DevNotes/Turn Based Combat.md",
     "Untitled.base",
-    "General Ideas.md",
     "ArtNotes",
     "DevNotes",
     "Welcome.md"

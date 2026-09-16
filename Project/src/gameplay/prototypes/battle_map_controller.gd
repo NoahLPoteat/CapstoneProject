@@ -4,6 +4,8 @@ signal update_gui()
 
 var nav_sys = AStar2D.new()
 
+@onready var map_container: MapContainer = $MapContainer
+
 ##NOTE later this will be loaded on the fly, for now its here
 @onready var battle_map: BattleMapNode = $MapContainer/Map
 
@@ -17,6 +19,7 @@ func _ready():
 	#temporary until while we test
 	load_map(battle_map)
 	print(nav_sys.get_point_count())
+	_on_map_container_need_nav()
 
 func move_current_unit(to_pos: Vector2i):
 	if not current_unit:
@@ -71,3 +74,7 @@ func load_map(map: BattleMapNode):
 
 func gen_cell_id(cell: Vector2i):
 	return cell.x + cell.y * 114901
+
+
+func _on_map_container_need_nav() -> void:
+	map_container.update_nav_mesh(nav_sys)

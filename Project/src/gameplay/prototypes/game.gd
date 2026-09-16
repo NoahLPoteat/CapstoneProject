@@ -4,6 +4,10 @@ extends Control
 @onready var battle_screen_control = $BattleScreenController
 @onready var world_map_control: WorldMapController = $WorldMapController
 
+##Used solely for checking if mouse input is in the subviewport
+##	so we can send the input down if needed
+var sub_view_rect: Rect2 = Rect2i(81, 11, 228, 158)
+
 ## Here we handle loading the battlemap, and transitioning from the world map
 ## 	to the world map
 ##NOTE the battlemap node will handle placing units and actually utilizing the map
@@ -33,5 +37,17 @@ func _on_world_map_controller_map_node_clicked(battle_map: PackedScene) -> void:
 	##battle_screen_control.start_battle()
 	
 	##var node = battlemap.instant
-	
-	
+
+
+##Mouse Input Handling
+##	NOTE (This should be moved down a node to battleScreen Controller where it can handle
+##		  the mouse input for abilities, and other things)
+##	[]We need to first detect if the mouse in hovering over the subviewport
+##	[]If it is we need to pass the mouse input down to the battle map
+##	[]else the buttons and such should handle the input themselves
+func _unhandled_input(event: InputEvent) -> void:
+	if event is InputEventMouse:
+		var pos = event.global_position
+		if sub_view_rect.has_point(pos):
+			##send input mouse position down to the BattleController
+			pass

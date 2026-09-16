@@ -1,0 +1,12 @@
+I spent the first 2 days making a game design document, its not comprehensive but covers much of what I needed.
+For the rest of the first week I setup the Godot project structure and a basic node, the in engine tree, structure.
+The next week was spent exporting the placeholder art to get a basic visual into godot, and then make a transition between the 3 main scenes of the game (main menu, world map, and battlemap).
+I also setup the itch.io page but there not really anything on it yet. just some colors. 
+But here it is https://noah-poteat.itch.io/untitled-t-rpg (password:123)
+
+
+For the next week I will finish the prototype of the combat system, starting first by adding the ability for the units to walk around the map together in an arbitrary turn order. Then implementing the basic attacks and damage taking.
+Lastly I will make a basic AI for the enemies so they walk to the nearest enemy and attack it if possible.
+With those 2 things in place the basic prototype will be done and I will begin planning which features to build on top next.
+
+(P.S. The game I mentioned was in fact NOT made by Hempuli, just very inspired in both art and general whimsical vibe)
