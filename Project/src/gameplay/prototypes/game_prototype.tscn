@@ -44,7 +44,6 @@ mouse_filter = 1
 script = ExtResource("1_4dq4k")
 
 [node name="BattleScreenController" type="Control" parent="Game"]
-visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -67,18 +66,23 @@ color = Color(0.05882353, 0.019607844, 0.1764706, 1)
 [node name="SubViewportContainer" type="SubViewportContainer" parent="Game/BattleScreenController"]
 clip_contents = true
 custom_minimum_size = Vector2(228, 158)
-layout_mode = 0
-offset_left = 81.0
-offset_top = 11.0
-offset_right = 309.0
-offset_bottom = 169.0
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.25300002
+anchor_top = 0.061000004
+anchor_right = 0.966
+anchor_bottom = 0.93900007
+offset_left = 0.039993286
+offset_top = 0.019999504
+offset_right = -0.11999512
+offset_bottom = -0.020019531
 
 [node name="SubViewport" type="SubViewport" parent="Game/BattleScreenController/SubViewportContainer"]
 transparent_bg = true
 handle_input_locally = false
 canvas_item_default_texture_filter = 0
 size = Vector2i(228, 158)
-render_target_update_mode = 0
+render_target_update_mode = 4
 
 [node name="BattleMapController" parent="Game/BattleScreenController/SubViewportContainer/SubViewport" instance=ExtResource("2_yhlpg")]
 
@@ -92,6 +96,7 @@ grow_vertical = 2
 texture = ExtResource("2_utvfa")
 
 [node name="WorldMapController" type="Control" parent="Game"]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0

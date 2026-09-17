@@ -41,7 +41,7 @@
             "state": {
               "type": "kanban",
               "state": {
-                "file": "Bugs & Issues.md",
+                "file": "Untitled Kanban.md",
                 "kanbanViewState": {
                   "kanban-plugin": "board",
                   "list-collapse": [
@@ -52,7 +52,7 @@
                 }
               },
               "icon": "lucide-trello",
-              "title": "Bugs & Issues"
+              "title": "Untitled Kanban"
             }
           }
         ],
@@ -224,10 +224,11 @@
       "obsidian-kanban:Create new board": false
     }
   },
-  "active": "9d782606c5a02092",
+  "active": "96364d2f985e0643",
   "lastOpenFiles": [
-    "General Ideas.md",
     "Bugs & Issues.md",
+    "Untitled Kanban.md",
+    "General Ideas.md",
     "BUGS & ISSUES.md",
     "DevNotes/Unit & Class System (Friendly & Enemy).md",
     "DevNotes/World Map.md",
