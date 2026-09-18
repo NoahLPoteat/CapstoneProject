@@ -16,12 +16,13 @@ kanban-plugin: board
 
 ## in-progress
 
-- [ ] Highlight tile that is hovered by curser
 
 
 ## complete
 
 - [ ] Setup basic Unit Retrieval and turn order
+- [ ] Highlight tile that is hovered by curser
+- [ ] Add ability for unit to move on click (will be repurposed later for real movement)
 
 
 

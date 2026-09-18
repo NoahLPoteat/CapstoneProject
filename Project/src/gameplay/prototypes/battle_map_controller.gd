@@ -14,8 +14,8 @@ var unit_pos_from_pos = {}
 var unit_pos_from_unit = {}
 
 ##unfortunate requirement due to issues with the viewport
-var offset_x: int = 81
-var offset_y: int = 15
+var offset_x: float = 81.0
+var offset_y: float = 15.0
 var offset_vec: Vector2 = Vector2(offset_x, offset_y)
 
 
@@ -38,22 +38,70 @@ func attempt_move_unit(to_pos_global: Vector2, unit: UnitBase):
 	
 	var to_pos_iso = iso_from_global(to_pos_global)
 	
-	unit_pos_from_pos[to_pos_iso] = unit
-	unit_pos_from_unit[unit] = to_pos_iso
+	if battle_map.main_tile.get_cell_source_id(to_pos_iso) == 0:
 	
-	var to_pos_local = battle_map.main_tile.map_to_local(to_pos_iso)
-	
-	#print(to_pos_local, to_pos_global, to_pos_iso)
-	
-	unit.position = to_pos_local - Vector2(offset_x, offset_y)
+		unit_pos_from_pos[to_pos_iso] = unit
+		unit_pos_from_unit[unit] = to_pos_iso
+		
+		var to_pos_local = battle_map.main_tile.map_to_local(to_pos_iso)
+		
+		#print(to_pos_local, to_pos_global, to_pos_iso)
+		
+		unit.position = to_pos_local -  - Vector2(0, -8)
+
+
+enum atlas_enum {
+	DEF,
+	WALKABLE,
+	HOVERED
+}
+var map_atlas: Dictionary = {
+	atlas_enum.DEF : Vector2i(0, 0),
+	atlas_enum.WALKABLE : Vector2i(2, 0),
+	atlas_enum.HOVERED : Vector2i(3, 0)
+}
 
 var current_hovered: Vector2i = Vector2i(-10000,-10000)
+var current_tile_old_atl: Vector2i = Vector2i(-1,-1)
 func hovering_tile(pos_global: Vector2):
-	var pos_iso = iso_from_global(pos_global - offset_vec)
+	var pos_iso = iso_from_global(pos_global)
 	
+	
+	var map = battle_map.main_tile
 	var new_cell_id = battle_map.main_tile.get_cell_source_id(pos_iso)
 	
+	print(pos_iso, current_hovered)
 	
+	## == 1 means the tile is in our set
+	## Our maps currently only use 1 tile, 
+	## so this may have to change in the future
+	if new_cell_id == 0:
+		##replace current hovered with the default tile
+		## keep track of tiles old atlas texture
+		
+		##If we are still on the same tile
+		if current_hovered == pos_iso:
+			map.set_cell(current_hovered, 0, map_atlas[atlas_enum.HOVERED])
+		else: ##We are hovered on a new tile
+			## Swap current_tile pos back to DEF
+			## change current tile to new tile
+			## swap new tile to hovered
+			
+			if current_tile_old_atl:
+				map.set_cell(current_hovered, 0, current_tile_old_atl)
+			else:
+				map.set_cell(current_hovered, 0, map_atlas[atlas_enum.DEF])
+			
+			
+			current_hovered = pos_iso
+			current_tile_old_atl = map.get_cell_atlas_coords(current_hovered)
+			
+			map.set_cell(current_hovered, 0, map_atlas[atlas_enum.HOVERED])
+	else:
+		if current_tile_old_atl:
+			map.set_cell(current_hovered, 0, current_tile_old_atl)
+		else:
+			map.set_cell(current_hovered, 0, map_atlas[atlas_enum.DEF])
 
 ##generates the navigation system, and extracts the units from the map
 func load_map(map: BattleMapNode):
@@ -103,4 +151,5 @@ func get_units_arr():
 
 func iso_from_global(pos: Vector2):
 	var local_pos = battle_map.main_tile.to_local(pos)
+	local_pos -= offset_vec
 	return battle_map.main_tile.local_to_map(local_pos)
