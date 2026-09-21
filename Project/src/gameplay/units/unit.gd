@@ -2,6 +2,7 @@ class_name UnitBase extends Node2D
 
 @export var unit_name: String = "Enter Name..."
 @export var unit_class : UnitClass
+@export var portrait_texture: Texture2D
 
 var damage_mod: float = 1.0
 var hit_chance_mod: float = 1.0

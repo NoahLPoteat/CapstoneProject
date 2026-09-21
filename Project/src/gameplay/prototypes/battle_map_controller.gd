@@ -103,6 +103,16 @@ func hovering_tile(pos_global: Vector2):
 		else:
 			map.set_cell(current_hovered, 0, map_atlas[atlas_enum.DEF])
 
+
+func highlight_tile(to_change: atlas_enum, iso_pos: Vector2i):
+	#change the target iso tile to whatever atlas_enum it needs
+	pass
+
+
+func get_nav_sys():
+	return nav_sys
+
+
 ##generates the navigation system, and extracts the units from the map
 func load_map(map: BattleMapNode):
 	#battle_map = map

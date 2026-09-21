@@ -2,6 +2,13 @@ class_name BattleScreen extends Control
 signal turn_changed(new_active_unit: UnitBase)
 
 @onready var battle_map_controller: BattleMapControl = $SubViewportContainer/SubViewport/BattleMapController
+@onready var overlay_node: Control = $BattleGUI
+
+enum TURN_STATES {
+	MOVING,
+	ATTACKING,
+	END_IDLE
+}
 
 ##Used solely for checking if mouse input is in the subviewport
 ##	so we can send the input down if needed
@@ -17,6 +24,47 @@ var offset_y: int = 11
 
 func _ready():
 	init_turn_order()
+
+func _process(delta: float) -> void:
+	pass
+
+var current_state: TURN_STATES
+
+func state_process():
+	match current_state:
+		TURN_STATES.MOVING:
+			##Highlight tiles based on units available spaces left
+			pass
+		TURN_STATES.ATTACKING:
+			##Get ability unit is attempting to use / active and highlight
+			##	valid target tiles
+			pass
+		TURN_STATES.END_IDLE:
+			##if unit enemy, maybe way a second then end turn :)
+			pass
+		_:
+			pass
+
+func change_unit_state(new_state: TURN_STATES):
+	state_left(current_state)
+	current_state = new_state
+	match new_state:
+		TURN_STATES.MOVING:
+			
+			var nav: AStar2D = battle_map_controller.get_nav_sys()
+			##calculate all tiles within distance that the unit can move to
+			##	keep track of all of those coordinates and their old atl coords
+			##Change them each to the atl coord of the moveable tile
+			
+			
+			pass
+
+func state_left(old_state: TURN_STATES):
+	if current_state == null:
+		print("Unit state broken, check state_left() in battle_screen_controller.gd")
+		return 
+	
+	return
 
 ##This is where the main game state logic will be held.
 ##	We will keep track of current unit turn, what their state is
@@ -52,6 +100,10 @@ func _ready():
 ##	[]If movable, attempt to move, if abi_selected, attempt to use ability
 ##	[]else the buttons and such should handle the input themselves
 func _unhandled_input(event: InputEvent) -> void:
+	if Input.is_action_just_pressed("debug_turn_skip"):
+		next_turn()
+	
+	
 	if event is InputEventMouse:
 		var pos = event.global_position
 		if sub_view_rect.has_point(pos) and self.visible:
@@ -64,9 +116,11 @@ func _unhandled_input(event: InputEvent) -> void:
 
 ##Updates the overlay GUI with the new unit data
 func update_gui():
-	pass
+	overlay_node.update_gui(current_unit)
 
 func next_turn():
+	#print("turn changed")
+	
 	if turn_index >= len(turn_order):
 		turn_index = 0 #reset back to start of turn order
 	
