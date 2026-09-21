@@ -12,6 +12,7 @@ kanban-plugin: board
 - [ ] Add button for end turn
 - [ ] Add basic AI for enemy units (and the pipeline for enemy AI) that makes them just move to a random spot in range and end their turn
 - [ ] Finish itch.io devlog of the tactical walking sim
+- [ ] Place Enemy Units based on their Default Positions
 
 
 ## in-progress
