@@ -1,0 +1,23 @@
+[gd_scene load_steps=5 format=3 uid="uid://ct3ui131rw88u"]
+
+[ext_resource type="Script" uid="uid://dh7uvryf2q04a" path="res://src/gameplay/units/unit.gd" id="1_jy6c2"]
+[ext_resource type="Texture2D" uid="uid://stn5bu8ghnvr" path="res://assets/art/characters/portraitDesign.png" id="2_2p8cq"]
+[ext_resource type="Texture2D" uid="uid://c3t8f5k3ggg8w" path="res://assets/art/characters/CharacterDesignAtl.png" id="3_yytn0"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jy6c2"]
+atlas = ExtResource("2_2p8cq")
+region = Rect2(180, 0, 59, 59)
+
+[node name="Unit" type="Node2D"]
+y_sort_enabled = true
+script = ExtResource("1_jy6c2")
+unit_name = "Test A 1"
+portrait_texture = SubResource("AtlasTexture_jy6c2")
+starting_pos = Vector2i(9, 2)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+y_sort_enabled = true
+texture = ExtResource("3_yytn0")
+hframes = 8
+vframes = 8
+frame = 3

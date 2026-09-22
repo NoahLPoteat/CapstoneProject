@@ -3,18 +3,21 @@
 [ext_resource type="Script" uid="uid://3dlg7spf66qq" path="res://src/gameplay/prototypes/battle_map_controller.gd" id="1_k8cae"]
 [ext_resource type="TileSet" uid="uid://byqahne7l5q25" path="res://assets/art/world/tilesets/custom_tile_set.tres" id="1_ojxod"]
 [ext_resource type="Script" uid="uid://cobbp30l8tm5a" path="res://src/gameplay/prototypes/map_container.gd" id="2_gj81i"]
-[ext_resource type="Script" uid="uid://dh7uvryf2q04a" path="res://src/gameplay/units/unit.gd" id="3_8n5a6"]
 [ext_resource type="Script" uid="uid://b8cfkjif4u2r0" path="res://src/gameplay/battle_maps/map.gd" id="3_ekq22"]
-[ext_resource type="Texture2D" uid="uid://c3t8f5k3ggg8w" path="res://assets/art/characters/CharacterDesignAtl.png" id="4_b02qm"]
+[ext_resource type="PackedScene" uid="uid://ct3ui131rw88u" path="res://src/gameplay/prototypes/unit_scene_base.tscn" id="5_ekq22"]
 [ext_resource type="Texture2D" uid="uid://stn5bu8ghnvr" path="res://assets/art/characters/portraitDesign.png" id="6_063d6"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ekq22"]
+atlas = ExtResource("6_063d6")
+region = Rect2(60, 0, 59, 59)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_chmxg"]
 atlas = ExtResource("6_063d6")
-region = Rect2(120, 0, 59, 59)
+region = Rect2(0, 0, 59, 59)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_063d6"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_lpman"]
 atlas = ExtResource("6_063d6")
-region = Rect2(180, 0, 59, 59)
+region = Rect2(120, 0, 59, 59)
 
 [node name="BattleMapController" type="Node2D"]
 script = ExtResource("1_k8cae")
@@ -28,42 +31,49 @@ script = ExtResource("3_ekq22")
 
 [node name="MainTile" type="TileMapLayer" parent="MapContainer/Map"]
 y_sort_enabled = true
-tile_map_data = PackedByteArray("AAAHAP3/AAAAAAAAAAAHAP7/AAAAAAAAAAAHAP//AAAAAAAAAAAHAAAAAAAAAAAAAAAHAAEAAAAAAAAAAAAHAAIAAAAAAAAAAAAHAAMAAAAAAAAAAAAIAP3/AAAAAAAAAAAIAP7/AAAAAAAAAAAIAP//AAAAAAAAAAAIAAAAAAAAAAAAAAAIAAEAAAAAAAAAAAAIAAIAAAAAAAAAAAAIAAMAAAAAAAAAAAAJAP3/AAAAAAAAAAAJAP7/AAAAAAAAAAAJAP//AAAAAAAAAAAJAAAAAAAAAAAAAAAJAAEAAAAAAAAAAAAJAAIAAAAAAAAAAAAJAAMAAAAAAAAAAAAKAP3/AAAAAAAAAAAKAP7/AAAAAAAAAAAKAP//AAAAAAAAAAAKAAAAAAAAAAAAAAAKAAEAAAAAAAAAAAAKAAIAAAAAAAAAAAAKAAMAAAAAAAAAAAALAP3/AAAAAAAAAAALAP7/AAAAAAAAAAALAP//AAAAAAAAAAALAAAAAAAAAAAAAAALAAEAAAAAAAAAAAALAAIAAAAAAAAAAAALAAMAAAAAAAAAAAAMAP3/AAAAAAAAAAAMAP7/AAAAAAAAAAAMAP//AAAAAAAAAAAMAAAAAAAAAAAAAAAMAAEAAAAAAAAAAAAMAAIAAAAAAAAAAAAMAAMAAAAAAAAAAAAGAP3/AAAAAAAAAAAGAP7/AAAAAAAAAAAGAP//AAAAAAAAAAAGAAAAAAAAAAAAAAAGAAEAAAAAAAAAAAAGAAIAAAAAAAAAAAAGAAMAAAAAAAAAAAAFAPv/AAAAAAAAAAAFAPz/AAAAAAAAAAAFAP3/AAAAAAAAAAAFAP7/AAAAAAAAAAAFAP//AAAAAAAAAAAFAAAAAAAAAAAAAAAFAAEAAAAAAAAAAAAFAAIAAAAAAAAAAAAFAAMAAAAAAAAAAAAGAPv/AAAAAAAAAAAGAPz/AAAAAAAAAAAHAPv/AAAAAAAAAAAHAPz/AAAAAAAAAAAIAPv/AAAAAAAAAAAIAPz/AAAAAAAAAAAJAPv/AAAAAAAAAAAJAPz/AAAAAAAAAAAKAPv/AAAAAAAAAAAKAPz/AAAAAAAAAAALAPv/AAAAAAAAAAALAPz/AAAAAAAAAAAMAPv/AAAAAAAAAAAMAPz/AAAAAAAAAAA=")
+tile_map_data = PackedByteArray("AAAHAP3/AAAAAAAAAAAHAP7/AAAAAAAAAAAHAP//AAAAAAAAAAAHAAAAAAAAAAAAAAAHAAEAAAAAAAAAAAAHAAIAAAAAAAAAAAAHAAMAAAAAAAAAAAAIAP3/AAAAAAAAAAAIAP7/AAAAAAAAAAAIAP//AAAAAAAAAAAIAAAAAAAAAAAAAAAIAAEAAAAAAAAAAAAIAAIAAAAAAAAAAAAIAAMAAAAAAAAAAAAJAP3/AAAAAAAAAAAJAP7/AAAAAAAAAAAJAP//AAAAAAAAAAAJAAAAAAAAAAAAAAAJAAEAAAAAAAAAAAAJAAIAAAAAAAAAAAAJAAMAAAAAAAAAAAAKAP3/AAAAAAAAAAAKAP7/AAAAAAAAAAAKAP//AAAAAAAAAAAKAAAAAAAAAAAAAAAKAAEAAAAAAAAAAAAKAAIAAAAAAAAAAAAKAAMAAAAAAAAAAAALAP7/AAAAAAAAAAALAP//AAAAAAAAAAALAAAAAAAAAAAAAAALAAEAAAAAAAAAAAALAAIAAAAAAAAAAAALAAMAAAAAAAAAAAAMAP//AAAAAAAAAAAMAAAAAAAAAAAAAAAMAAEAAAAAAAAAAAAMAAIAAAAAAAAAAAAMAAMAAAAAAAAAAAAGAP3/AAAAAAAAAAAGAP7/AAAAAAAAAAAGAP//AAAAAAAAAAAGAAAAAAAAAAAAAAAGAAEAAAAAAAAAAAAGAAIAAAAAAAAAAAAGAAMAAAAAAAAAAAAFAPv/AAAAAAAAAAAFAPz/AAAAAAAAAAAFAP3/AAAAAAAAAAAFAP7/AAAAAAAAAAAFAP//AAAAAAAAAAAFAAAAAAAAAAAAAAAFAAEAAAAAAAAAAAAFAAIAAAAAAAAAAAAFAAMAAAAAAAAAAAAGAPv/AAAAAAAAAAAGAPz/AAAAAAAAAAAHAPv/AAAAAAAAAAAHAPz/AAAAAAAAAAAIAPv/AAAAAAAAAAAIAPz/AAAAAAAAAAAJAPz/AAAAAAAAAAAEAAAAAAAAAAAAAAAEAAEAAAAAAAAAAAAEAP//AAAAAAAAAAAEAAMAAAAAAAAAAAAEAAIAAAAAAAAAAAAEAP7/AAAAAAAAAAAEAP3/AAAAAAAAAAAGAAQAAAAAAAAAAAAHAAQAAAAAAAAAAAAIAAQAAAAAAAAAAAAJAAQAAAAAAAAAAAAKAAQAAAAAAAAAAAALAAQAAAAAAAAAAAAFAAQAAAAAAAAAAAAEAPz/AAAAAAAAAAA=")
 tile_set = ExtResource("1_ojxod")
 
 [node name="TileDeco" type="TileMapLayer" parent="MapContainer/Map"]
 y_sort_enabled = true
+tile_map_data = PackedByteArray("AAAEAPn/AAABAAAAAAAFAPn/AAABAAAAAAAGAPn/AAABAAAAAAAHAPn/AAABAAAAAAADAPr/AAABAAEAAAACAPr/AAABAAEAAAACAPv/AAABAAEAAAACAPz/AAABAAEAAAACAP3/AAABAAEAAAACAP7/AAABAAEAAAACAP//AAABAAEAAAACAAAAAAABAAEAAAACAAEAAAABAAEAAAACAAIAAAABAAEAAAABAPn/AAAAAAAAAAABAPr/AAAAAAAAAAABAPv/AAAAAAAAAAABAPz/AAAAAAAAAAABAP3/AAAAAAAAAAABAP7/AAAAAAAAAAABAP//AAAAAAAAAAABAAAAAAAAAAAAAAABAAEAAAAAAAAAAAABAAIAAAAAAAAAAAACAPn/AAAAAAAAAAADAPn/AAAAAAAAAAADAPj/AAAAAAAAAAAEAPj/AAAAAAAAAAAFAPj/AAAAAAAAAAAGAPj/AAAAAAAAAAAHAPj/AAAAAAAAAAAIAPj/AAAAAAAAAAAIAPr/AAABAAEAAAAIAPn/AAABAAEAAAAJAPv/AAABAAEAAAAJAPr/AAABAAEAAAAJAPn/AAABAAEAAAAJAPj/AAABAAEAAAAJAPf/AAABAAEAAAAKAPz/AAABAAEAAAAKAPv/AAABAAEAAAAKAPr/AAABAAEAAAAKAPn/AAABAAEAAAAKAPj/AAABAAEAAAAKAPf/AAABAAEAAAALAP3/AAABAAEAAAALAPz/AAABAAEAAAALAPv/AAABAAEAAAALAPr/AAABAAEAAAALAPn/AAABAAEAAAALAPj/AAABAAEAAAALAPf/AAABAAEAAAAMAAIAAAABAAEAAAAMAAEAAAABAAEAAAAMAAAAAAABAAEAAAAMAP//AAABAAEAAAAMAP7/AAABAAEAAAAMAP3/AAABAAEAAAAMAPz/AAABAAEAAAAMAPv/AAABAAEAAAAMAPr/AAABAAEAAAAMAPn/AAABAAEAAAAMAPj/AAABAAEAAAALAAMAAAABAAEAAAAMAAMAAAABAAEAAAANAAMAAAABAAEAAAANAAIAAAABAAEAAAANAAEAAAABAAEAAAANAAAAAAABAAEAAAANAP//AAABAAEAAAANAP7/AAABAAEAAAANAP3/AAABAAEAAAANAPz/AAABAAEAAAANAPv/AAABAAEAAAANAPr/AAABAAEAAAANAPn/AAABAAEAAAANAPj/AAABAAEAAAA=")
 tile_set = ExtResource("1_ojxod")
 y_sort_origin = -8
 
 [node name="EnemyUnits" type="Node2D" parent="MapContainer/Map"]
 
-[node name="Unit" type="Node2D" parent="MapContainer/Map/EnemyUnits"]
-y_sort_enabled = true
-script = ExtResource("3_8n5a6")
-unit_name = "Test A 1"
-portrait_texture = SubResource("AtlasTexture_chmxg")
+[node name="Unit2" parent="MapContainer/Map/EnemyUnits" instance=ExtResource("5_ekq22")]
+position = Vector2(28, -22)
+starting_pos = Vector2i(6, -3)
 
-[node name="Sprite2D" type="Sprite2D" parent="MapContainer/Map/EnemyUnits/Unit"]
-y_sort_enabled = true
-texture = ExtResource("4_b02qm")
-hframes = 8
-vframes = 8
-frame = 1
+[node name="Unit" parent="MapContainer/Map/EnemyUnits" instance=ExtResource("5_ekq22")]
+position = Vector2(46, -22)
+portrait_texture = SubResource("AtlasTexture_ekq22")
+starting_pos = Vector2i(5, -4)
+
+[node name="Sprite2D" parent="MapContainer/Map/EnemyUnits/Unit" index="0"]
+frame = 17
 
 [node name="AllyUnitContainer" type="Node2D" parent="."]
 
-[node name="Unit" type="Node2D" parent="AllyUnitContainer"]
-y_sort_enabled = true
-script = ExtResource("3_8n5a6")
-unit_name = "Test A 1"
-portrait_texture = SubResource("AtlasTexture_063d6")
+[node name="Unit" parent="AllyUnitContainer" instance=ExtResource("5_ekq22")]
+position = Vector2(-32, -20)
+portrait_texture = SubResource("AtlasTexture_chmxg")
 
-[node name="Sprite2D" type="Sprite2D" parent="AllyUnitContainer/Unit"]
-y_sort_enabled = true
-texture = ExtResource("4_b02qm")
-hframes = 8
-vframes = 8
-frame = 3
+[node name="Sprite2D" parent="AllyUnitContainer/Unit" index="0"]
+frame = 0
+
+[node name="Unit2" parent="AllyUnitContainer" instance=ExtResource("5_ekq22")]
+position = Vector2(-11, -19)
+portrait_texture = SubResource("AtlasTexture_lpman")
+starting_pos = Vector2i(10, 2)
+
+[node name="Sprite2D" parent="AllyUnitContainer/Unit2" index="0"]
+frame = 1
 
 [connection signal="need_nav" from="MapContainer" to="." method="_on_map_container_need_nav"]
+
+[editable path="MapContainer/Map/EnemyUnits/Unit2"]
+[editable path="MapContainer/Map/EnemyUnits/Unit"]
+[editable path="AllyUnitContainer/Unit"]
+[editable path="AllyUnitContainer/Unit2"]

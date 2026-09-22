@@ -11,11 +11,13 @@ var attack_change_mode: float = 1.0
 
 ##holds the units target position, the unit will lerp to it when moving
 var map_position: Vector2i = Vector2i(0, 0)
+@export var starting_pos: Vector2i = Vector2i(0, 0)
 
 #stats determined by class
 var health: int = 0 
 var mana: int = 0
 var mana_recovery: int = 0
+var movement_left: int = 3
 
 #For now each unit will just have a static sprite
 #	In the future I want them to be animated
@@ -39,3 +41,8 @@ func init_class_vars():
 #Initialize
 func pre_fight_init():
 	pass
+
+
+
+func reset_turn():
+	movement_left = 3

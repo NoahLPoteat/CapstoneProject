@@ -31,24 +31,41 @@ func load_battle():
 func start_battle():
 	pass
 
-func attempt_move_unit(to_pos_global: Vector2, unit: UnitBase):
+func attempt_move_unit(to_pos_global: Vector2, unit: UnitBase, iso: Vector2i = Vector2i(0, 0), from_iso: bool = false, dist_override: bool = false):
 	if not unit:
 		print("Attempting to move unit without one selected")
 		return
+	var to_pos_iso: Vector2i
+	var old_pos: Vector2i = unit.map_position
 	
-	var to_pos_iso = iso_from_global(to_pos_global)
+	if from_iso:
+		to_pos_iso = iso
+	else:
+		to_pos_iso = iso_from_global(to_pos_global)
 	
-	if battle_map.main_tile.get_cell_source_id(to_pos_iso) == 0:
+	var from_id: int = gen_cell_id(unit.map_position)
+	var to_id: int = gen_cell_id(to_pos_iso) 
 	
-		unit_pos_from_pos[to_pos_iso] = unit
-		unit_pos_from_unit[unit] = to_pos_iso
+	var dist = len(nav_sys.get_id_path(from_id, to_id)) - 1
+	
+	var tile_has_unit: bool = unit_pos_from_pos.has(to_pos_iso)
+	
+	if (dist <= unit.movement_left or dist_override) and not tile_has_unit:
+		if battle_map.main_tile.get_cell_source_id(to_pos_iso) == 0:
 		
-		var to_pos_local = battle_map.main_tile.map_to_local(to_pos_iso)
-		
-		#print(to_pos_local, to_pos_global, to_pos_iso)
-		
-		unit.position = to_pos_local -  - Vector2(0, -8)
-
+			unit_pos_from_pos[to_pos_iso] = unit
+			unit_pos_from_unit[unit] = to_pos_iso
+			
+			unit_pos_from_pos.erase(old_pos)
+			
+			var to_pos_local = battle_map.main_tile.map_to_local(to_pos_iso)
+			
+			#print(to_pos_local, to_pos_global, to_pos_iso)
+			unit.map_position = to_pos_iso
+			unit.position = to_pos_local -  - Vector2(0, -8)
+			
+			unit.movement_left -= dist
+	
 
 enum atlas_enum {
 	DEF,
@@ -70,7 +87,7 @@ func hovering_tile(pos_global: Vector2):
 	var map = battle_map.main_tile
 	var new_cell_id = battle_map.main_tile.get_cell_source_id(pos_iso)
 	
-	print(pos_iso, current_hovered)
+	#print(pos_iso, current_hovered)
 	
 	## == 1 means the tile is in our set
 	## Our maps currently only use 1 tile, 
@@ -104,9 +121,31 @@ func hovering_tile(pos_global: Vector2):
 			map.set_cell(current_hovered, 0, map_atlas[atlas_enum.DEF])
 
 
-func highlight_tile(to_change: atlas_enum, iso_pos: Vector2i):
-	#change the target iso tile to whatever atlas_enum it needs
-	pass
+func highlight_tile(to_change: atlas_enum, iso_pos: Vector2i, hl_units: bool = false):
+	var atl = map_atlas[to_change]
+	var map = battle_map.main_tile
+	
+	var tile_atl: Vector2i = map.get_cell_atlas_coords(iso_pos)
+	var tile_has_unit: bool = unit_pos_from_pos.has(iso_pos)
+	
+	#if tile_atl != map_atlas[atlas_enum.HOVERED]:
+		#if hl_units:
+			#if map.get_cell_source_id(iso_pos) != -1:
+				#map.set_cell(iso_pos, 0, atl)
+		#else::
+			#if map.get_cell_source_id(iso_pos) != -1:
+				#map.set_cell(iso_pos, 0, atl)
+	
+	if tile_atl != map_atlas[atlas_enum.HOVERED]:
+		if hl_units:
+			if map.get_cell_source_id(iso_pos) != -1:
+				map.set_cell(iso_pos, 0, atl)
+		else:
+			if not tile_has_unit:
+				if map.get_cell_source_id(iso_pos) != -1:
+					map.set_cell(iso_pos, 0, atl)
+	
+	
 
 
 func get_nav_sys():

@@ -26,15 +26,29 @@ func _ready():
 	init_turn_order()
 
 func _process(delta: float) -> void:
-	pass
+	state_process()
 
 var current_state: TURN_STATES
 
+var old_tiles: Array = []
 func state_process():
 	match current_state:
 		TURN_STATES.MOVING:
+			
+			for tile in old_tiles:
+				battle_map_controller.highlight_tile(battle_map_controller.atlas_enum.DEF, tile, true)
+			
+			var moves_left = current_unit.movement_left
 			##Highlight tiles based on units available spaces left
-			pass
+			for x in range(moves_left * -1, moves_left + 1):
+				for y in range(moves_left * -1, moves_left + 1):
+					if abs(x) + abs(y) <= moves_left:
+						var to_pos = current_unit.map_position + Vector2i(x, y)
+						battle_map_controller.highlight_tile(
+							battle_map_controller.atlas_enum.WALKABLE, to_pos)
+						old_tiles.append(to_pos)
+			
+			
 		TURN_STATES.ATTACKING:
 			##Get ability unit is attempting to use / active and highlight
 			##	valid target tiles
@@ -44,6 +58,8 @@ func state_process():
 			pass
 		_:
 			pass
+
+
 
 func change_unit_state(new_state: TURN_STATES):
 	state_left(current_state)
@@ -92,13 +108,7 @@ func state_left(old_state: TURN_STATES):
 ##		tile that has the dot in the center
 
 
-##Mouse Input Handling
-##	NOTE (This should be moved down a node to battleScreen Controller where it can handle
-##		  the mouse input for abilities, and other things)
-##	[X]We need to first detect if the mouse in hovering over the subviewport
-##	[]If it is we need switch over what the current unit state is
-##	[]If movable, attempt to move, if abi_selected, attempt to use ability
-##	[]else the buttons and such should handle the input themselves
+
 func _unhandled_input(event: InputEvent) -> void:
 	if Input.is_action_just_pressed("debug_turn_skip"):
 		next_turn()
@@ -125,11 +135,13 @@ func next_turn():
 		turn_index = 0 #reset back to start of turn order
 	
 	current_unit = turn_order[turn_index]
+	current_unit.reset_turn()
+	current_state = TURN_STATES.MOVING
 	update_gui()
-	
 	turn_index += 1
 
 
+##Initilizes the turn order, and places units into their starting position
 func init_turn_order():
 	turn_order = []
 	
@@ -151,6 +163,10 @@ func init_turn_order():
 			if i < enemy_len:
 				turn_order.append(enemy_arr[i])
 			turn_order.append(ally_arr[i])
+	
+	for unit: UnitBase in turn_order:
+		print("Attempting unit starting move debug")
+		battle_map_controller.attempt_move_unit(Vector2.ZERO, unit, unit.starting_pos, true, true)
 	
 	next_turn()
 	
