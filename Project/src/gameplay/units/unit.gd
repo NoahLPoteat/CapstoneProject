@@ -3,6 +3,7 @@ class_name UnitBase extends Node2D
 @export var unit_name: String = "Enter Name..."
 @export var unit_class : UnitClass
 @export var portrait_texture: Texture2D
+@export var is_ally: bool
 
 var damage_mod: float = 1.0
 var hit_chance_mod: float = 1.0
@@ -14,10 +15,12 @@ var map_position: Vector2i = Vector2i(0, 0)
 @export var starting_pos: Vector2i = Vector2i(0, 0)
 
 #stats determined by class
-var health: int = 0 
-var mana: int = 0
-var mana_recovery: int = 0
-var movement_left: int = 3
+@export var health: int = 100
+@export var max_health: int = 100
+@export var mana: int = 0
+@export var mana_recovery: int = 0
+@export var movement_left: int = 3
+
 
 #For now each unit will just have a static sprite
 #	In the future I want them to be animated

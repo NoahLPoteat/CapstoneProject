@@ -41,7 +41,7 @@
             "state": {
               "type": "kanban",
               "state": {
-                "file": "Untitled Kanban.md",
+                "file": "To-do Kanban.md",
                 "kanbanViewState": {
                   "kanban-plugin": "board",
                   "list-collapse": [
@@ -52,11 +52,31 @@
                 }
               },
               "icon": "lucide-trello",
-              "title": "Untitled Kanban"
+              "title": "To-do Kanban"
+            }
+          },
+          {
+            "id": "1f3c2db9abfa1754",
+            "type": "leaf",
+            "state": {
+              "type": "kanban",
+              "state": {
+                "file": "To-do Kanban.md",
+                "kanbanViewState": {
+                  "kanban-plugin": "board",
+                  "list-collapse": [
+                    false,
+                    false,
+                    false
+                  ]
+                }
+              },
+              "icon": "lucide-trello",
+              "title": "To-do Kanban"
             }
           }
         ],
-        "currentTab": 2
+        "currentTab": 3
       }
     ],
     "direction": "vertical"
@@ -224,12 +244,14 @@
       "obsidian-kanban:Create new board": false
     }
   },
-  "active": "96364d2f985e0643",
+  "active": "1f3c2db9abfa1754",
   "lastOpenFiles": [
-    "DevNotes/Party System.md",
+    "TempNotes for Sys2 Do something with LATER.md",
+    "To-do Kanban.md",
     "Bugs & Issues.md",
     "General Ideas.md",
-    "Untitled Kanban.md",
+    "Pasted image 20260922152706.png",
+    "DevNotes/Party System.md",
     "BUGS & ISSUES.md",
     "DevNotes/Unit & Class System (Friendly & Enemy).md",
     "DevNotes/World Map.md",

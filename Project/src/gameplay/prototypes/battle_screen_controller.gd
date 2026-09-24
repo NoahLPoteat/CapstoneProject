@@ -4,10 +4,20 @@ signal turn_changed(new_active_unit: UnitBase)
 @onready var battle_map_controller: BattleMapControl = $SubViewportContainer/SubViewport/BattleMapController
 @onready var overlay_node: Control = $BattleGUI
 
+enum BATTLE_PHASES{
+	NONE,
+	PLACEMENT,
+	ALLY_TURN,
+	ENEMY_TURN,
+	END_SCREEN
+}
+
+var current_battle_phase: BATTLE_PHASES
+
 enum TURN_STATES {
 	MOVING,
-	ATTACKING,
-	END_IDLE
+	STRIKING,
+	ABILITY
 }
 
 ##Used solely for checking if mouse input is in the subviewport
@@ -37,7 +47,7 @@ func state_process():
 			
 			for tile in old_tiles:
 				battle_map_controller.highlight_tile(battle_map_controller.atlas_enum.DEF, tile, true)
-			
+			old_tiles = []
 			var moves_left = current_unit.movement_left
 			##Highlight tiles based on units available spaces left
 			for x in range(moves_left * -1, moves_left + 1):
@@ -49,12 +59,21 @@ func state_process():
 						old_tiles.append(to_pos)
 			
 			
-		TURN_STATES.ATTACKING:
-			##Get ability unit is attempting to use / active and highlight
-			##	valid target tiles
+		TURN_STATES.STRIKING:
+			##Cover tiles valid in current units strike distance
+			##	Use similar structure to the moving tiles (but different atl)
+			##Mouse Detection in lower node will be handling finer details
+			for tile in old_tiles:
+				battle_map_controller.highlight_tile(battle_map_controller.atlas_enum.DEF, tile, true)
+			old_tiles = []
+			
 			pass
-		TURN_STATES.END_IDLE:
-			##if unit enemy, maybe way a second then end turn :)
+		TURN_STATES.ABILITY:
+			## Get units current chosen ability, mark all tiles in range
+			for tile in old_tiles:
+				battle_map_controller.highlight_tile(battle_map_controller.atlas_enum.DEF, tile, true)
+			old_tiles = []
+			
 			pass
 		_:
 			pass
@@ -73,6 +92,8 @@ func change_unit_state(new_state: TURN_STATES):
 			##Change them each to the atl coord of the moveable tile
 			
 			
+			pass
+		_:
 			pass
 
 func state_left(old_state: TURN_STATES):
@@ -117,16 +138,24 @@ func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouse:
 		var pos = event.global_position
 		if sub_view_rect.has_point(pos) and self.visible:
-			if event is InputEventMouseButton:
-				battle_map_controller.attempt_move_unit(pos, current_unit)
-				
-			elif event is InputEventMouseMotion:
+			match current_state:
+				TURN_STATES.MOVING:
+					if event is InputEventMouseButton:
+						battle_map_controller.attempt_move_unit(pos, current_unit)
+				TURN_STATES.STRIKING:
+					pass
+				TURN_STATES.ABILITY:
+					pass
+				_:
+					pass
+			
+			if event is InputEventMouseMotion:
 				battle_map_controller.hovering_tile(pos)
 
 
 ##Updates the overlay GUI with the new unit data
 func update_gui():
-	overlay_node.update_gui(current_unit)
+	overlay_node.update_gui(current_unit, current_battle_phase, current_state)
 
 func next_turn():
 	#print("turn changed")
@@ -174,3 +203,31 @@ func init_turn_order():
 
 func retrieve_units():
 	return battle_map_controller.get_units_arr()
+
+
+func _on_active_unit_button_ctr_button_pressed(choice: UnitButton.BUTTON_CHOICE) -> void:
+	match choice:
+		UnitButton.BUTTON_CHOICE.MOVEMENT:
+			if current_state == TURN_STATES.MOVING:
+				return
+			else:
+				change_unit_state(TURN_STATES.MOVING)
+				update_gui()
+		UnitButton.BUTTON_CHOICE.STRIKE:
+			if current_state == TURN_STATES.STRIKING:
+				return
+			else:
+				change_unit_state(TURN_STATES.STRIKING)
+				update_gui()
+		UnitButton.BUTTON_CHOICE.ABILITY:
+			if current_state == TURN_STATES.ABILITY:
+				return
+			else:
+				change_unit_state(TURN_STATES.ABILITY)
+				update_gui()
+		_:
+			pass
+
+
+func _on_end_turn_end_turn_button_pressed() -> void:
+	next_turn()

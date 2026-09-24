@@ -1,0 +1,8 @@
+[gd_resource type="LabelSettings" load_steps=2 format=3 uid="uid://ccfs6ugu3pcqr"]
+
+[ext_resource type="FontFile" uid="uid://dmlw1g48os6em" path="res://assets/fonts&labels/dogicapixel.ttf" id="1_jblaw"]
+
+[resource]
+font = ExtResource("1_jblaw")
+font_size = 8
+font_color = Color(0.37254903, 0.78039217, 0.3647059, 1)

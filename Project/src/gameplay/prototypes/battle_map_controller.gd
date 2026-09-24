@@ -1,6 +1,6 @@
 class_name BattleMapControl extends Node2D
 signal turn_changed()
-signal update_gui()
+signal update_gui(unit: UnitBase)
 
 var nav_sys = AStar2D.new()
 
@@ -65,6 +65,9 @@ func attempt_move_unit(to_pos_global: Vector2, unit: UnitBase, iso: Vector2i = V
 			unit.position = to_pos_local -  - Vector2(0, -8)
 			
 			unit.movement_left -= dist
+			
+			if not dist_override:
+				update_gui.emit()
 	
 
 enum atlas_enum {
