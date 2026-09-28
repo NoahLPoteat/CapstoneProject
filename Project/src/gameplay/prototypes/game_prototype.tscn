@@ -65,6 +65,7 @@ mouse_filter = 1
 script = ExtResource("1_4dq4k")
 
 [node name="BattleScreenController" type="Control" parent="Game"]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -103,7 +104,7 @@ transparent_bg = true
 handle_input_locally = false
 canvas_item_default_texture_filter = 0
 size = Vector2i(228, 158)
-render_target_update_mode = 4
+render_target_update_mode = 0
 
 [node name="BattleMapController" parent="Game/BattleScreenController/SubViewportContainer/SubViewport" instance=ExtResource("2_yhlpg")]
 
@@ -319,7 +320,6 @@ position = Vector2(30.5, 9)
 shape = SubResource("RectangleShape2D_h14kp")
 
 [node name="WorldMapController" type="Control" parent="Game"]
-visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
