@@ -1,4 +1,5 @@
 class_name UnitBase extends Node2D
+signal unit_died(turn_position: int)
 
 @export var unit_name: String = "Enter Name..."
 @export var unit_class : UnitClass
@@ -9,18 +10,28 @@ var damage_mod: float = 1.0
 var hit_chance_mod: float = 1.0
 var cast_chance_mod: float = 1.0
 var attack_change_mode: float = 1.0
+var turn_order_pos: int = -1
 
 ##holds the units target position, the unit will lerp to it when moving
 var map_position: Vector2i = Vector2i(0, 0)
 @export var starting_pos: Vector2i = Vector2i(0, 0)
 
-#stats determined by class
+@export_category("Battle Stats")
 @export var health: int = 100
 @export var max_health: int = 100
 @export var mana: int = 0
 @export var mana_recovery: int = 0
 @export var movement_left: int = 3
 
+
+
+@export_category("Strike / Abilities")
+@export var strike: AbilityBase
+@export var chosen_ability: AbilityBase
+@export var available_abilities: Array[AbilityBase]
+##Dictates the number of abilities a unit can use in a turn
+@export var ability_use_left: int = 1
+@export var max_ability_uses: int = 1
 
 #For now each unit will just have a static sprite
 #	In the future I want them to be animated
@@ -45,7 +56,34 @@ func init_class_vars():
 func pre_fight_init():
 	pass
 
+func take_damage(val: int):
+	health -= val
+	
+	health = max(health, 0)
+	
+	if health <= 0:
+		die()
 
+func heal(val: int):
+	health += val
+	
+	health = min(health, max_health)
+
+func die():
+	unit_died.emit(turn_order_pos)
+
+func get_strike():
+	if strike != null:
+		return strike
+	else:
+		return null
+
+func can_use_ability():
+	if ability_use_left > 0:
+		return true
+	else:
+		return false
 
 func reset_turn():
 	movement_left = 3
+	ability_use_left = max_ability_uses

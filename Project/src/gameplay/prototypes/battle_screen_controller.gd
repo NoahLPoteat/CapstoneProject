@@ -36,12 +36,12 @@ func _ready():
 	init_turn_order()
 
 func _process(delta: float) -> void:
-	state_process()
+	turn_state_process()
 
 var current_state: TURN_STATES
 
 var old_tiles: Array = []
-func state_process():
+func turn_state_process():
 	match current_state:
 		TURN_STATES.MOVING:
 			
@@ -66,6 +66,31 @@ func state_process():
 			for tile in old_tiles:
 				battle_map_controller.highlight_tile(battle_map_controller.atlas_enum.DEF, tile, true)
 			old_tiles = []
+			
+			var strike: AbilityBase = current_unit.get_strike()
+			
+			
+			if strike == null:
+				return
+			
+			var can_use_abi: bool = current_unit.can_use_ability()
+			
+			if not can_use_abi:
+				return
+			
+			var dist = strike.abi_range
+			for x in range(dist * -1, dist + 1):
+				for y in range(dist * -1, dist + 1):
+					if abs(x) + abs(y) <= dist:
+						var to_pos = current_unit.map_position + Vector2i(x, y)
+						
+						if to_pos == current_unit.map_position:
+							continue
+						
+						battle_map_controller.highlight_tile(
+							battle_map_controller.atlas_enum.ATTACKABLE, to_pos, true)
+						old_tiles.append(to_pos)
+					
 			
 			pass
 		TURN_STATES.ABILITY:
@@ -103,37 +128,9 @@ func state_left(old_state: TURN_STATES):
 	
 	return
 
-##This is where the main game state logic will be held.
-##	We will keep track of current unit turn, what their state is
-## (moving, using ability, selecting ability, etc)
-## along with expending their resources.
-##
-## we will also generate and place the unit portrait, abilities, and stats
-## 	when the turn changes.
-## 
-## Abstract
-## This will serve as the main interchange between
-## the node based game structure and the GUI based game controls
-## 
-## TODO:
-## [X] retrieve units from battlemap
-## [X] load units into a turn order (revise for proper turn order later)
-## [] setup function for sending unit stats, abilities, and portrait to the overlay.
-## [] setup unit states for (moving, attacking, selecting ability, etc)
-## [X] retrieve input from mouse, if over viewport detect which tile
-## [X] move whatever currentUnit is to clicked tile
-## [] if unit has movementPoints available let them move to a clicked tile
-## [] Add button to end turn (and functionality for said button)
-## [] Calculate tiles within range based on movement points, and then highlight those tiles
-##		by changing them to the ID for the highlighted tile, if hovered by mouse make it the
-##		tile that has the dot in the center
-
-
-
 func _unhandled_input(event: InputEvent) -> void:
 	if Input.is_action_just_pressed("debug_turn_skip"):
 		next_turn()
-	
 	
 	if event is InputEventMouse:
 		var pos = event.global_position
@@ -141,9 +138,12 @@ func _unhandled_input(event: InputEvent) -> void:
 			match current_state:
 				TURN_STATES.MOVING:
 					if event is InputEventMouseButton:
-						battle_map_controller.attempt_move_unit(pos, current_unit)
+						if event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
+							battle_map_controller.attempt_move_unit(pos, current_unit)
 				TURN_STATES.STRIKING:
-					pass
+					if event is InputEventMouseButton:
+						if event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
+							battle_map_controller.attempt_strike_unit(pos, current_unit)
 				TURN_STATES.ABILITY:
 					pass
 				_:

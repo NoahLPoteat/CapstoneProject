@@ -10,7 +10,7 @@ var nav_sys = AStar2D.new()
 ##NOTE later this will be loaded on the fly, for now its here
 @onready var battle_map: BattleMapNode = $MapContainer/Map
 
-var unit_pos_from_pos = {} 
+var unit_from_pos = {} 
 var unit_pos_from_unit = {}
 
 ##unfortunate requirement due to issues with the viewport
@@ -31,6 +31,38 @@ func load_battle():
 func start_battle():
 	pass
 
+func attempt_strike_unit(to_pos_global: Vector2, user: UnitBase):
+	
+	var to_pos_iso: Vector2i = iso_from_global(to_pos_global)
+	var strike = user.get_strike()
+	
+	if strike == null:
+		return
+	
+	var abi_r = strike.abi_range
+	
+	#preliminary check to make sure click is in range, and isnt on self
+	var to_check: Vector2i = to_pos_iso - user.map_position
+	var tc_val = abs(to_check.x) + abs(to_check.y)
+	if  tc_val > abi_r or tc_val == 0: ##INVALID STRIKE ZONE
+		return
+	
+	##Here we are within range, and on a valid tile
+	var target_unit: UnitBase
+	if unit_from_pos.has(to_pos_iso):
+		target_unit = unit_from_pos[to_pos_iso]
+	else:
+		return
+	
+	##will be true when both current unit, and targett are on the same team
+	var is_same_side: bool = target_unit.is_ally == user.is_ally
+	
+	if is_same_side: return
+	
+	## from here we are in a valid state to perform the attack
+	strike.effect(target_unit)
+	user.ability_use_left -= 1
+
 func attempt_move_unit(to_pos_global: Vector2, unit: UnitBase, iso: Vector2i = Vector2i(0, 0), from_iso: bool = false, dist_override: bool = false):
 	if not unit:
 		print("Attempting to move unit without one selected")
@@ -48,15 +80,15 @@ func attempt_move_unit(to_pos_global: Vector2, unit: UnitBase, iso: Vector2i = V
 	
 	var dist = len(nav_sys.get_id_path(from_id, to_id)) - 1
 	
-	var tile_has_unit: bool = unit_pos_from_pos.has(to_pos_iso)
+	var tile_has_unit: bool = unit_from_pos.has(to_pos_iso)
 	
 	if (dist <= unit.movement_left or dist_override) and not tile_has_unit:
 		if battle_map.main_tile.get_cell_source_id(to_pos_iso) == 0:
 		
-			unit_pos_from_pos[to_pos_iso] = unit
+			unit_from_pos[to_pos_iso] = unit
 			unit_pos_from_unit[unit] = to_pos_iso
 			
-			unit_pos_from_pos.erase(old_pos)
+			unit_from_pos.erase(old_pos)
 			
 			var to_pos_local = battle_map.main_tile.map_to_local(to_pos_iso)
 			
@@ -73,12 +105,14 @@ func attempt_move_unit(to_pos_global: Vector2, unit: UnitBase, iso: Vector2i = V
 enum atlas_enum {
 	DEF,
 	WALKABLE,
-	HOVERED
+	HOVERED,
+	ATTACKABLE
 }
 var map_atlas: Dictionary = {
 	atlas_enum.DEF : Vector2i(0, 0),
 	atlas_enum.WALKABLE : Vector2i(2, 0),
-	atlas_enum.HOVERED : Vector2i(3, 0)
+	atlas_enum.HOVERED : Vector2i(3, 0),
+	atlas_enum.ATTACKABLE : Vector2i(2, 1)
 }
 
 var current_hovered: Vector2i = Vector2i(-10000,-10000)
@@ -129,7 +163,7 @@ func highlight_tile(to_change: atlas_enum, iso_pos: Vector2i, hl_units: bool = f
 	var map = battle_map.main_tile
 	
 	var tile_atl: Vector2i = map.get_cell_atlas_coords(iso_pos)
-	var tile_has_unit: bool = unit_pos_from_pos.has(iso_pos)
+	var tile_has_unit: bool = unit_from_pos.has(iso_pos)
 	
 	#if tile_atl != map_atlas[atlas_enum.HOVERED]:
 		#if hl_units:

@@ -1,0 +1,27 @@
+Over the past two weeks I have gotten through quite a few (but not all) of the things I planned to get done. I will list them all below with further description will.
+
+- GUI overhaul, with everything being able to be controlled by mouse input / touch screen
+- GUI now displays unit stats
+- Units now have 3 distinct states for movement, striking, ability use.
+- While in movement moveable tiles are highlighted, and units may move to ones not occupied by others
+- Striking highlights tiles in range, and allows units to attack non-allies. 
+- Units can now take damage (but not die (yet))
+- A lot of work on the bones of some future features (such as the battle phases and placement phase)
+
+
+Over the next two week these are the things I wish to get done (kind of in order)
+
+- Implement dying
+- Implement battle phases, unit placement, ally turn, enemy turn, end
+- Modify tile map to have flagged tiles that allow for units to be placed on them at the beginning of a battle
+- Add the placement phase, allowing the user to place their units where they want them (in the future this is where you will select their ability)
+- The End phase will display whether you have won or lost the fight, and boot you back to the world map (progressing the map on win when implemented)
+- Add an arrow indicator to the map to show who the current unit is
+- Basic enemy AI, that "thinks" (waits like half a second to 1.5 seconds between each action) and just moves to nearest unit and attacks it back
+- Visual to display whether or not a unit can attack still (like the movement one) I'm thinking a star twinkling in their portraits eye
+- Allow user to pan the battle map with middle mouse (2 finger pan on mobile / touch)
+
+If theres extra time over this period:
+- Implement world map progression
+- Add 3 linked test maps
+- Make units play a little animation (tween back and slam forward) when they strike a unit, and have a particle effect emit on the stricken 

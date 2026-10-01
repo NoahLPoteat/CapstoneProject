@@ -67,6 +67,7 @@
                   "list-collapse": [
                     false,
                     false,
+                    false,
                     false
                   ]
                 }
@@ -138,7 +139,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300
+    "width": 212.1666717529297
   },
   "right": {
     "id": "ce2f114d119351c5",
@@ -244,11 +245,11 @@
       "obsidian-kanban:Create new board": false
     }
   },
-  "active": "1f3c2db9abfa1754",
+  "active": "9d782606c5a02092",
   "lastOpenFiles": [
-    "TempNotes for Sys2 Do something with LATER.md",
-    "To-do Kanban.md",
     "Bugs & Issues.md",
+    "To-do Kanban.md",
+    "TempNotes for Sys2 Do something with LATER.md",
     "General Ideas.md",
     "Pasted image 20260922152706.png",
     "DevNotes/Party System.md",
