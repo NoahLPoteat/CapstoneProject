@@ -12,7 +12,6 @@ kanban-plugin: board
 
 ## Todo
 
-- [ ] Add some sort of visual to indicate whether or not the unit can attack still
 - [ ] Add basic AI for enemy units (and the pipeline for enemy AI) that makes them just move to a random spot in range and end their turn
 - [ ] Implement middle mouse hold panning with bounds for the battlemap
 - [ ] Implement Placement Phase
@@ -23,10 +22,12 @@ kanban-plugin: board
 - [ ] Add logic for unit abilities and ability selection (doesnt have to actually be unique but get logic there)
 - [ ] Add arrow indicator for current unit
 - [ ] Create tech demo video, push an update to itchio, and make a devlog
+- [ ] Rewrite hovering_tile in battle_map_controller to use the highlight_tile function
 
 
 ## in-progress
 
+- [ ] Add some sort of visual to indicate whether or not the unit can attack still
 - [ ] Implement the battle phases
 - [ ] Make Strike and Ability button change unit state, and display valid tiles for said ability (may be worth keeping that logic in the ability itself)
 - [ ] Add functionality for units to take damage

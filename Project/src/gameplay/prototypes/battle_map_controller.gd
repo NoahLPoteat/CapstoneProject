@@ -141,24 +141,26 @@ func hovering_tile(pos_global: Vector2):
 			## change current tile to new tile
 			## swap new tile to hovered
 			
-			if current_tile_old_atl:
-				map.set_cell(current_hovered, 0, current_tile_old_atl)
-			else:
-				map.set_cell(current_hovered, 0, map_atlas[atlas_enum.DEF])
-			
+			#if current_tile_old_atl:
+				#map.set_cell(current_hovered, 0, current_tile_old_atl)
+			#else:
+			#map.set_cell(current_hovered, 0, map_atlas[atlas_enum.DEF])
+			map.set_cell(current_hovered, 0, map_atlas[atlas_enum.DEF])
 			
 			current_hovered = pos_iso
 			current_tile_old_atl = map.get_cell_atlas_coords(current_hovered)
 			
 			map.set_cell(current_hovered, 0, map_atlas[atlas_enum.HOVERED])
 	else:
-		if current_tile_old_atl:
-			map.set_cell(current_hovered, 0, current_tile_old_atl)
-		else:
-			map.set_cell(current_hovered, 0, map_atlas[atlas_enum.DEF])
+		#if current_tile_old_atl:
+			#map.set_cell(current_hovered, 0, current_tile_old_atl)
+		#else:
+			#map.set_cell(current_hovered, 0, map_atlas[atlas_enum.DEF])
+		map.set_cell(current_hovered, 0, map_atlas[atlas_enum.DEF])
 
-
-func highlight_tile(to_change: atlas_enum, iso_pos: Vector2i, hl_units: bool = false):
+##hl_units - whether or not the highlight will affect the tile under a unit
+##clean_up whether or not the highlight should overwrite our hovered tile (post turn mainly)
+func highlight_tile(to_change: atlas_enum, iso_pos: Vector2i, hl_units: bool = false, clean_up: bool = false):
 	var atl = map_atlas[to_change]
 	var map = battle_map.main_tile
 	

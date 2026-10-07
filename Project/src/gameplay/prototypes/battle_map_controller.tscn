@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=4 uid="uid://cu0oyqg0re8sc"]
+[gd_scene load_steps=14 format=4 uid="uid://cu0oyqg0re8sc"]
 
 [ext_resource type="Script" uid="uid://3dlg7spf66qq" path="res://src/gameplay/prototypes/battle_map_controller.gd" id="1_k8cae"]
 [ext_resource type="TileSet" uid="uid://byqahne7l5q25" path="res://assets/art/world/tilesets/custom_tile_set.tres" id="1_ojxod"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://ct3ui131rw88u" path="res://src/gameplay/prototypes/unit_scene_base.tscn" id="5_ekq22"]
 [ext_resource type="Texture2D" uid="uid://stn5bu8ghnvr" path="res://assets/art/characters/portraitDesign.png" id="6_063d6"]
 [ext_resource type="Script" uid="uid://b10cm1o4txpbm" path="res://src/gameplay/resources/ability_res/built_abilities/single_target_strike.gd" id="7_063d6"]
+[ext_resource type="PackedScene" uid="uid://dqxytahl0deg1" path="res://src/gameplay/prototypes/particles/bloodParticle.tscn" id="8_chmxg"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ekq22"]
 atlas = ExtResource("6_063d6")
@@ -88,6 +89,10 @@ strike = SubResource("Resource_063d6")
 
 [node name="Sprite2D" parent="AllyUnitContainer/Unit2" index="0"]
 frame = 1
+
+[node name="Node2D" parent="." instance=ExtResource("8_chmxg")]
+position = Vector2(160, 51)
+explosiveness = 0.8
 
 [connection signal="need_nav" from="MapContainer" to="." method="_on_map_container_need_nav"]
 

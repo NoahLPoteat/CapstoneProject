@@ -42,12 +42,13 @@ var current_state: TURN_STATES
 
 var old_tiles: Array = []
 func turn_state_process():
+	for tile in old_tiles:
+		battle_map_controller.highlight_tile(battle_map_controller.atlas_enum.DEF, tile, true, true)
+	old_tiles = []
+	
+	
 	match current_state:
 		TURN_STATES.MOVING:
-			
-			for tile in old_tiles:
-				battle_map_controller.highlight_tile(battle_map_controller.atlas_enum.DEF, tile, true)
-			old_tiles = []
 			var moves_left = current_unit.movement_left
 			##Highlight tiles based on units available spaces left
 			for x in range(moves_left * -1, moves_left + 1):
@@ -63,10 +64,6 @@ func turn_state_process():
 			##Cover tiles valid in current units strike distance
 			##	Use similar structure to the moving tiles (but different atl)
 			##Mouse Detection in lower node will be handling finer details
-			for tile in old_tiles:
-				battle_map_controller.highlight_tile(battle_map_controller.atlas_enum.DEF, tile, true)
-			old_tiles = []
-			
 			var strike: AbilityBase = current_unit.get_strike()
 			
 			
@@ -81,7 +78,8 @@ func turn_state_process():
 			var dist = strike.abi_range
 			for x in range(dist * -1, dist + 1):
 				for y in range(dist * -1, dist + 1):
-					if abs(x) + abs(y) <= dist:
+					var axy = abs(x) + abs(y)
+					if axy <= dist and axy != 0:
 						var to_pos = current_unit.map_position + Vector2i(x, y)
 						
 						if to_pos == current_unit.map_position:
@@ -144,6 +142,7 @@ func _unhandled_input(event: InputEvent) -> void:
 					if event is InputEventMouseButton:
 						if event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
 							battle_map_controller.attempt_strike_unit(pos, current_unit)
+							update_gui()
 				TURN_STATES.ABILITY:
 					pass
 				_:
