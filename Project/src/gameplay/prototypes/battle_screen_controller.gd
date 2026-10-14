@@ -40,24 +40,16 @@ func _process(delta: float) -> void:
 	battle_state_process()
 
 
+var enemy_ai_running: bool = false
 #placement - just start turn order fo now
 #	in the future
 #	display a side panel of all ally units
 #	go through order allowing user to place
 #	each unit in a select area
 #	first we need tiles to have data on which tiles should be placeable
-#ALLY_TURN
-#	pass down to current_turn_process which handles all ally turn behaivour
-#ENEMY_TURN
-#	for now have a quick function to just make enemy unit move to nearest ally unit
-#	and attack if in range
-#	in the future we will offset this to the enemy specificly
-#	allowing them to control their own ai
 #END_SCREEN
 #	if game won display a win screen and pass up that the user has won
 #	if game lost then display a loss screen and pass up without has won
-#NONE
-#	default state, potentially use to just swap to placement phase
 var current_battle_state: BATTLE_PHASES
 func battle_state_process():
 	
@@ -67,10 +59,16 @@ func battle_state_process():
 			##	and the gui updating
 			##for now we just go to ally_turn
 			change_battle_state(BATTLE_PHASES.ALLY_TURN)
+			
+			return
 		BATTLE_PHASES.ALLY_TURN:
 			turn_state_process()
+			return
 		BATTLE_PHASES.ENEMY_TURN:
-			turn_state_process()
+			if not enemy_ai_running:
+				enemy_ai()
+			#turn_state_process()
+			return
 		BATTLE_PHASES.END_SCREEN:
 			pass
 		BATTLE_PHASES.NONE: 
@@ -80,6 +78,71 @@ func battle_state_process():
 			#	cross ref the way battles are initiated to make sure everything works
 			change_battle_state(BATTLE_PHASES.PLACEMENT)
 			pass
+
+var custom_timer: Timer
+func enemy_ai():
+	var this_enemy = current_unit
+	enemy_ai_running = true
+	custom_timer = Timer.new()
+	add_child(custom_timer)
+	custom_timer.wait_time = 1.0
+	custom_timer.one_shot = true
+	
+	
+	for tile in old_tiles:
+		battle_map_controller.highlight_tile(battle_map_controller.atlas_enum.DEF, tile, true, true)
+	old_tiles = []
+	
+	#loop through turn_order, check each unit
+	#	find closest
+	var moves_left = current_unit.movement_left
+	
+	
+	#highlight valid movement tiles
+	for x in range(moves_left * -1, moves_left + 1):
+		for y in range(moves_left * -1, moves_left + 1):
+			if abs(x) + abs(y) <= moves_left:
+				var to_pos = current_unit.map_position + Vector2i(x, y)
+				battle_map_controller.highlight_tile(
+					battle_map_controller.atlas_enum.WALKABLE, to_pos)
+				old_tiles.append(to_pos)
+	
+	#t = randf_range(0.8, 1.2)
+	#await get_tree().create_timer(t).timeout
+	custom_timer.start()
+	await custom_timer.timeout
+	
+	
+	var closest_unit: UnitBase
+	var closest_dist: float = 10000000.0
+	for unit in turn_order:
+		if this_enemy == unit:
+			continue
+		var s_iso: Vector2i = this_enemy.map_position
+		var t_iso: Vector2i = unit.map_position
+		var d = s_iso.distance_to(t_iso)
+		if d <= closest_dist:
+			closest_dist = d
+			closest_unit = unit
+	
+	#loop through all free movement tiles
+	#	find tile closest to enemy unit
+	#take between 0.8 to 1.2 s to 'think'
+	#move enemy unit to said tile
+	
+	var closest_tile: Vector2i
+	for tile in old_tiles: #each tile in old_tiles is actually a moveable tile rn
+		battle_map_controller.highlight_tile(battle_map_controller.atlas_enum.DEF, tile, true, true)
+	old_tiles = []
+	
+	#swap to attack
+	
+	#loop through all available attack tiles
+		#if any enemy in range, attack closest
+	
+	enemy_ai_running = false
+	if current_unit == this_enemy:
+		next_turn()
 
 func change_battle_state(new_state: BATTLE_PHASES):
 	exit_battle_state(current_battle_state)
@@ -103,7 +166,7 @@ func exit_battle_state(old_state: BATTLE_PHASES):
 		BATTLE_PHASES.ALLY_TURN:
 			pass
 		BATTLE_PHASES.ENEMY_TURN:
-			pass
+			enemy_ai_running = false
 		BATTLE_PHASES.END_SCREEN:
 			pass
 		BATTLE_PHASES.NONE:
@@ -129,7 +192,7 @@ func turn_state_process():
 							battle_map_controller.atlas_enum.WALKABLE, to_pos)
 						old_tiles.append(to_pos)
 			
-			
+			pass
 		TURN_STATES.STRIKING:
 			var strike: AbilityBase = current_unit.get_strike()
 			if strike == null:
@@ -189,7 +252,7 @@ func _unhandled_input(event: InputEvent) -> void:
 	if Input.is_action_just_pressed("debug_turn_skip"):
 		next_turn()
 	
-	if event is InputEventMouse:
+	if event is InputEventMouse and current_battle_state == BATTLE_PHASES.ALLY_TURN:
 		var pos = event.global_position
 		if sub_view_rect.has_point(pos) and self.visible:
 			match current_turn_state:
@@ -223,9 +286,12 @@ func next_turn():
 	current_unit = turn_order[turn_index]
 	current_unit.reset_turn()
 	
+	
 	if current_unit.is_ally:
+		#print("ally")
 		change_battle_state(BATTLE_PHASES.ALLY_TURN)
 	else:
+		#print("enemy")
 		change_battle_state(BATTLE_PHASES.ENEMY_TURN)
 	
 	current_turn_state = TURN_STATES.MOVING
@@ -283,7 +349,7 @@ func unit_death(unit: UnitBase):
 	for u in turn_order:
 		u.turn_order_pos = i
 		i += 1
-	
+	turn_index -= 1
 	check_win_loss()
 
 ## two options
