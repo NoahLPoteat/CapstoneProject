@@ -1,5 +1,8 @@
 class_name UnitBase extends Node2D
-signal unit_died(turn_position: int)
+signal unit_died()
+
+##subnodes
+@onready var blood_particle: GPUParticles2D = $Node2D
 
 @export var unit_name: String = "Enter Name..."
 @export var unit_class : UnitClass
@@ -59,8 +62,11 @@ func pre_fight_init():
 func take_damage(val: int):
 	health -= val
 	
+	blood_particle.restart(false)
+	
 	health = max(health, 0)
 	
+	await blood_particle.finished
 	if health <= 0:
 		die()
 
@@ -70,7 +76,7 @@ func heal(val: int):
 	health = min(health, max_health)
 
 func die():
-	unit_died.emit(turn_order_pos)
+	unit_died.emit()
 
 func get_strike():
 	if strike != null:

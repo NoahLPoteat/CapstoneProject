@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=4 uid="uid://cu0oyqg0re8sc"]
+[gd_scene load_steps=16 format=4 uid="uid://cu0oyqg0re8sc"]
 
 [ext_resource type="Script" uid="uid://3dlg7spf66qq" path="res://src/gameplay/prototypes/battle_map_controller.gd" id="1_k8cae"]
 [ext_resource type="TileSet" uid="uid://byqahne7l5q25" path="res://assets/art/world/tilesets/custom_tile_set.tres" id="1_ojxod"]
@@ -6,8 +6,10 @@
 [ext_resource type="Script" uid="uid://b8cfkjif4u2r0" path="res://src/gameplay/battle_maps/map.gd" id="3_ekq22"]
 [ext_resource type="PackedScene" uid="uid://ct3ui131rw88u" path="res://src/gameplay/prototypes/unit_scene_base.tscn" id="5_ekq22"]
 [ext_resource type="Texture2D" uid="uid://stn5bu8ghnvr" path="res://assets/art/characters/portraitDesign.png" id="6_063d6"]
-[ext_resource type="Script" uid="uid://b10cm1o4txpbm" path="res://src/gameplay/resources/ability_res/built_abilities/single_target_strike.gd" id="7_063d6"]
+[ext_resource type="Resource" uid="uid://1lwlmrmyxrwk" path="res://src/gameplay/resources/ability_res/built_abilities/str_single_plus.tres" id="6_lpman"]
+[ext_resource type="Script" uid="uid://b10cm1o4txpbm" path="res://src/gameplay/resources/ability_res/built_abilities/str_single_corners.gd" id="7_063d6"]
 [ext_resource type="PackedScene" uid="uid://dqxytahl0deg1" path="res://src/gameplay/prototypes/particles/bloodParticle.tscn" id="8_chmxg"]
+[ext_resource type="Resource" uid="uid://ccxbxmqnssxwi" path="res://src/gameplay/resources/ability_res/built_abilities/str_single_corners.tres" id="8_qu2af"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ekq22"]
 atlas = ExtResource("6_063d6")
@@ -21,7 +23,7 @@ region = Rect2(0, 0, 59, 59)
 script = ExtResource("7_063d6")
 ability_name = "Strike"
 ability_desc = "Single Target Strike, Range and Damage Varies per unit"
-val = 20
+val = 35
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_lpman"]
 atlas = ExtResource("6_063d6")
@@ -60,11 +62,21 @@ y_sort_origin = -8
 [node name="Unit2" parent="MapContainer/Map/EnemyUnits" instance=ExtResource("5_ekq22")]
 position = Vector2(28, -22)
 starting_pos = Vector2i(9, 1)
+health = 20
+max_health = 20
+mana = 60
+mana_recovery = 10
+movement_left = 2
+strike = ExtResource("6_lpman")
 
 [node name="Unit" parent="MapContainer/Map/EnemyUnits" instance=ExtResource("5_ekq22")]
 position = Vector2(46, -22)
 portrait_texture = SubResource("AtlasTexture_ekq22")
 starting_pos = Vector2i(5, -4)
+mana = 75
+mana_recovery = 15
+movement_left = 4
+strike = ExtResource("8_qu2af")
 
 [node name="Sprite2D" parent="MapContainer/Map/EnemyUnits/Unit" index="0"]
 frame = 17
@@ -75,6 +87,8 @@ frame = 17
 position = Vector2(-32, -20)
 portrait_texture = SubResource("AtlasTexture_chmxg")
 is_ally = true
+health = 125
+max_health = 125
 strike = SubResource("Resource_chmxg")
 
 [node name="Sprite2D" parent="AllyUnitContainer/Sharri" index="0"]
@@ -85,6 +99,7 @@ position = Vector2(-11, -19)
 portrait_texture = SubResource("AtlasTexture_lpman")
 is_ally = true
 starting_pos = Vector2i(10, 2)
+movement_left = 4
 strike = SubResource("Resource_063d6")
 
 [node name="Sprite2D" parent="AllyUnitContainer/Unit2" index="0"]

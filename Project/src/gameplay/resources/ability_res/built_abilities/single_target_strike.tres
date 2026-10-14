@@ -1,8 +1,0 @@
-[gd_resource type="Resource" load_steps=2 format=3 uid="uid://ccxbxmqnssxwi"]
-
-[ext_resource type="Script" uid="uid://b10cm1o4txpbm" path="res://src/gameplay/resources/ability_res/built_abilities/single_target_strike.gd" id="1_mpplt"]
-
-[resource]
-script = ExtResource("1_mpplt")
-ability_name = "Strike"
-ability_desc = "Single Target Strike, Range and Damage Varies per unit"

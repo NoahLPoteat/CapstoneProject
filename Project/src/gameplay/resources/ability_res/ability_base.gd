@@ -19,3 +19,6 @@ func effect(target_unit: UnitBase):
 
 func get_range():
 	return abi_range
+
+func get_tiles():
+	return []

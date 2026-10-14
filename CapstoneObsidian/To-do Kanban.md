@@ -7,36 +7,38 @@ kanban-plugin: board
 ## Todo - Stretch
 
 - [ ] override mouse to custom mouse
-- [ ] Add Particle effect on strike
+- [ ] Rewrite hovering_tile in battle_map_controller to use the highlight_tile function
+- [ ] Make units play a little animation on death
+- [ ] implement a white flash shader on unit damage taken
 
 
 ## Todo
 
-- [ ] Add basic AI for enemy units (and the pipeline for enemy AI) that makes them just move to a random spot in range and end their turn
 - [ ] Implement middle mouse hold panning with bounds for the battlemap
 - [ ] Implement Placement Phase
 - [ ] Modify Battle Maps to have certain tiles be marked as available for starting placement
 - [ ] Adjust placement phase to limit which tiles can be placed on (consider using custom tile data)
 - [ ] Update Next Turn to only allow player to end turn on their turn
+- [ ] Add basic AI for enemy units (and the pipeline for enemy AI) that makes them just move to a random spot in range and end their turn
 - [ ] Make the AI follow the closest unit, and attack it off cooldown.
 - [ ] Add logic for unit abilities and ability selection (doesnt have to actually be unique but get logic there)
 - [ ] Add arrow indicator for current unit
 - [ ] Create tech demo video, push an update to itchio, and make a devlog
-- [ ] Rewrite hovering_tile in battle_map_controller to use the highlight_tile function
 
 
 ## in-progress
 
-- [ ] Add some sort of visual to indicate whether or not the unit can attack still
 - [ ] Implement the battle phases
-- [ ] Make Strike and Ability button change unit state, and display valid tiles for said ability (may be worth keeping that logic in the ability itself)
-- [ ] Add functionality for units to take damage
-- [ ] implement death (consider letting each unit store its position in the turn order and when it calls die() it will release a signal, this signal will remove it from the turn order)
-	DONT FORGET TO UPDATE THE OTHER UNITS TURN ORDER POSITIONS AFTER
+- [ ] implement death animation
 
 
 ## complete
 
+- [ ] implement death
+- [ ] Add Particle effect on strike
+- [ ] Add functionality for units to take damage
+- [ ] Make Strike and Ability button change unit state, and display valid tiles for said ability (may be worth keeping that logic in the ability itself)
+- [ ] Add some sort of visual to indicate whether or not the unit can attack still
 - [ ] Display Unit Stats on turn change
 - [ ] Setup basic Unit Retrieval and turn order
 - [ ] Highlight tile that is hovered by curser

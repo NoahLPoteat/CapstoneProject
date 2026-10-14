@@ -186,6 +186,10 @@ func highlight_tile(to_change: atlas_enum, iso_pos: Vector2i, hl_units: bool = f
 	
 	
 
+func remove_unit(unit: UnitBase):
+	var i_pos = unit_pos_from_unit[unit]
+	unit_pos_from_unit.erase(unit)
+	unit_from_pos.erase(i_pos)
 
 func get_nav_sys():
 	return nav_sys

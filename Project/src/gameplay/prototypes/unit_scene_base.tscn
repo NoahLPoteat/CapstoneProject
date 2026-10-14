@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://ct3ui131rw88u"]
+[gd_scene load_steps=6 format=3 uid="uid://ct3ui131rw88u"]
 
 [ext_resource type="Script" uid="uid://dh7uvryf2q04a" path="res://src/gameplay/units/unit.gd" id="1_jy6c2"]
 [ext_resource type="Texture2D" uid="uid://stn5bu8ghnvr" path="res://assets/art/characters/portraitDesign.png" id="2_2p8cq"]
 [ext_resource type="Texture2D" uid="uid://c3t8f5k3ggg8w" path="res://assets/art/characters/CharacterDesignAtl.png" id="3_yytn0"]
+[ext_resource type="PackedScene" uid="uid://dqxytahl0deg1" path="res://src/gameplay/prototypes/particles/bloodParticle.tscn" id="4_2p8cq"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_jy6c2"]
 atlas = ExtResource("2_2p8cq")
@@ -21,3 +22,11 @@ texture = ExtResource("3_yytn0")
 hframes = 8
 vframes = 8
 frame = 3
+
+[node name="Node2D" parent="." instance=ExtResource("4_2p8cq")]
+y_sort_enabled = true
+amount = 20
+explosiveness = 0.8
+randomness = 0.15
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
