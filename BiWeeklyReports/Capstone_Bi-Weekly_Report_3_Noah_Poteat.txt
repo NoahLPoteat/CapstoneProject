@@ -1,0 +1,14 @@
+I have not made anywhere near as much progress as I was hoping to this session, I had to shift a lot of focus to studying for midterms.
+
+I finished the enemy death system, and have a basic enemy AI.
+I have some of the backend done for the world map progression but the battle maps dont interact with it at all (and it doesn't reallyyy work)
+
+Some smaller things:
+I added a little particle effect on hit
+A gravestone sprite when a unit dies (was way easier than my old implementation for death and got rid of EVERY bug I was dealing with)
+
+
+For the next two weeks since I should have more free time
+I plan to get a win / loss screen, and connect it up to the world map so the user can unlock more battle nodes
+I want to have 3 little sample battles for that system
+and hopefully want to have a placement phase for the battles

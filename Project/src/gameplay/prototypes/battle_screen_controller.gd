@@ -38,6 +38,7 @@ func _ready():
 
 func _process(delta: float) -> void:
 	battle_state_process()
+	#print(turn_order, turn_index)
 
 
 var enemy_ai_running: bool = false
@@ -80,6 +81,7 @@ func battle_state_process():
 			pass
 
 var custom_timer: Timer
+var t: float
 func enemy_ai():
 	var this_enemy = current_unit
 	enemy_ai_running = true
@@ -87,6 +89,7 @@ func enemy_ai():
 	add_child(custom_timer)
 	custom_timer.wait_time = 1.0
 	custom_timer.one_shot = true
+	
 	
 	
 	for tile in old_tiles:
@@ -107,42 +110,78 @@ func enemy_ai():
 					battle_map_controller.atlas_enum.WALKABLE, to_pos)
 				old_tiles.append(to_pos)
 	
-	#t = randf_range(0.8, 1.2)
-	#await get_tree().create_timer(t).timeout
-	custom_timer.start()
+	t = randf_range(0.8, 1.2)
+	custom_timer.start(t)
 	await custom_timer.timeout
 	
-	
+	var s_iso: Vector2i = this_enemy.map_position
 	var closest_unit: UnitBase
 	var closest_dist: float = 10000000.0
 	for unit in turn_order:
 		if this_enemy == unit:
 			continue
-		var s_iso: Vector2i = this_enemy.map_position
 		var t_iso: Vector2i = unit.map_position
 		var d = s_iso.distance_to(t_iso)
 		if d <= closest_dist:
 			closest_dist = d
 			closest_unit = unit
 	
-	#loop through all free movement tiles
-	#	find tile closest to enemy unit
-	#take between 0.8 to 1.2 s to 'think'
-	#move enemy unit to said tile
+	if not closest_unit:
+		return
 	
-	var closest_tile: Vector2i
-	for tile in old_tiles: #each tile in old_tiles is actually a moveable tile rn
+	var closest_tile: Vector2i = Vector2i(-1000, -1000)
+	closest_dist = 10000000.0
+	for tile: Vector2i in old_tiles: #each tile in old_tiles is actually a moveable tile rn
+		var d = tile.distance_to(closest_unit.map_position)
+		if d <= closest_dist and not battle_map_controller.tile_has_unit(tile):
+			closest_dist = d
+			closest_tile = tile
+		battle_map_controller.highlight_tile(battle_map_controller.atlas_enum.DEF, tile, true, true)
+	old_tiles = []
+	print(closest_tile, closest_unit, closest_dist)
+	battle_map_controller.attempt_move_unit(Vector2(0,0), this_enemy, closest_tile, true)
+	
+	#get strike and display tiles (abilities come later)
+	var strike: AbilityBase = this_enemy.get_strike()
+	
+	for tile in strike.get_tiles():
+		var t_off: Vector2i = tile + this_enemy.map_position
+		if t_off == current_unit.map_position:
+			continue
+		
+		battle_map_controller.highlight_tile(
+			battle_map_controller.atlas_enum.ATTACKABLE, t_off, true
+		)
+		old_tiles.append(t_off)
+	
+	t = randf_range(0.8, 1.2)
+	custom_timer.start(t)
+	await custom_timer.timeout
+	
+	var first_enemy_in_range: UnitBase = null
+	var striking_tile: Vector2i = Vector2i(-1000,-1000)
+	for tile in old_tiles:
+		if battle_map_controller.tile_has_unit(tile):
+			var tar: UnitBase = battle_map_controller.unit_from_pos[tile]
+			if tar.is_ally != this_enemy.is_ally:
+				first_enemy_in_range = tar
+				striking_tile = first_enemy_in_range.map_position
+				break
+	 
+	for tile in old_tiles: #reset tiles
 		battle_map_controller.highlight_tile(battle_map_controller.atlas_enum.DEF, tile, true, true)
 	old_tiles = []
 	
-	#swap to attack
+	#attempt to strike a unit if one in range
+	if first_enemy_in_range != null and striking_tile != Vector2i(-1000,-1000):
+		battle_map_controller.attempt_strike_unit(Vector2(-1,-1), this_enemy, striking_tile, true)
 	
-	#loop through all available attack tiles
-		#if any enemy in range, attack closest
+	t = randf_range(0.8, 1.2)
+	custom_timer.start(t)
+	await custom_timer.timeout
 	
 	enemy_ai_running = false
-	if current_unit == this_enemy:
-		next_turn()
+	next_turn()
 
 func change_battle_state(new_state: BATTLE_PHASES):
 	exit_battle_state(current_battle_state)
@@ -179,6 +218,8 @@ func turn_state_process():
 		battle_map_controller.highlight_tile(battle_map_controller.atlas_enum.DEF, tile, true, true)
 	old_tiles = []
 	
+	#if unit is dead:
+	#	skip!
 	
 	match current_turn_state:
 		TURN_STATES.MOVING:
@@ -280,10 +321,16 @@ func update_gui():
 	overlay_node.update_gui(current_unit, current_battle_state, current_turn_state)
 
 func next_turn():
-	if turn_index >= len(turn_order):
+	if turn_index >= turn_order.size():
 		turn_index = 0 #reset back to start of turn order
 	
 	current_unit = turn_order[turn_index]
+	if current_unit.unit_dead:
+		check_win_loss()
+		turn_index += 1
+		next_turn()
+		return
+	
 	current_unit.reset_turn()
 	
 	
@@ -339,17 +386,6 @@ func retrieve_units():
 	return battle_map_controller.get_units_arr()
 
 func unit_death(unit: UnitBase):
-	turn_order.remove_at(unit.turn_order_pos)
-	unit.queue_free()
-	
-	battle_map_controller.remove_unit(unit)
-	
-	#update loop
-	var i = 0
-	for u in turn_order:
-		u.turn_order_pos = i
-		i += 1
-	turn_index -= 1
 	check_win_loss()
 
 ## two options

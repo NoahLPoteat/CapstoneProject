@@ -61,11 +61,10 @@
             "state": {
               "type": "kanban",
               "state": {
-                "file": "To-do Kanban.md",
+                "file": "Bugs & Issues.md",
                 "kanbanViewState": {
                   "kanban-plugin": "board",
                   "list-collapse": [
-                    false,
                     false,
                     false,
                     false
@@ -73,7 +72,7 @@
                 }
               },
               "icon": "lucide-trello",
-              "title": "To-do Kanban"
+              "title": "Bugs & Issues"
             }
           }
         ],
@@ -247,8 +246,8 @@
   },
   "active": "1f3c2db9abfa1754",
   "lastOpenFiles": [
-    "Bugs & Issues.md",
     "To-do Kanban.md",
+    "Bugs & Issues.md",
     "General Ideas.md",
     "Pasted image 20260922152706.png",
     "TempNotes for Sys2 Do something with LATER.md",

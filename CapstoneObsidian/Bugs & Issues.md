@@ -16,6 +16,7 @@ kanban-plugin: board
 
 - [ ] UNIT LOADER DOES NOT GO TO NEXT TURN, HANDLE IN BATTLE PHASE LOGIC
 - [ ] ^^^ DO THIS
+- [ ] when an enemy unit dies, the turn order gets all wonky
 
 
 ## Fixed
@@ -23,6 +24,10 @@ kanban-plugin: board
 - [ ] REMOVE DEAD UNITS FROM THE POS DICTS
 - [ ] tile under unit in attack gotta GO
 - [ ] when you end your turn immediately after moving, a tile is leftover under you
+- [ ] when an enemy kills a unit, the delay between them getting queue freed and the enemy calling next turn is out of sync. Maybe make a new flag, when a unit is killed it is immediately set to true. and that flag overrides all unit states
+	
+	ALTERNATIVELY:
+	in enemy turn, check if unit killed is dead if so wait 0.8 to 1.2 seconds
 
 
 

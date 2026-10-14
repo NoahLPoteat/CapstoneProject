@@ -1,13 +1,107 @@
-[gd_scene load_steps=6 format=3 uid="uid://ct3ui131rw88u"]
+[gd_scene load_steps=21 format=3 uid="uid://ct3ui131rw88u"]
 
 [ext_resource type="Script" uid="uid://dh7uvryf2q04a" path="res://src/gameplay/units/unit.gd" id="1_jy6c2"]
 [ext_resource type="Texture2D" uid="uid://stn5bu8ghnvr" path="res://assets/art/characters/portraitDesign.png" id="2_2p8cq"]
 [ext_resource type="Texture2D" uid="uid://c3t8f5k3ggg8w" path="res://assets/art/characters/CharacterDesignAtl.png" id="3_yytn0"]
 [ext_resource type="PackedScene" uid="uid://dqxytahl0deg1" path="res://src/gameplay/prototypes/particles/bloodParticle.tscn" id="4_2p8cq"]
+[ext_resource type="Texture2D" uid="uid://ddbpxaxdu1ktf" path="res://assets/art/characters/unitDeathAnim.png" id="5_a07dw"]
+[ext_resource type="Texture2D" uid="uid://bjti2gkvkyp00" path="res://assets/art/characters/GraveStone.png" id="5_yytn0"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_jy6c2"]
 atlas = ExtResource("2_2p8cq")
 region = Rect2(180, 0, 59, 59)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dull3"]
+atlas = ExtResource("5_a07dw")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c0562"]
+atlas = ExtResource("5_a07dw")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lwlis"]
+atlas = ExtResource("5_a07dw")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wwt2p"]
+atlas = ExtResource("5_a07dw")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yv1vw"]
+atlas = ExtResource("5_a07dw")
+region = Rect2(64, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_88kmv"]
+atlas = ExtResource("5_a07dw")
+region = Rect2(80, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hwyn6"]
+atlas = ExtResource("5_a07dw")
+region = Rect2(96, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_abipi"]
+atlas = ExtResource("5_a07dw")
+region = Rect2(112, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ugljh"]
+atlas = ExtResource("5_a07dw")
+region = Rect2(128, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3q0rv"]
+atlas = ExtResource("5_a07dw")
+region = Rect2(144, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8xpmw"]
+atlas = ExtResource("5_a07dw")
+region = Rect2(160, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f5wwp"]
+atlas = ExtResource("5_a07dw")
+region = Rect2(176, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_h8l8m"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dull3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c0562")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lwlis")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wwt2p")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yv1vw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_88kmv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hwyn6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_abipi")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ugljh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3q0rv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8xpmw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f5wwp")
+}],
+"loop": false,
+"name": &"new_animation",
+"speed": 8.0
+}]
 
 [node name="Unit" type="Node2D"]
 y_sort_enabled = true
@@ -30,3 +124,12 @@ explosiveness = 0.8
 randomness = 0.15
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_h8l8m")
+animation = &"new_animation"
+
+[node name="GraveSprite" type="Sprite2D" parent="."]
+visible = false
+texture = ExtResource("5_yytn0")
+
+[connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
+[connection signal="frame_changed" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_frame_changed"]

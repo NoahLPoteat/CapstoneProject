@@ -14,6 +14,7 @@ var hit_chance_mod: float = 1.0
 var cast_chance_mod: float = 1.0
 var attack_change_mode: float = 1.0
 var turn_order_pos: int = -1
+var unit_dead: bool = false
 
 ##holds the units target position, the unit will lerp to it when moving
 var map_position: Vector2i = Vector2i(0, 0)
@@ -39,6 +40,9 @@ var map_position: Vector2i = Vector2i(0, 0)
 #For now each unit will just have a static sprite
 #	In the future I want them to be animated
 @export var sprite: Texture2D
+@onready var sprite_node: Sprite2D = $Sprite2D
+@onready var grave: Sprite2D = $GraveSprite
+@onready var death_anim: AnimatedSprite2D = $AnimatedSprite2D
 
 enum DIR {
 	LEFT,
@@ -60,6 +64,9 @@ func pre_fight_init():
 	pass
 
 func take_damage(val: int):
+	if unit_dead:
+		return
+	
 	health -= val
 	
 	blood_particle.restart(false)
@@ -71,12 +78,17 @@ func take_damage(val: int):
 		die()
 
 func heal(val: int):
+	if unit_dead: return
+	
 	health += val
 	
 	health = min(health, max_health)
 
 func die():
-	unit_died.emit()
+	if not unit_dead:
+		unit_dead = true
+		death_anim.play()
+
 
 func get_strike():
 	if strike != null:
@@ -93,3 +105,20 @@ func can_use_ability():
 func reset_turn():
 	movement_left = 3
 	ability_use_left = max_ability_uses
+
+
+func hide_sprite():
+	sprite_node.visible = false
+
+func show_sprite():
+	pass
+
+
+func _on_animated_sprite_2d_frame_changed() -> void:
+	if death_anim.frame == 7:
+		hide_sprite()
+
+func _on_animated_sprite_2d_animation_finished() -> void:
+	death_anim.stop()
+	death_anim.frame = 0
+	grave.visible = true

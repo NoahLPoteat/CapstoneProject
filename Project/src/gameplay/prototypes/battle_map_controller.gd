@@ -31,9 +31,12 @@ func load_battle():
 func start_battle():
 	pass
 
-func attempt_strike_unit(to_pos_global: Vector2, user: UnitBase):
-	
-	var to_pos_iso: Vector2i = iso_from_global(to_pos_global)
+func attempt_strike_unit(to_pos_global: Vector2, user: UnitBase, iso: Vector2i = Vector2i(0,0), from_iso:bool = false):
+	var to_pos_iso: Vector2i
+	if from_iso:
+		to_pos_iso = iso
+	else:
+		to_pos_iso = iso_from_global(to_pos_global)
 	var strike = user.get_strike()
 	
 	if strike == null:
@@ -62,6 +65,10 @@ func attempt_strike_unit(to_pos_global: Vector2, user: UnitBase):
 	## from here we are in a valid state to perform the attack
 	strike.effect(target_unit)
 	user.ability_use_left -= 1
+
+func tile_has_unit(to_pos: Vector2i):
+	if unit_from_pos.has(to_pos): return true
+	return false
 
 func attempt_move_unit(to_pos_global: Vector2, unit: UnitBase, iso: Vector2i = Vector2i(0, 0), from_iso: bool = false, dist_override: bool = false):
 	if not unit:

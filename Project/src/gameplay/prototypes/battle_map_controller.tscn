@@ -87,7 +87,7 @@ frame = 17
 position = Vector2(-32, -20)
 portrait_texture = SubResource("AtlasTexture_chmxg")
 is_ally = true
-health = 125
+health = 80
 max_health = 125
 strike = SubResource("Resource_chmxg")
 
@@ -99,6 +99,7 @@ position = Vector2(-11, -19)
 portrait_texture = SubResource("AtlasTexture_lpman")
 is_ally = true
 starting_pos = Vector2i(10, 2)
+health = 80
 movement_left = 4
 strike = SubResource("Resource_063d6")
 
