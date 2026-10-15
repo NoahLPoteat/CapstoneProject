@@ -54,30 +54,9 @@
               "icon": "lucide-trello",
               "title": "To-do Kanban"
             }
-          },
-          {
-            "id": "1f3c2db9abfa1754",
-            "type": "leaf",
-            "state": {
-              "type": "kanban",
-              "state": {
-                "file": "To-do Kanban.md",
-                "kanbanViewState": {
-                  "kanban-plugin": "board",
-                  "list-collapse": [
-                    false,
-                    false,
-                    false,
-                    false
-                  ]
-                }
-              },
-              "icon": "lucide-trello",
-              "title": "To-do Kanban"
-            }
           }
         ],
-        "currentTab": 3
+        "currentTab": 2
       }
     ],
     "direction": "vertical"
@@ -245,7 +224,7 @@
       "obsidian-kanban:Create new board": false
     }
   },
-  "active": "1f3c2db9abfa1754",
+  "active": "96364d2f985e0643",
   "lastOpenFiles": [
     "Bugs & Issues.md",
     "To-do Kanban.md",

@@ -27,3 +27,16 @@ func _on_world_map_controller_map_node_clicked(battle_map: PackedScene) -> void:
 	##battle_screen_control.start_battle()
 	
 	##var node = battlemap.instant
+
+
+##called when the battle is over and user presses continue on the battle screen
+##	(for now its instant)
+func _on_battle_screen_controller_game_over(game_won: bool, battle_map: BattleMapNode) -> void:
+	##begin transition away from battle
+	## battle.vis = false
+	##	battle.unload_map
+	## worldMap.vis = true
+	## if won -> worldmap.progress map 
+	
+	
+	pass

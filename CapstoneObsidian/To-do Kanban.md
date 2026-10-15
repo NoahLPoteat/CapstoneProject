@@ -12,6 +12,9 @@ kanban-plugin: board
 - [ ] implement a white flash shader on unit damage taken
 - [ ] progression line between map nodes with fun little animation
 - [ ] damage numbers
+- [ ] add a visual to the end of the battle screen when battle won / lost
+- [ ] make a cool shader for the win loss
+- [ ] add functionality for a small cinematic when a map is loaded
 
 
 ## Todo
@@ -29,11 +32,15 @@ kanban-plugin: board
 ## in-progress
 
 - [ ] update current world node system to push the battle map to the battle screen (instead of loading the default one)
-- [ ] finish battle maps check_win_loss, and add functionality for wins to progress the world map
+- [ ] Link battle map win loss, to a win loss screen, and then up to the game node
+- [ ] connect the game node win loss detection down to world map controller, and perform a transition to it.
+- [ ] update battle_map_controller to load a map node instead of a default node
+- [ ] update battle_map_controller to queue.free old maps when the battle is over
 
 
 ## complete
 
+- [ ] finish battle maps check_win_loss,
 - [ ] add functionality to "unlock" the next node
 - [ ] Adjust map nodes to take a battle map and a progress_node
 - [ ] Add basic AI for enemy units (and the pipeline for enemy AI) that makes them just move to a random spot in range and end their turn

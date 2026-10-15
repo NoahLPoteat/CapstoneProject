@@ -1,5 +1,6 @@
 class_name BattleScreen extends Control
 signal turn_changed(new_active_unit: UnitBase)
+signal game_over(game_won: bool, battle_map: BattleMapNode)
 
 @onready var battle_map_controller: BattleMapControl = $SubViewportContainer/SubViewport/BattleMapController
 @onready var overlay_node: Control = $BattleGUI
@@ -389,13 +390,33 @@ func retrieve_units():
 func unit_death(unit: UnitBase):
 	check_win_loss()
 
-## two options
-#	either return 2 bools, 1 for whether the game is over
-#	another for if won
-#OR
-# just keep the logic in function and return when called elsewhere
 func check_win_loss():
-	pass
+	var gt1_ally_alive: bool = false
+	var gt1_enemy_alive: bool = false
+	for unit in turn_order:
+		if unit.is_ally:
+			if not unit.unit_dead:
+				gt1_ally_alive = true
+		else:
+			if not unit.unit_dead:
+				gt1_enemy_alive = true
+	
+	if gt1_ally_alive and gt1_enemy_alive:
+		return
+	
+	var current_map: BattleMapNode = battle_map_controller.battle_map
+	
+	if not gt1_ally_alive and gt1_enemy_alive:
+		print("LOSELOSELOSE")
+		game_over.emit(false, current_map)
+	
+	if gt1_ally_alive and not gt1_enemy_alive:
+		game_over.emit(true, current_map)
+		print("WONWONWON")
+	
+	if not gt1_ally_alive and not gt1_enemy_alive:
+		print("very broken, plz fix (check_win_loss() bsc.gd)")
+		return
 
 func _on_active_unit_button_ctr_button_pressed(choice: UnitButton.BUTTON_CHOICE) -> void:
 	match choice:

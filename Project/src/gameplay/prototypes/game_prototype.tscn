@@ -505,6 +505,7 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = SubResource("GradientTexture2D_wyd14")
 
+[connection signal="game_over" from="Game/BattleScreenController" to="Game" method="_on_battle_screen_controller_game_over"]
 [connection signal="update_gui" from="Game/BattleScreenController/SubViewportContainer/SubViewport/BattleMapController" to="Game/BattleScreenController" method="update_gui"]
 [connection signal="button_pressed" from="Game/BattleScreenController/BattleGUI/ActiveUnitButtonCtr" to="Game/BattleScreenController" method="_on_active_unit_button_ctr_button_pressed"]
 [connection signal="input_event" from="Game/BattleScreenController/BattleGUI/ActiveUnitButtonCtr/MovButDetec" to="Game/BattleScreenController/BattleGUI/ActiveUnitButtonCtr" method="_on_mov_but_detec_input_event"]

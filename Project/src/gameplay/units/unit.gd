@@ -122,3 +122,4 @@ func _on_animated_sprite_2d_animation_finished() -> void:
 	death_anim.stop()
 	death_anim.frame = 0
 	grave.visible = true
+	unit_died.emit()

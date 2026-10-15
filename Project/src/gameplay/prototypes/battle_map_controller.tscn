@@ -72,7 +72,8 @@ strike = ExtResource("6_lpman")
 [node name="Unit" parent="MapContainer/Map/EnemyUnits" instance=ExtResource("5_ekq22")]
 position = Vector2(46, -22)
 portrait_texture = SubResource("AtlasTexture_ekq22")
-starting_pos = Vector2i(5, -4)
+starting_pos = Vector2i(8, -1)
+health = 20
 mana = 75
 mana_recovery = 15
 movement_left = 4
@@ -87,7 +88,7 @@ frame = 17
 position = Vector2(-32, -20)
 portrait_texture = SubResource("AtlasTexture_chmxg")
 is_ally = true
-health = 80
+health = 1
 max_health = 125
 strike = SubResource("Resource_chmxg")
 
@@ -99,7 +100,7 @@ position = Vector2(-11, -19)
 portrait_texture = SubResource("AtlasTexture_lpman")
 is_ally = true
 starting_pos = Vector2i(10, 2)
-health = 80
+health = 1
 movement_left = 4
 strike = SubResource("Resource_063d6")
 
