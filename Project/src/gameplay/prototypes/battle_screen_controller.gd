@@ -80,6 +80,7 @@ func battle_state_process():
 			change_battle_state(BATTLE_PHASES.PLACEMENT)
 			pass
 
+##temp for testing
 var custom_timer: Timer
 var t: float
 func enemy_ai():
@@ -163,7 +164,7 @@ func enemy_ai():
 	for tile in old_tiles:
 		if battle_map_controller.tile_has_unit(tile):
 			var tar: UnitBase = battle_map_controller.unit_from_pos[tile]
-			if tar.is_ally != this_enemy.is_ally:
+			if tar.is_ally != this_enemy.is_ally and not tar.unit_dead:
 				first_enemy_in_range = tar
 				striking_tile = first_enemy_in_range.map_position
 				break

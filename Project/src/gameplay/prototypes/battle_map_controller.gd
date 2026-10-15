@@ -57,10 +57,12 @@ func attempt_strike_unit(to_pos_global: Vector2, user: UnitBase, iso: Vector2i =
 	else:
 		return
 	
+	
+	
 	##will be true when both current unit, and targett are on the same team
 	var is_same_side: bool = target_unit.is_ally == user.is_ally
 	
-	if is_same_side: return
+	if is_same_side or target_unit.unit_dead: return
 	
 	## from here we are in a valid state to perform the attack
 	strike.effect(target_unit)

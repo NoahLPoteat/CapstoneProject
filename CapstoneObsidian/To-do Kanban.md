@@ -10,6 +10,8 @@ kanban-plugin: board
 - [ ] Rewrite hovering_tile in battle_map_controller to use the highlight_tile function
 - [ ] Make units play a little animation on death
 - [ ] implement a white flash shader on unit damage taken
+- [ ] progression line between map nodes with fun little animation
+- [ ] damage numbers
 
 
 ## Todo
@@ -18,8 +20,6 @@ kanban-plugin: board
 - [ ] Implement Placement Phase
 - [ ] Modify Battle Maps to have certain tiles be marked as available for starting placement
 - [ ] Adjust placement phase to limit which tiles can be placed on (consider using custom tile data)
-- [ ] Update Next Turn to only allow player to end turn on their turn
-- [ ] Add basic AI for enemy units (and the pipeline for enemy AI) that makes them just move to a random spot in range and end their turn
 - [ ] Make the AI follow the closest unit, and attack it off cooldown.
 - [ ] Add logic for unit abilities and ability selection (doesnt have to actually be unique but get logic there)
 - [ ] Add arrow indicator for current unit
@@ -28,12 +28,18 @@ kanban-plugin: board
 
 ## in-progress
 
-- [ ] Implement the battle phases
-- [ ] implement death animation
+- [ ] update current world node system to push the battle map to the battle screen (instead of loading the default one)
+- [ ] finish battle maps check_win_loss, and add functionality for wins to progress the world map
 
 
 ## complete
 
+- [ ] add functionality to "unlock" the next node
+- [ ] Adjust map nodes to take a battle map and a progress_node
+- [ ] Add basic AI for enemy units (and the pipeline for enemy AI) that makes them just move to a random spot in range and end their turn
+- [ ] Update Next Turn to only allow player to end turn on their turn
+- [ ] Implement the battle phases
+- [ ] implement death animation
 - [ ] implement death
 - [ ] Add Particle effect on strike
 - [ ] Add functionality for units to take damage

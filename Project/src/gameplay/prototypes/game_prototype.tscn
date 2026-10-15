@@ -1,4 +1,4 @@
-[gd_scene load_steps=47 format=3 uid="uid://vyvnt6xkcn2d"]
+[gd_scene load_steps=44 format=3 uid="uid://vyvnt6xkcn2d"]
 
 [ext_resource type="Script" uid="uid://dsqrh11elmfx5" path="res://src/gameplay/prototypes/game.gd" id="1_4dq4k"]
 [ext_resource type="Script" uid="uid://cyfqqttarqlg6" path="res://src/gameplay/prototypes/battle_screen_controller.gd" id="2_wyd14"]
@@ -7,10 +7,8 @@
 [ext_resource type="Script" uid="uid://b67ca813sx6pc" path="res://src/gameplay/prototypes/world_map_controller.gd" id="3_qwj7d"]
 [ext_resource type="Texture2D" uid="uid://b53aq5ur204uh" path="res://assets/art/ui/world_map_gui/WorldMap_proto_frame.png" id="4_r4dsk"]
 [ext_resource type="Script" uid="uid://bhu0m2jj72ojx" path="res://src/gameplay/prototypes/battle_gui.gd" id="4_r80b6"]
-[ext_resource type="Texture2D" uid="uid://bistwo6yjxmqh" path="res://icon.svg" id="5_mqqr1"]
 [ext_resource type="Texture2D" uid="uid://clwnq2p75x744" path="res://assets/art/ui/battle_map_gui/GUI Design Prototype BG.png" id="5_ooegf"]
 [ext_resource type="Script" uid="uid://0etskjq4ec44" path="res://src/gameplay/prototypes/map_node_controller.gd" id="5_qwj7d"]
-[ext_resource type="Script" uid="uid://b0p1qotwa48bv" path="res://src/gameplay/world_maps/map_node.gd" id="6_4dq4k"]
 [ext_resource type="LabelSettings" uid="uid://ccfs6ugu3pcqr" path="res://assets/fonts&labels/PixelLabelSettings.tres" id="6_dmcc4"]
 [ext_resource type="Texture2D" uid="uid://d1c1e2djcx32u" path="res://assets/art/ui/battle_map_gui/attackIndicatorAnim.png" id="6_h14kp"]
 [ext_resource type="Script" uid="uid://djgiplfhdvyh3" path="res://src/gameplay/prototypes/movement_left_dis.gd" id="7_dmcc4"]
@@ -28,6 +26,7 @@
 [ext_resource type="Texture2D" uid="uid://622v3iyoy0yj" path="res://assets/art/ui/battle_map_gui/GUIEndTurnButtonDown.png" id="17_iufsc"]
 [ext_resource type="Script" uid="uid://b0yty6v8jxua6" path="res://src/gameplay/prototypes/end_turn.gd" id="17_kc0fq"]
 [ext_resource type="Texture2D" uid="uid://co51310qlvewy" path="res://assets/art/ui/battle_map_gui/GUIEndTurnButtonUp.png" id="18_kc0fq"]
+[ext_resource type="PackedScene" uid="uid://bvome6kasaqpr" path="res://src/gameplay/world_maps/map_node.tscn" id="25_kc0fq"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_bhsri"]
 atlas = ExtResource("6_h14kp")
@@ -142,11 +141,6 @@ size = Vector2(17, 14)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_h14kp"]
 size = Vector2(59, 16)
 
-[sub_resource type="PackedScene" id="PackedScene_yhlpg"]
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_mqqr1"]
-radius = 7.0
-
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_3ykrj"]
 shader = ExtResource("10_3ykrj")
 shader_parameter/intensity = 1.0
@@ -173,6 +167,7 @@ mouse_filter = 1
 script = ExtResource("1_4dq4k")
 
 [node name="BattleScreenController" type="Control" parent="Game"]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -211,7 +206,7 @@ transparent_bg = true
 handle_input_locally = false
 canvas_item_default_texture_filter = 0
 size = Vector2i(228, 158)
-render_target_update_mode = 4
+render_target_update_mode = 0
 
 [node name="BattleMapController" parent="Game/BattleScreenController/SubViewportContainer/SubViewport" instance=ExtResource("2_yhlpg")]
 
@@ -433,7 +428,6 @@ position = Vector2(30.5, 9)
 shape = SubResource("RectangleShape2D_h14kp")
 
 [node name="WorldMapController" type="Control" parent="Game"]
-visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -463,36 +457,19 @@ grow_vertical = 2
 mouse_filter = 2
 texture = ExtResource("4_r4dsk")
 
-[node name="MapNodeController" type="Node2D" parent="Game/WorldMapController"]
+[node name="MapNodeController" type="Node2D" parent="Game/WorldMapController" node_paths=PackedStringArray("starting_map")]
 script = ExtResource("5_qwj7d")
+starting_map = NodePath("TestMapNode")
 
-[node name="TestMapNode" type="Node2D" parent="Game/WorldMapController/MapNodeController"]
-position = Vector2(71, 61)
-script = ExtResource("6_4dq4k")
-linked_battle_map = SubResource("PackedScene_yhlpg")
+[node name="TestMapNode" parent="Game/WorldMapController/MapNodeController" node_paths=PackedStringArray("post_maps") instance=ExtResource("25_kc0fq")]
+position = Vector2(83, 56)
+post_maps = [NodePath("../TestMapNode3"), NodePath("../TestMapNode2")]
 
-[node name="MapNodeIcon" type="Sprite2D" parent="Game/WorldMapController/MapNodeController/TestMapNode"]
-scale = Vector2(0.05, 0.05)
-texture = ExtResource("5_mqqr1")
+[node name="TestMapNode2" parent="Game/WorldMapController/MapNodeController" instance=ExtResource("25_kc0fq")]
+position = Vector2(113, 35)
 
-[node name="ClickDetection" type="Area2D" parent="Game/WorldMapController/MapNodeController/TestMapNode"]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Game/WorldMapController/MapNodeController/TestMapNode/ClickDetection"]
-shape = SubResource("CircleShape2D_mqqr1")
-
-[node name="TestMapNode2" type="Node2D" parent="Game/WorldMapController/MapNodeController"]
-position = Vector2(96, 93)
-script = ExtResource("6_4dq4k")
-linked_battle_map = SubResource("PackedScene_yhlpg")
-
-[node name="MapNodeIcon" type="Sprite2D" parent="Game/WorldMapController/MapNodeController/TestMapNode2"]
-scale = Vector2(0.05, 0.05)
-texture = ExtResource("5_mqqr1")
-
-[node name="ClickDetection" type="Area2D" parent="Game/WorldMapController/MapNodeController/TestMapNode2"]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Game/WorldMapController/MapNodeController/TestMapNode2/ClickDetection"]
-shape = SubResource("CircleShape2D_mqqr1")
+[node name="TestMapNode3" parent="Game/WorldMapController/MapNodeController" instance=ExtResource("25_kc0fq")]
+position = Vector2(112, 78)
 
 [node name="MainMenu" type="Control" parent="Game"]
 visible = false
@@ -538,5 +515,3 @@ texture = SubResource("GradientTexture2D_wyd14")
 [connection signal="mouse_exited" from="Game/BattleScreenController/BattleGUI/EndTurn/Area2D" to="Game/BattleScreenController/BattleGUI/EndTurn" method="_on_area_2d_mouse_exited"]
 [connection signal="map_node_clicked" from="Game/WorldMapController" to="Game" method="_on_world_map_controller_map_node_clicked"]
 [connection signal="node_clicked" from="Game/WorldMapController/MapNodeController" to="Game/WorldMapController" method="_on_map_node_controller_node_clicked"]
-[connection signal="input_event" from="Game/WorldMapController/MapNodeController/TestMapNode/ClickDetection" to="Game/WorldMapController/MapNodeController/TestMapNode" method="_on_click_detection_input_event"]
-[connection signal="input_event" from="Game/WorldMapController/MapNodeController/TestMapNode2/ClickDetection" to="Game/WorldMapController/MapNodeController/TestMapNode2" method="_on_click_detection_input_event"]
