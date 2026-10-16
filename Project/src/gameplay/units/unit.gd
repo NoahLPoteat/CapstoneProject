@@ -51,17 +51,9 @@ enum DIR {
 
 var facing: DIR = DIR.RIGHT
 
-#Initializes all the variables that are determined by the units class
-func init_class_vars():
-	if unit_class == null:
-		print("No class selected for unit, " + unit_name)
-		return
-	
-	health = unit_class.cl
-
 #Initialize
 func pre_fight_init():
-	pass
+	res(max_health)
 
 func take_damage(val: int):
 	if unit_dead:
@@ -89,6 +81,12 @@ func die():
 		unit_dead = true
 		death_anim.play()
 
+func res(to_hp: int):
+	unit_dead = false
+	grave.visible = false
+	show_sprite()
+	
+	health = to_hp
 
 func get_strike():
 	if strike != null:
@@ -111,7 +109,7 @@ func hide_sprite():
 	sprite_node.visible = false
 
 func show_sprite():
-	pass
+	sprite_node.visible = true
 
 
 func _on_animated_sprite_2d_frame_changed() -> void:

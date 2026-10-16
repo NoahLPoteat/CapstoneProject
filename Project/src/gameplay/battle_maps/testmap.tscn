@@ -1,0 +1,203 @@
+[gd_scene load_steps=26 format=4 uid="uid://def0gbs0hdjko"]
+
+[ext_resource type="Script" uid="uid://b8cfkjif4u2r0" path="res://src/gameplay/battle_maps/map.gd" id="1_d8stw"]
+[ext_resource type="TileSet" uid="uid://byqahne7l5q25" path="res://assets/art/world/tilesets/custom_tile_set.tres" id="2_6i5tv"]
+[ext_resource type="Script" uid="uid://dh7uvryf2q04a" path="res://src/gameplay/units/unit.gd" id="3_cscml"]
+[ext_resource type="Resource" uid="uid://1lwlmrmyxrwk" path="res://src/gameplay/resources/ability_res/built_abilities/str_single_plus.tres" id="4_8jvam"]
+[ext_resource type="Texture2D" uid="uid://stn5bu8ghnvr" path="res://assets/art/characters/portraitDesign.png" id="5_btnxl"]
+[ext_resource type="Texture2D" uid="uid://c3t8f5k3ggg8w" path="res://assets/art/characters/CharacterDesignAtl.png" id="6_03lwa"]
+[ext_resource type="Resource" uid="uid://ccxbxmqnssxwi" path="res://src/gameplay/resources/ability_res/built_abilities/str_single_corners.tres" id="6_uf8jv"]
+[ext_resource type="PackedScene" uid="uid://dqxytahl0deg1" path="res://src/gameplay/prototypes/particles/bloodParticle.tscn" id="7_0ip2t"]
+[ext_resource type="Texture2D" uid="uid://ddbpxaxdu1ktf" path="res://assets/art/characters/unitDeathAnim.png" id="8_lpsbq"]
+[ext_resource type="Texture2D" uid="uid://bjti2gkvkyp00" path="res://assets/art/characters/GraveStone.png" id="9_7581o"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cscml"]
+atlas = ExtResource("5_btnxl")
+region = Rect2(177, 0, 59, 59)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dull3"]
+atlas = ExtResource("8_lpsbq")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c0562"]
+atlas = ExtResource("8_lpsbq")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lwlis"]
+atlas = ExtResource("8_lpsbq")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wwt2p"]
+atlas = ExtResource("8_lpsbq")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yv1vw"]
+atlas = ExtResource("8_lpsbq")
+region = Rect2(64, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_88kmv"]
+atlas = ExtResource("8_lpsbq")
+region = Rect2(80, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hwyn6"]
+atlas = ExtResource("8_lpsbq")
+region = Rect2(96, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_abipi"]
+atlas = ExtResource("8_lpsbq")
+region = Rect2(112, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ugljh"]
+atlas = ExtResource("8_lpsbq")
+region = Rect2(128, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3q0rv"]
+atlas = ExtResource("8_lpsbq")
+region = Rect2(144, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8xpmw"]
+atlas = ExtResource("8_lpsbq")
+region = Rect2(160, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f5wwp"]
+atlas = ExtResource("8_lpsbq")
+region = Rect2(176, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_h8l8m"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dull3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c0562")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lwlis")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wwt2p")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yv1vw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_88kmv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hwyn6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_abipi")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ugljh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3q0rv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8xpmw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f5wwp")
+}],
+"loop": false,
+"name": &"new_animation",
+"speed": 8.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_03lwa"]
+atlas = ExtResource("5_btnxl")
+region = Rect2(59, 0, 59, 59)
+
+[node name="Map" type="Node2D"]
+script = ExtResource("1_d8stw")
+
+[node name="MainTile" type="TileMapLayer" parent="."]
+y_sort_enabled = true
+tile_map_data = PackedByteArray("AAAHAP3/AAAAAAAAAAAHAP7/AAAAAAAAAAAHAP//AAAAAAAAAAAHAAAAAAAAAAAAAAAHAAEAAAAAAAAAAAAHAAIAAAAAAAAAAAAHAAMAAAAAAAAAAAAIAP3/AAAAAAAAAAAIAP7/AAAAAAAAAAAIAP//AAAAAAAAAAAIAAAAAAAAAAAAAAAIAAEAAAAAAAAAAAAIAAIAAAAAAAAAAAAIAAMAAAAAAAAAAAAJAP3/AAAAAAAAAAAJAP7/AAAAAAAAAAAJAP//AAAAAAAAAAAJAAAAAAAAAAAAAAAJAAEAAAAAAAAAAAAJAAIAAAAAAAAAAAAJAAMAAAAAAAAAAAAKAP3/AAAAAAAAAAAKAP7/AAAAAAAAAAAKAP//AAAAAAAAAAAKAAAAAAAAAAAAAAAKAAEAAAAAAAAAAAAKAAIAAAAAAAAAAAAKAAMAAAAAAAAAAAALAP7/AAAAAAAAAAALAP//AAAAAAAAAAALAAAAAAAAAAAAAAALAAEAAAAAAAAAAAALAAIAAAAAAAAAAAALAAMAAAAAAAAAAAAGAP3/AAAAAAAAAAAGAP7/AAAAAAAAAAAGAP//AAAAAAAAAAAGAAAAAAAAAAAAAAAGAAEAAAAAAAAAAAAGAAIAAAAAAAAAAAAGAAMAAAAAAAAAAAAFAPv/AAAAAAAAAAAFAPz/AAAAAAAAAAAFAP3/AAAAAAAAAAAFAP7/AAAAAAAAAAAFAP//AAAAAAAAAAAFAAAAAAAAAAAAAAAFAAEAAAAAAAAAAAAFAAIAAAAAAAAAAAAFAAMAAAAAAAAAAAAGAPv/AAAAAAAAAAAGAPz/AAAAAAAAAAAHAPv/AAAAAAAAAAAHAPz/AAAAAAAAAAAIAPv/AAAAAAAAAAAIAPz/AAAAAAAAAAAJAPz/AAAAAAAAAAAEAAAAAAAAAAAAAAAEAAEAAAAAAAAAAAAEAP//AAAAAAAAAAAEAAMAAAAAAAAAAAAEAAIAAAAAAAAAAAAEAP7/AAAAAAAAAAAEAP3/AAAAAAAAAAAGAAQAAAAAAAAAAAAHAAQAAAAAAAAAAAAIAAQAAAAAAAAAAAAJAAQAAAAAAAAAAAAKAAQAAAAAAAAAAAALAAQAAAAAAAAAAAAFAAQAAAAAAAAAAAAEAPz/AAAAAAAAAAA=")
+tile_set = ExtResource("2_6i5tv")
+
+[node name="TileDeco" type="TileMapLayer" parent="."]
+y_sort_enabled = true
+tile_map_data = PackedByteArray("AAAEAPn/AAABAAAAAAAFAPn/AAABAAAAAAAGAPn/AAABAAAAAAAHAPn/AAABAAAAAAADAPr/AAABAAEAAAACAPr/AAABAAEAAAACAPv/AAABAAEAAAACAPz/AAABAAEAAAACAP3/AAABAAEAAAACAP7/AAABAAEAAAACAP//AAABAAEAAAACAAAAAAABAAEAAAACAAEAAAABAAEAAAACAAIAAAABAAEAAAABAPn/AAAAAAAAAAABAPr/AAAAAAAAAAABAPv/AAAAAAAAAAABAPz/AAAAAAAAAAABAP3/AAAAAAAAAAABAP7/AAAAAAAAAAABAP//AAAAAAAAAAABAAAAAAAAAAAAAAABAAEAAAAAAAAAAAABAAIAAAAAAAAAAAACAPn/AAAAAAAAAAADAPn/AAAAAAAAAAADAPj/AAAAAAAAAAAEAPj/AAAAAAAAAAAFAPj/AAAAAAAAAAAGAPj/AAAAAAAAAAAHAPj/AAAAAAAAAAA=")
+tile_set = ExtResource("2_6i5tv")
+y_sort_origin = -8
+
+[node name="EnemyUnits" type="Node2D" parent="."]
+
+[node name="Unit2" type="Node2D" parent="EnemyUnits"]
+y_sort_enabled = true
+position = Vector2(28, -22)
+script = ExtResource("3_cscml")
+unit_name = "Test A 1"
+portrait_texture = SubResource("AtlasTexture_cscml")
+starting_pos = Vector2i(9, -1)
+health = 1
+max_health = 80
+mana = 60
+mana_recovery = 10
+movement_left = 2
+strike = ExtResource("4_8jvam")
+
+[node name="Sprite2D" type="Sprite2D" parent="EnemyUnits/Unit2"]
+y_sort_enabled = true
+texture = ExtResource("6_03lwa")
+hframes = 8
+vframes = 8
+frame = 3
+
+[node name="Node2D" parent="EnemyUnits/Unit2" instance=ExtResource("7_0ip2t")]
+y_sort_enabled = true
+amount = 20
+explosiveness = 0.8
+randomness = 0.15
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="EnemyUnits/Unit2"]
+sprite_frames = SubResource("SpriteFrames_h8l8m")
+animation = &"new_animation"
+
+[node name="GraveSprite" type="Sprite2D" parent="EnemyUnits/Unit2"]
+visible = false
+texture = ExtResource("9_7581o")
+
+[node name="Unit" type="Node2D" parent="EnemyUnits"]
+y_sort_enabled = true
+position = Vector2(46, -22)
+script = ExtResource("3_cscml")
+unit_name = "Test A 1"
+portrait_texture = SubResource("AtlasTexture_03lwa")
+starting_pos = Vector2i(8, -1)
+health = 1
+max_health = 55
+mana = 75
+mana_recovery = 15
+movement_left = 4
+strike = ExtResource("6_uf8jv")
+
+[node name="Sprite2D" type="Sprite2D" parent="EnemyUnits/Unit"]
+y_sort_enabled = true
+texture = ExtResource("6_03lwa")
+hframes = 8
+vframes = 8
+frame = 17
+
+[node name="Node2D" parent="EnemyUnits/Unit" instance=ExtResource("7_0ip2t")]
+y_sort_enabled = true
+amount = 20
+explosiveness = 0.8
+randomness = 0.15
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="EnemyUnits/Unit"]
+sprite_frames = SubResource("SpriteFrames_h8l8m")
+animation = &"new_animation"
+
+[node name="GraveSprite" type="Sprite2D" parent="EnemyUnits/Unit"]
+visible = false
+texture = ExtResource("9_7581o")
+
+[connection signal="animation_finished" from="EnemyUnits/Unit2/AnimatedSprite2D" to="EnemyUnits/Unit2" method="_on_animated_sprite_2d_animation_finished"]
+[connection signal="frame_changed" from="EnemyUnits/Unit2/AnimatedSprite2D" to="EnemyUnits/Unit2" method="_on_animated_sprite_2d_frame_changed"]
+[connection signal="animation_finished" from="EnemyUnits/Unit/AnimatedSprite2D" to="EnemyUnits/Unit" method="_on_animated_sprite_2d_animation_finished"]
+[connection signal="frame_changed" from="EnemyUnits/Unit/AnimatedSprite2D" to="EnemyUnits/Unit" method="_on_animated_sprite_2d_frame_changed"]

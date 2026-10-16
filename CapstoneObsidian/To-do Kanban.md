@@ -15,6 +15,7 @@ kanban-plugin: board
 - [ ] add a visual to the end of the battle screen when battle won / lost
 - [ ] make a cool shader for the win loss
 - [ ] add functionality for a small cinematic when a map is loaded
+- [ ] make camera pan / center to current unit when the turn changes
 
 
 ## Todo
@@ -27,19 +28,23 @@ kanban-plugin: board
 - [ ] Add logic for unit abilities and ability selection (doesnt have to actually be unique but get logic there)
 - [ ] Add arrow indicator for current unit
 - [ ] Create tech demo video, push an update to itchio, and make a devlog
+- [ ] reroute enemy ai to be tied to the enemy itself
+- [ ] make 6 unique enemies (make 2 or 3 fodder types)
+- [ ] add some basic single target abilities
 
 
 ## in-progress
 
-- [ ] update current world node system to push the battle map to the battle screen (instead of loading the default one)
-- [ ] Link battle map win loss, to a win loss screen, and then up to the game node
-- [ ] connect the game node win loss detection down to world map controller, and perform a transition to it.
-- [ ] update battle_map_controller to load a map node instead of a default node
-- [ ] update battle_map_controller to queue.free old maps when the battle is over
+- [ ] Fix battles so you cant skip enemy turns with the next turn button (consider enemy override in the next_turn)
 
 
 ## complete
 
+- [ ] update battle_map_controller to queue.free old maps when the battle is over
+- [ ] update battle_map_controller to load a map node instead of a default node
+- [ ] connect the game node win loss detection down to world map controller, and perform a transition to it.
+- [ ] Link battle map win loss, to a win loss screen, and then up to the game node
+- [ ] update current world node system to push the battle map to the battle screen (instead of loading the default one)
 - [ ] finish battle maps check_win_loss,
 - [ ] add functionality to "unlock" the next node
 - [ ] Adjust map nodes to take a battle map and a progress_node

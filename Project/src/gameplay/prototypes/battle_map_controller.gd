@@ -1,6 +1,7 @@
 class_name BattleMapControl extends Node2D
 signal turn_changed()
 signal update_gui(unit: UnitBase)
+signal map_ready()
 
 var nav_sys = AStar2D.new()
 
@@ -8,7 +9,7 @@ var nav_sys = AStar2D.new()
 @onready var ally_unit_container: Node2D = $AllyUnitContainer
 
 ##NOTE later this will be loaded on the fly, for now its here
-@onready var battle_map: BattleMapNode = $MapContainer/Map
+var battle_map: BattleMapNode
 
 var unit_from_pos = {} 
 var unit_pos_from_unit = {}
@@ -21,12 +22,9 @@ var offset_vec: Vector2 = Vector2(offset_x, offset_y)
 
 func _ready():
 	#temporary until while we test
-	load_map(battle_map)
-	print(nav_sys.get_point_count())
+	#print(nav_sys.get_point_count())
 	_on_map_container_need_nav()
 
-func load_battle():
-	pass
 
 func start_battle():
 	pass
@@ -136,7 +134,7 @@ func hovering_tile(pos_global: Vector2):
 	#print(pos_iso, current_hovered)
 	
 	## == 1 means the tile is in our set
-	## Our maps currently only use 1 tile, 
+	## Our maps currently only use 1 tile set, 
 	## so this may have to change in the future
 	if new_cell_id == 0:
 		##replace current hovered with the default tile
@@ -192,8 +190,10 @@ func highlight_tile(to_change: atlas_enum, iso_pos: Vector2i, hl_units: bool = f
 			if not tile_has_unit:
 				if map.get_cell_source_id(iso_pos) != -1:
 					map.set_cell(iso_pos, 0, atl)
-	
-	
+
+func has_tile(pos: Vector2i) -> bool:
+	var map = battle_map.main_tile
+	return map.get_cell_source_id(pos) != -1
 
 func remove_unit(unit: UnitBase):
 	var i_pos = unit_pos_from_unit[unit]
@@ -206,7 +206,10 @@ func get_nav_sys():
 
 ##generates the navigation system, and extracts the units from the map
 func load_map(map: BattleMapNode):
-	#battle_map = map
+	battle_map = map
+	map_container.add_child(battle_map)
+	unit_pos_from_unit = {}
+	unit_from_pos = {}
 	
 	##this is where we will setup map height in the future
 	var used_cells = map.main_tile.get_used_cells()
@@ -233,6 +236,11 @@ func load_map(map: BattleMapNode):
 				var neighbor_id = gen_cell_id(neighbor)
 				if nav_sys.has_point(neighbor_id) and not nav_sys.are_points_connected(id, neighbor_id):
 					nav_sys.connect_points(id, neighbor_id, true)
+	map_ready.emit()
+
+func unload_map():
+	nav_sys = AStar2D.new()
+	battle_map.queue_free()
 
 func gen_cell_id(cell: Vector2i):
 	var id = abs(cell.x + cell.y * 114901)

@@ -30,15 +30,14 @@ var current_unit: UnitBase
 ##unfortunate requirement due to issues with the viewport
 var offset_x: int = 81
 var offset_y: int = 11
+var battle_active: bool = false
 
 func _ready():
-	init_turn_order()
-	
-	#get rid of when we have a proper placement phase 
-	next_turn()
+	pass
 
 func _process(delta: float) -> void:
-	battle_state_process()
+	if battle_active:
+		battle_state_process()
 	#print(turn_order, turn_index)
 
 
@@ -78,7 +77,6 @@ func battle_state_process():
 			#	no active battle
 			#meaning, if this state exists we should go to the placement phase
 			#	cross ref the way battles are initiated to make sure everything works
-			change_battle_state(BATTLE_PHASES.PLACEMENT)
 			pass
 
 ##temp for testing
@@ -124,7 +122,7 @@ func enemy_ai():
 			continue
 		var t_iso: Vector2i = unit.map_position
 		var d = s_iso.distance_to(t_iso)
-		if d <= closest_dist:
+		if d <= closest_dist and this_enemy.is_ally != unit.is_ally and not unit.unit_dead:
 			closest_dist = d
 			closest_unit = unit
 	
@@ -135,7 +133,7 @@ func enemy_ai():
 	closest_dist = 10000000.0
 	for tile: Vector2i in old_tiles: #each tile in old_tiles is actually a moveable tile rn
 		var d = tile.distance_to(closest_unit.map_position)
-		if d <= closest_dist and not battle_map_controller.tile_has_unit(tile):
+		if d <= closest_dist and not battle_map_controller.tile_has_unit(tile) and battle_map_controller.has_tile(tile):
 			closest_dist = d
 			closest_tile = tile
 		battle_map_controller.highlight_tile(battle_map_controller.atlas_enum.DEF, tile, true, true)
@@ -183,7 +181,7 @@ func enemy_ai():
 	await custom_timer.timeout
 	
 	enemy_ai_running = false
-	next_turn()
+	next_turn(true)
 
 func change_battle_state(new_state: BATTLE_PHASES):
 	exit_battle_state(current_battle_state)
@@ -322,13 +320,16 @@ func _unhandled_input(event: InputEvent) -> void:
 func update_gui():
 	overlay_node.update_gui(current_unit, current_battle_state, current_turn_state)
 
-func next_turn():
+func next_turn(override: bool = false):
+	if not override and not current_unit.is_ally and not current_unit.unit_dead:
+		return
+	
 	if turn_index >= turn_order.size():
 		turn_index = 0 #reset back to start of turn order
 	
 	current_unit = turn_order[turn_index]
 	if current_unit.unit_dead:
-		check_win_loss()
+		#check_win_loss()
 		turn_index += 1
 		next_turn()
 		return
@@ -351,6 +352,7 @@ func next_turn():
 ##Initilizes the turn order, and places units into their starting position
 func init_turn_order():
 	turn_order = []
+	turn_index = 0
 	
 	var unit_arrs = retrieve_units()
 	var ally_arr = unit_arrs[0]
@@ -373,8 +375,10 @@ func init_turn_order():
 	
 	var i = 0
 	for unit: UnitBase in turn_order:
+		unit.pre_fight_init()
 		print("Attempting unit starting move debug, and turn order setup")
 		unit.turn_order_pos = i
+		
 		battle_map_controller.attempt_move_unit(Vector2.ZERO, unit, unit.starting_pos, true, true)
 		#connect each units on_death signal to a function for killing them
 		unit.unit_died.connect(unit_death.bind(unit))
@@ -444,3 +448,15 @@ func _on_active_unit_button_ctr_button_pressed(choice: UnitButton.BUTTON_CHOICE)
 
 func _on_end_turn_end_turn_button_pressed() -> void:
 	next_turn()
+
+func unload_map():
+	change_battle_state(BATTLE_PHASES.NONE)
+	battle_map_controller.unload_map()
+	battle_active = false
+
+
+func _on_battle_map_controller_map_ready():
+	init_turn_order()
+	next_turn(true)
+	change_battle_state(BATTLE_PHASES.PLACEMENT)
+	battle_active = true

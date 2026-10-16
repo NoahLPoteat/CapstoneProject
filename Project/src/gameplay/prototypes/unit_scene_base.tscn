@@ -9,7 +9,7 @@
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_jy6c2"]
 atlas = ExtResource("2_2p8cq")
-region = Rect2(180, 0, 59, 59)
+region = Rect2(236, 0, 59, 59)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_dull3"]
 atlas = ExtResource("5_a07dw")

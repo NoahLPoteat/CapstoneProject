@@ -6,5 +6,5 @@
 script = ExtResource("1_okvtp")
 ability_name = "Strike"
 ability_desc = "Single Target Strike, Range and Damage Varies per unit"
-abi_range = 5
-val = 30
+abi_range = 3
+val = 20

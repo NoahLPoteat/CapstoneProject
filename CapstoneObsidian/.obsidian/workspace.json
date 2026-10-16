@@ -39,20 +39,14 @@
             "id": "96364d2f985e0643",
             "type": "leaf",
             "state": {
-              "type": "kanban",
+              "type": "markdown",
               "state": {
-                "file": "To-do Kanban.md",
-                "kanbanViewState": {
-                  "kanban-plugin": "board",
-                  "list-collapse": [
-                    false,
-                    false,
-                    false
-                  ]
-                }
+                "file": "DevNotes/BattleMaps.md",
+                "mode": "source",
+                "source": false
               },
-              "icon": "lucide-trello",
-              "title": "To-do Kanban"
+              "icon": "lucide-file",
+              "title": "BattleMaps"
             }
           }
         ],
@@ -226,14 +220,14 @@
   },
   "active": "96364d2f985e0643",
   "lastOpenFiles": [
-    "Bugs & Issues.md",
+    "TempNotes for Sys2 Do something with LATER.md",
     "To-do Kanban.md",
+    "DevNotes/Unit & Class System (Friendly & Enemy).md",
+    "Bugs & Issues.md",
     "General Ideas.md",
     "Pasted image 20260922152706.png",
-    "TempNotes for Sys2 Do something with LATER.md",
     "DevNotes/Party System.md",
     "BUGS & ISSUES.md",
-    "DevNotes/Unit & Class System (Friendly & Enemy).md",
     "DevNotes/World Map.md",
     "DevNotes/BattleMaps.md",
     "DevNotes/Turn Based Combat.md",

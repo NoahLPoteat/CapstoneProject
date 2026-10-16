@@ -1,8 +1,10 @@
-extends Node2D
-signal node_clicked(battle_map: PackedScene)
+class_name MapNodeController extends Node2D
+signal node_clicked(battle_map: PackedScene, calling_node: MapNode)
 
 @export var starting_map: MapNode
 var map_nodes: Array[MapNode] = []
+
+var map_node_from_b_map: Dictionary = {}
 
 func _ready():
 	link_map_nodes()
@@ -17,12 +19,14 @@ func link_map_nodes():
 		map_node.node_clicked.connect(map_node_clicked.bind(map_node))
 		map_nodes.append(map_node)
 		
+		map_node_from_b_map[map_node.linked_battle_map] = map_node
+		
 		if map_node!=starting_map:
 			map_node.visible = false
 
 func map_node_clicked(map_node: MapNode):
 	#print("debug!")
-	node_clicked.emit(map_node.linked_battle_map)
+	node_clicked.emit(map_node.linked_battle_map, map_node)
 
 ##unlocks the post_maps of a map
 func unlock_maps(map_node: MapNode):

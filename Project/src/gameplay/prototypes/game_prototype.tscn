@@ -1,4 +1,4 @@
-[gd_scene load_steps=44 format=3 uid="uid://vyvnt6xkcn2d"]
+[gd_scene load_steps=47 format=3 uid="uid://vyvnt6xkcn2d"]
 
 [ext_resource type="Script" uid="uid://dsqrh11elmfx5" path="res://src/gameplay/prototypes/game.gd" id="1_4dq4k"]
 [ext_resource type="Script" uid="uid://cyfqqttarqlg6" path="res://src/gameplay/prototypes/battle_screen_controller.gd" id="2_wyd14"]
@@ -27,6 +27,9 @@
 [ext_resource type="Script" uid="uid://b0yty6v8jxua6" path="res://src/gameplay/prototypes/end_turn.gd" id="17_kc0fq"]
 [ext_resource type="Texture2D" uid="uid://co51310qlvewy" path="res://assets/art/ui/battle_map_gui/GUIEndTurnButtonUp.png" id="18_kc0fq"]
 [ext_resource type="PackedScene" uid="uid://bvome6kasaqpr" path="res://src/gameplay/world_maps/map_node.tscn" id="25_kc0fq"]
+[ext_resource type="PackedScene" uid="uid://def0gbs0hdjko" path="res://src/gameplay/battle_maps/testmap.tscn" id="26_h14kp"]
+[ext_resource type="PackedScene" uid="uid://b5dhjfy7248iw" path="res://src/gameplay/battle_maps/test_map2.tscn" id="27_bhsri"]
+[ext_resource type="PackedScene" uid="uid://dn7vyqasmstml" path="res://src/gameplay/battle_maps/test_map3.tscn" id="28_nkpx2"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_bhsri"]
 atlas = ExtResource("6_h14kp")
@@ -462,14 +465,18 @@ script = ExtResource("5_qwj7d")
 starting_map = NodePath("TestMapNode")
 
 [node name="TestMapNode" parent="Game/WorldMapController/MapNodeController" node_paths=PackedStringArray("post_maps") instance=ExtResource("25_kc0fq")]
-position = Vector2(83, 56)
-post_maps = [NodePath("../TestMapNode3"), NodePath("../TestMapNode2")]
+position = Vector2(127, 51)
+linked_battle_map = ExtResource("26_h14kp")
+post_maps = [NodePath("../TestMapNode2")]
 
-[node name="TestMapNode2" parent="Game/WorldMapController/MapNodeController" instance=ExtResource("25_kc0fq")]
-position = Vector2(113, 35)
+[node name="TestMapNode2" parent="Game/WorldMapController/MapNodeController" node_paths=PackedStringArray("post_maps") instance=ExtResource("25_kc0fq")]
+position = Vector2(132, 82)
+linked_battle_map = ExtResource("27_bhsri")
+post_maps = [NodePath("../MapNodeT2")]
 
-[node name="TestMapNode3" parent="Game/WorldMapController/MapNodeController" instance=ExtResource("25_kc0fq")]
-position = Vector2(112, 78)
+[node name="MapNodeT2" parent="Game/WorldMapController/MapNodeController" instance=ExtResource("25_kc0fq")]
+position = Vector2(111, 97)
+linked_battle_map = ExtResource("28_nkpx2")
 
 [node name="MainMenu" type="Control" parent="Game"]
 visible = false
@@ -506,6 +513,7 @@ grow_vertical = 2
 texture = SubResource("GradientTexture2D_wyd14")
 
 [connection signal="game_over" from="Game/BattleScreenController" to="Game" method="_on_battle_screen_controller_game_over"]
+[connection signal="map_ready" from="Game/BattleScreenController/SubViewportContainer/SubViewport/BattleMapController" to="Game/BattleScreenController" method="_on_battle_map_controller_map_ready"]
 [connection signal="update_gui" from="Game/BattleScreenController/SubViewportContainer/SubViewport/BattleMapController" to="Game/BattleScreenController" method="update_gui"]
 [connection signal="button_pressed" from="Game/BattleScreenController/BattleGUI/ActiveUnitButtonCtr" to="Game/BattleScreenController" method="_on_active_unit_button_ctr_button_pressed"]
 [connection signal="input_event" from="Game/BattleScreenController/BattleGUI/ActiveUnitButtonCtr/MovButDetec" to="Game/BattleScreenController/BattleGUI/ActiveUnitButtonCtr" method="_on_mov_but_detec_input_event"]
