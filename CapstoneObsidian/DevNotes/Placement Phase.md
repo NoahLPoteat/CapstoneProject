@@ -9,10 +9,10 @@ placeables highlighting working
 
 TODO
 
-\[ ] Finish wrapper attempt place unit function
-\[ ] Get click detection to place the unit
-\[ ] update the placeable units array
-\[ ] finish the units display
+\[X] Finish wrapper attempt place unit function
+\[X] Get click detection to place the unit
+\[X] update the placeable units array
+\[X] finish the units display
 \[ ] Update each map to have placeable tiles
 \[ ] Ensure transition from placement to first turn is working properly
 \[ ] If I feel like it, potentially make the enemy units coming in look a little better, they just pop into existence rn

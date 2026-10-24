@@ -1,4 +1,4 @@
-[gd_scene load_steps=47 format=3 uid="uid://vyvnt6xkcn2d"]
+[gd_scene load_steps=51 format=3 uid="uid://vyvnt6xkcn2d"]
 
 [ext_resource type="Script" uid="uid://dsqrh11elmfx5" path="res://src/gameplay/prototypes/game.gd" id="1_4dq4k"]
 [ext_resource type="Script" uid="uid://cyfqqttarqlg6" path="res://src/gameplay/prototypes/battle_screen_controller.gd" id="2_wyd14"]
@@ -7,13 +7,17 @@
 [ext_resource type="Script" uid="uid://b67ca813sx6pc" path="res://src/gameplay/prototypes/world_map_controller.gd" id="3_qwj7d"]
 [ext_resource type="Texture2D" uid="uid://b53aq5ur204uh" path="res://assets/art/ui/world_map_gui/WorldMap_proto_frame.png" id="4_r4dsk"]
 [ext_resource type="Script" uid="uid://bhu0m2jj72ojx" path="res://src/gameplay/prototypes/battle_gui.gd" id="4_r80b6"]
+[ext_resource type="PackedScene" uid="uid://beyr2ejxm1bse" path="res://src/gameplay/prototypes/placement_phase/placement_solo.tscn" id="5_ckvyo"]
 [ext_resource type="Texture2D" uid="uid://clwnq2p75x744" path="res://assets/art/ui/battle_map_gui/GUI Design Prototype BG.png" id="5_ooegf"]
 [ext_resource type="Script" uid="uid://0etskjq4ec44" path="res://src/gameplay/prototypes/map_node_controller.gd" id="5_qwj7d"]
 [ext_resource type="LabelSettings" uid="uid://ccfs6ugu3pcqr" path="res://assets/fonts&labels/PixelLabelSettings.tres" id="6_dmcc4"]
 [ext_resource type="Texture2D" uid="uid://d1c1e2djcx32u" path="res://assets/art/ui/battle_map_gui/attackIndicatorAnim.png" id="6_h14kp"]
+[ext_resource type="PackedScene" uid="uid://dldac0uastitt" path="res://src/gameplay/prototypes/placement_phase/placement_start.tscn" id="6_vh825"]
+[ext_resource type="PackedScene" uid="uid://b60srafrpvp6p" path="res://src/gameplay/prototypes/placement_phase/placement_mid.tscn" id="7_3moma"]
 [ext_resource type="Script" uid="uid://djgiplfhdvyh3" path="res://src/gameplay/prototypes/movement_left_dis.gd" id="7_dmcc4"]
 [ext_resource type="Script" uid="uid://csyh78wqgu78n" path="res://src/gameplay/prototypes/active_unit_button_ctr.gd" id="7_yrn74"]
 [ext_resource type="Texture2D" uid="uid://l17dyuel7t7v" path="res://assets/art/ui/battle_map_gui/GUIMovementSelectNodeDown.png" id="8_00fvs"]
+[ext_resource type="PackedScene" uid="uid://6wwwv5a33qky" path="res://src/gameplay/prototypes/placement_phase/placement_end.tscn" id="8_d71po"]
 [ext_resource type="Texture2D" uid="uid://cvjvfn3xo0jbn" path="res://assets/art/ui/battle_map_gui/GUIMovementLeftNodeDown.png" id="9_igv4w"]
 [ext_resource type="Texture2D" uid="uid://rtw8wietsedn" path="res://assets/art/ui/battle_map_gui/GUIMovementSelectNodeUp.png" id="9_p7w2p"]
 [ext_resource type="Shader" uid="uid://bvp114koaqxce" path="res://shaders/dither_trans.gdshader" id="10_3ykrj"]
@@ -222,6 +226,10 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 1
 script = ExtResource("4_r80b6")
+solo_cont = ExtResource("5_ckvyo")
+start_cont = ExtResource("6_vh825")
+mid_cont = ExtResource("7_3moma")
+end_cont = ExtResource("8_d71po")
 
 [node name="BattleOverlayBG" type="TextureRect" parent="Game/BattleScreenController/BattleGUI"]
 layout_mode = 1
@@ -472,6 +480,7 @@ texture = ExtResource("4_r4dsk")
 [node name="MapNodeController" type="Node2D" parent="Game/WorldMapController" node_paths=PackedStringArray("starting_map")]
 script = ExtResource("5_qwj7d")
 starting_map = NodePath("TestMapNode")
+debug_unlock = true
 
 [node name="TestMapNode" parent="Game/WorldMapController/MapNodeController" node_paths=PackedStringArray("post_maps") instance=ExtResource("25_kc0fq")]
 position = Vector2(127, 51)

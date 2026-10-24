@@ -322,7 +322,12 @@ func _unhandled_input(event: InputEvent) -> void:
 			if current_battle_state == BATTLE_PHASES.PLACEMENT:
 				if event is InputEventMouseButton:
 					#attempt place_unit
-					pass
+					var unit: UnitBase = overlay_node.placeables[0]
+					var to_pos_iso: Vector2i = battle_map_controller.iso_from_global(pos)
+					
+					if event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
+						if battle_map_controller.attempt_place_unit(unit, to_pos_iso):
+							overlay_node.placeables.remove_at(0)
 				
 				if event is InputEventMouseMotion:
 					battle_map_controller.hovering_tile(pos)
@@ -394,7 +399,8 @@ func init_turn_order():
 		print("Attempting unit starting move debug, and turn order setup")
 		unit.turn_order_pos = i
 		
-		battle_map_controller.attempt_move_unit(Vector2.ZERO, unit, unit.starting_pos, true, true)
+		if not unit.is_ally:
+			battle_map_controller.attempt_move_unit(Vector2.ZERO, unit, unit.starting_pos, true, true)
 		#connect each units on_death signal to a function for killing them
 		unit.unit_died.connect(unit_death.bind(unit))
 		i += 1
@@ -473,5 +479,6 @@ func _on_battle_map_controller_map_ready():
 	battle_active = true
 
 func _on_placement_done():
+	print("Placement phase over, bsc.gd")
 	init_turn_order()
 	next_turn(true)

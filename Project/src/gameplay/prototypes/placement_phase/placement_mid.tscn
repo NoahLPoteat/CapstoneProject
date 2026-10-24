@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=3 uid="uid://b60srafrpvp6p"]
+
+[ext_resource type="Texture2D" uid="uid://cf8n4yx63gah3" path="res://assets/art/ui/battle_map_gui/GUIPlacementMid.png" id="1_jhht7"]
+[ext_resource type="Texture2D" uid="uid://c3t8f5k3ggg8w" path="res://assets/art/characters/CharacterDesignAtl.png" id="2_k4r4a"]
+
+[node name="Control" type="TextureRect"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -298.0
+offset_bottom = -162.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_jhht7")
+stretch_mode = 2
+
+[node name="TextureRect" type="Sprite2D" parent="."]
+position = Vector2(11, 9)
+texture = ExtResource("2_k4r4a")
+hframes = 8
+vframes = 8

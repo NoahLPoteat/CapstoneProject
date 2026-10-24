@@ -28,6 +28,7 @@ kanban-plugin: board
 - [ ] reroute enemy ai to be tied to the enemy itself
 - [ ] make 6 unique enemies (make 2 or 3 fodder types)
 - [ ] add some basic single target abilities
+- [ ] Once Abilities are added, update unit placement to have a choice box appear next to the top unit to choose the ability
 
 
 ## in-progress

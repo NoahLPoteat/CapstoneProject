@@ -114,8 +114,18 @@ func attempt_move_unit(to_pos_global: Vector2, unit: UnitBase, iso: Vector2i = V
 ##	There isnt a unit already there
 ##	The tile exists
 ##	Return True if placed, false if not placed
-func attempt_place_unit():
+func attempt_place_unit(unit: UnitBase, to_iso: Vector2i):
 	var valid_tiles: Array = battle_map.placeable_tiles
+	
+	if to_iso not in valid_tiles:
+		return false
+	
+	attempt_move_unit(Vector2(0,0), unit, to_iso, true, true)
+	
+	if unit.map_position == to_iso:
+		return true
+	
+	return false
 
 enum atlas_enum {
 	DEF,

@@ -9,12 +9,20 @@ signal placement_done()
 
 @onready var placement_container: VBoxContainer = $PlacementCont
 
+@export var solo_cont: PackedScene
+@export var start_cont: PackedScene
+@export var mid_cont: PackedScene
+@export var end_cont: PackedScene
+
 var placeables: Array = []
 
 func update_gui(new_char: UnitBase, battle_phase: BattleScreen.BATTLE_PHASES, turn_state: BattleScreen.TURN_STATES):
 	portrait_gui.texture = new_char.portrait_texture
 	movement_left_display.update(new_char.movement_left)
 	health_label.text = str(new_char.health) + "/" + str(new_char.max_health)
+	if battle_phase == BattleScreen.BATTLE_PHASES.PLACEMENT:
+		return
+	
 	active_button.update(turn_state)
 	
 	if new_char.ability_use_left <= 0:
@@ -30,6 +38,7 @@ func update_gui(new_char: UnitBase, battle_phase: BattleScreen.BATTLE_PHASES, tu
 ## then loop through every ally char until we reach the last one
 ##for the first we place a tile for the start of the chain into the container
 func update_placement():
+	print(placeables)
 	attack_indicator.visible = false
 	
 	for child in placement_container.get_children():
@@ -37,17 +46,47 @@ func update_placement():
 	
 	if placeables == []:
 		placement_done.emit()
-	
-	if len(placeables) == 1:
-		##place the solo tile, into place_cont 
 		return
 	
-	##place the start tile, into place_cont with placeables[0]
+	var t: TextureRect
+	var sprite_box: Sprite2D
+	var unit : UnitBase
+	
+	#if len(placeables) == 1:
+		#print("In here")
+		#t = solo_cont.instantiate()
+		#sprite_box = t.get_child(0)
+		#unit = placeables[0]
+		#sprite_box.frame_coords = unit.sprite_node.frame_coords
+		#placement_container.add_child(t)
+		#
+		#update_gui(unit, BattleScreen.BATTLE_PHASES.PLACEMENT, BattleScreen.TURN_STATES.MOVING)
+		#return
+	
+	if len(placeables) == 1:
+		t = solo_cont.instantiate()
+	else:
+		t = start_cont.instantiate()
+	
+	sprite_box = t.get_child(0)
+	unit = placeables[0]
+	sprite_box.frame_coords = unit.sprite_node.frame_coords
+	placement_container.add_child(t)
+	update_gui(unit, BattleScreen.BATTLE_PHASES.PLACEMENT, BattleScreen.TURN_STATES.MOVING)
 	
 	for i in range(1, len(placeables) - 1):
 		##place the middle tile, into placeable with all placeable[i]
-		pass
+		t = start_cont.instantiate()
+		sprite_box = t.get_child(0)
+		unit = placeables[i]
+		sprite_box.frame_coords = unit.sprite_node.frame_coords
+		placement_container.add_child(t)
 	
+	t = end_cont.instantiate()
+	sprite_box = t.get_child(0)
+	unit = placeables[len(placeables) - 1]
+	sprite_box.frame_coords = unit.sprite_node.frame_coords
+	placement_container.add_child(t)
 	##place the end tile into place_cont with placeables[len(placeables) - 1]
 
 func set_placeables(to: Array):

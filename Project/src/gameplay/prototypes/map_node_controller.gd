@@ -2,12 +2,16 @@ class_name MapNodeController extends Node2D
 signal node_clicked(battle_map: PackedScene, calling_node: MapNode)
 
 @export var starting_map: MapNode
+@export var debug_unlock: bool = false
 var map_nodes: Array[MapNode] = []
 
 var map_node_from_b_map: Dictionary = {}
 
 func _ready():
 	link_map_nodes()
+	if debug_unlock:
+		for map in map_nodes:
+			unlock_maps(map)
 	#unlock_maps(starting_map)
 
 #Loops through each child map node, and links them to the signal.
