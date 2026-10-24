@@ -21,9 +21,6 @@ kanban-plugin: board
 ## Todo
 
 - [ ] Implement middle mouse hold panning with bounds for the battlemap
-- [ ] Implement Placement Phase
-- [ ] Modify Battle Maps to have certain tiles be marked as available for starting placement
-- [ ] Adjust placement phase to limit which tiles can be placed on (consider using custom tile data)
 - [ ] Make the AI follow the closest unit, and attack it off cooldown.
 - [ ] Add logic for unit abilities and ability selection (doesnt have to actually be unique but get logic there)
 - [ ] Add arrow indicator for current unit
@@ -35,11 +32,17 @@ kanban-plugin: board
 
 ## in-progress
 
-- [ ] Fix battles so you cant skip enemy turns with the next turn button (consider enemy override in the next_turn)
+- [ ] Implement Placement Phase
+- [ ] Modify Battle Maps to have certain tiles be marked as available for starting placement
+- [ ] Adjust placement phase to limit which tiles can be placed on (consider using custom tile data)
+- [ ] update _unhandled_input_ to match between the battlephases and on placement should use the click to attempt_place_unit at that position
+- [ ] implement attempt_place_unit
+	a wrapper for attempt move unit that checks if the tile is placeable first and then moves the unit to said tile if so (it should also probably emit a signal or return a bool) when successful we need to update the placeables array to not have that unit anymore
 
 
 ## complete
 
+- [ ] Fix battles so you cant skip enemy turns with the next turn button (consider enemy override in the next_turn)
 - [ ] update battle_map_controller to queue.free old maps when the battle is over
 - [ ] update battle_map_controller to load a map node instead of a default node
 - [ ] connect the game node win loss detection down to world map controller, and perform a transition to it.

@@ -3,7 +3,7 @@ signal turn_changed(new_active_unit: UnitBase)
 signal game_over(game_won: bool, battle_map: BattleMapNode)
 
 @onready var battle_map_controller: BattleMapControl = $SubViewportContainer/SubViewport/BattleMapController
-@onready var overlay_node: Control = $BattleGUI
+@onready var overlay_node: BattleGUI = $BattleGUI
 
 enum BATTLE_PHASES{
 	NONE,
@@ -26,6 +26,7 @@ var sub_view_rect: Rect2 = Rect2i(81, 11, 228, 158)
 var turn_order: Array[UnitBase] = []
 var turn_index: int = 0
 var current_unit: UnitBase
+var old_tiles: Array = []
 
 ##unfortunate requirement due to issues with the viewport
 var offset_x: int = 81
@@ -42,24 +43,17 @@ func _process(delta: float) -> void:
 
 
 var enemy_ai_running: bool = false
-#placement - just start turn order fo now
-#	in the future
-#	display a side panel of all ally units
-#	go through order allowing user to place
-#	each unit in a select area
-#	first we need tiles to have data on which tiles should be placeable
-#END_SCREEN
-#	if game won display a win screen and pass up that the user has won
-#	if game lost then display a loss screen and pass up without has won
 var current_battle_state: BATTLE_PHASES
 func battle_state_process():
 	
 	match current_battle_state:
 		BATTLE_PHASES.PLACEMENT:
-			##Most of placement phase will be handled by the input function
-			##	and the gui updating
-			##for now we just go to ally_turn
-			change_battle_state(BATTLE_PHASES.ALLY_TURN)
+			placement_process()
+			update_gui()
+			##highlight all placeable tiles (hardcoded :3)
+			##highlight all non-placeable with the nothing tile
+			##	^NOTE This would work but the deco tiles would still be there
+			##		  so consider just not caring :3
 			
 			return
 		BATTLE_PHASES.ALLY_TURN:
@@ -78,6 +72,19 @@ func battle_state_process():
 			#meaning, if this state exists we should go to the placement phase
 			#	cross ref the way battles are initiated to make sure everything works
 			pass
+
+##helper to not clog up process func
+func placement_process():
+	## reset tiles
+	for tile in old_tiles:
+		battle_map_controller.highlight_tile(battle_map_controller.atlas_enum.DEF, tile, true, true)
+	old_tiles = []
+	
+	var placeable_tiles = battle_map_controller.battle_map.placeable_tiles
+	
+	for tile in placeable_tiles:
+		battle_map_controller.highlight_tile(battle_map_controller.atlas_enum.WALKABLE, tile)
+		old_tiles.append(tile)
 
 ##temp for testing
 var custom_timer: Timer
@@ -188,7 +195,8 @@ func change_battle_state(new_state: BATTLE_PHASES):
 	current_battle_state = new_state
 	match new_state:
 		BATTLE_PHASES.PLACEMENT:
-			pass
+			var arr = retrieve_units()
+			overlay_node.set_placeables(arr[0])
 		BATTLE_PHASES.ALLY_TURN:
 			pass
 		BATTLE_PHASES.ENEMY_TURN:
@@ -212,14 +220,10 @@ func exit_battle_state(old_state: BATTLE_PHASES):
 			pass
 
 var current_turn_state: TURN_STATES
-var old_tiles: Array = []
 func turn_state_process():
 	for tile in old_tiles:
 		battle_map_controller.highlight_tile(battle_map_controller.atlas_enum.DEF, tile, true, true)
 	old_tiles = []
-	
-	#if unit is dead:
-	#	skip!
 	
 	match current_turn_state:
 		TURN_STATES.MOVING:
@@ -293,32 +297,44 @@ func _unhandled_input(event: InputEvent) -> void:
 	if Input.is_action_just_pressed("debug_turn_skip"):
 		next_turn()
 	
-	if event is InputEventMouse and current_battle_state == BATTLE_PHASES.ALLY_TURN:
+	if event is InputEventMouse:
 		var pos = event.global_position
 		if sub_view_rect.has_point(pos) and self.visible:
-			match current_turn_state:
-				TURN_STATES.MOVING:
-					if event is InputEventMouseButton:
-						if event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
-							battle_map_controller.attempt_move_unit(pos, current_unit)
-				TURN_STATES.STRIKING:
-					if event is InputEventMouseButton:
-						if event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
-							if current_unit.can_use_ability():
-								battle_map_controller.attempt_strike_unit(pos, current_unit)
-								update_gui()
-				TURN_STATES.ABILITY:
-					pass
-				_:
-					pass
+			if current_battle_state == BATTLE_PHASES.ALLY_TURN:
+				match current_turn_state:
+					TURN_STATES.MOVING:
+						if event is InputEventMouseButton:
+							if event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
+								battle_map_controller.attempt_move_unit(pos, current_unit)
+					TURN_STATES.STRIKING:
+						if event is InputEventMouseButton:
+							if event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
+								if current_unit.can_use_ability():
+									battle_map_controller.attempt_strike_unit(pos, current_unit)
+									update_gui()
+					TURN_STATES.ABILITY:
+						pass
+					_:
+						pass
+				if event is InputEventMouseMotion:
+					battle_map_controller.hovering_tile(pos)
 			
-			if event is InputEventMouseMotion:
-				battle_map_controller.hovering_tile(pos)
-
+			if current_battle_state == BATTLE_PHASES.PLACEMENT:
+				if event is InputEventMouseButton:
+					#attempt place_unit
+					pass
+				
+				if event is InputEventMouseMotion:
+					battle_map_controller.hovering_tile(pos)
 
 ##Updates the overlay GUI with the new unit data
 func update_gui():
-	overlay_node.update_gui(current_unit, current_battle_state, current_turn_state)
+	if current_battle_state == BATTLE_PHASES.NONE:
+		return
+	if current_battle_state == BATTLE_PHASES.PLACEMENT:
+		overlay_node.update_placement()
+	else:
+		overlay_node.update_gui(current_unit, current_battle_state, current_turn_state)
 
 func next_turn(override: bool = false):
 	if not override and not current_unit.is_ally and not current_unit.unit_dead:
@@ -347,7 +363,6 @@ func next_turn(override: bool = false):
 	current_turn_state = TURN_STATES.MOVING
 	update_gui()
 	turn_index += 1
-
 
 ##Initilizes the turn order, and places units into their starting position
 func init_turn_order():
@@ -445,7 +460,6 @@ func _on_active_unit_button_ctr_button_pressed(choice: UnitButton.BUTTON_CHOICE)
 		_:
 			pass
 
-
 func _on_end_turn_end_turn_button_pressed() -> void:
 	next_turn()
 
@@ -454,9 +468,10 @@ func unload_map():
 	battle_map_controller.unload_map()
 	battle_active = false
 
-
 func _on_battle_map_controller_map_ready():
-	init_turn_order()
-	next_turn(true)
 	change_battle_state(BATTLE_PHASES.PLACEMENT)
 	battle_active = true
+
+func _on_placement_done():
+	init_turn_order()
+	next_turn(true)

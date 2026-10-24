@@ -430,6 +430,15 @@ texture = ExtResource("18_kc0fq")
 position = Vector2(30.5, 9)
 shape = SubResource("RectangleShape2D_h14kp")
 
+[node name="PlacementCont" type="VBoxContainer" parent="Game/BattleScreenController/BattleGUI"]
+clip_contents = true
+layout_mode = 0
+offset_left = 83.0
+offset_top = 13.0
+offset_right = 105.0
+offset_bottom = 167.0
+theme_override_constants/separation = 0
+
 [node name="WorldMapController" type="Control" parent="Game"]
 layout_mode = 1
 anchors_preset = 15
@@ -515,6 +524,7 @@ texture = SubResource("GradientTexture2D_wyd14")
 [connection signal="game_over" from="Game/BattleScreenController" to="Game" method="_on_battle_screen_controller_game_over"]
 [connection signal="map_ready" from="Game/BattleScreenController/SubViewportContainer/SubViewport/BattleMapController" to="Game/BattleScreenController" method="_on_battle_map_controller_map_ready"]
 [connection signal="update_gui" from="Game/BattleScreenController/SubViewportContainer/SubViewport/BattleMapController" to="Game/BattleScreenController" method="update_gui"]
+[connection signal="placement_done" from="Game/BattleScreenController/BattleGUI" to="Game/BattleScreenController" method="_on_placement_done"]
 [connection signal="button_pressed" from="Game/BattleScreenController/BattleGUI/ActiveUnitButtonCtr" to="Game/BattleScreenController" method="_on_active_unit_button_ctr_button_pressed"]
 [connection signal="input_event" from="Game/BattleScreenController/BattleGUI/ActiveUnitButtonCtr/MovButDetec" to="Game/BattleScreenController/BattleGUI/ActiveUnitButtonCtr" method="_on_mov_but_detec_input_event"]
 [connection signal="input_event" from="Game/BattleScreenController/BattleGUI/ActiveUnitButtonCtr/StrButDetect" to="Game/BattleScreenController/BattleGUI/ActiveUnitButtonCtr" method="_on_str_but_detect_input_event"]

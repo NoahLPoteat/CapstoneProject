@@ -107,19 +107,29 @@ func attempt_move_unit(to_pos_global: Vector2, unit: UnitBase, iso: Vector2i = V
 			
 			if not dist_override:
 				update_gui.emit()
-	
+
+##Takes in a position, and attempts to place the unit there
+##	IF
+##	It is a valid placeable tile
+##	There isnt a unit already there
+##	The tile exists
+##	Return True if placed, false if not placed
+func attempt_place_unit():
+	var valid_tiles: Array = battle_map.placeable_tiles
 
 enum atlas_enum {
 	DEF,
 	WALKABLE,
 	HOVERED,
-	ATTACKABLE
+	ATTACKABLE,
+	NONE
 }
 var map_atlas: Dictionary = {
 	atlas_enum.DEF : Vector2i(0, 0),
 	atlas_enum.WALKABLE : Vector2i(2, 0),
 	atlas_enum.HOVERED : Vector2i(3, 0),
-	atlas_enum.ATTACKABLE : Vector2i(2, 1)
+	atlas_enum.ATTACKABLE : Vector2i(2, 1),
+	atlas_enum.NONE : Vector2i(3, 3)
 }
 
 var current_hovered: Vector2i = Vector2i(-10000,-10000)
