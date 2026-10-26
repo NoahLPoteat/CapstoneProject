@@ -74,6 +74,8 @@ func update_placement():
 	placement_container.add_child(t)
 	update_gui(unit, BattleScreen.BATTLE_PHASES.PLACEMENT, BattleScreen.TURN_STATES.MOVING)
 	
+	if len(placeables) == 1: return
+	
 	for i in range(1, len(placeables) - 1):
 		##place the middle tile, into placeable with all placeable[i]
 		t = start_cont.instantiate()

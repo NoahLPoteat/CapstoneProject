@@ -16,33 +16,36 @@ kanban-plugin: board
 - [ ] make a cool shader for the win loss
 - [ ] add functionality for a small cinematic when a map is loaded
 - [ ] make camera pan / center to current unit when the turn changes
+- [ ] Adjust Fights to allow for an enemies first toggle
 
 
 ## Todo
 
 - [ ] Implement middle mouse hold panning with bounds for the battlemap
-- [ ] Make the AI follow the closest unit, and attack it off cooldown.
-- [ ] Add logic for unit abilities and ability selection (doesnt have to actually be unique but get logic there)
 - [ ] Add arrow indicator for current unit
 - [ ] Create tech demo video, push an update to itchio, and make a devlog
 - [ ] reroute enemy ai to be tied to the enemy itself
 - [ ] make 6 unique enemies (make 2 or 3 fodder types)
 - [ ] add some basic single target abilities
 - [ ] Once Abilities are added, update unit placement to have a choice box appear next to the top unit to choose the ability
+- [ ] Amend arrow indicator to show the current unit in placement phase (mainly just for the early placement logic for the ability choice frame)
+- [ ] Give stages a potential for a pre/post fight cutscene (animated sprite and just do it manually)
+- [ ] Give stages the ability to give a unit after
 
 
 ## in-progress
 
-- [ ] Implement Placement Phase
-- [ ] Modify Battle Maps to have certain tiles be marked as available for starting placement
-- [ ] Adjust placement phase to limit which tiles can be placed on (consider using custom tile data)
-- [ ] update _unhandled_input_ to match between the battlephases and on placement should use the click to attempt_place_unit at that position
-- [ ] implement attempt_place_unit
-	a wrapper for attempt move unit that checks if the tile is placeable first and then moves the unit to said tile if so (it should also probably emit a signal or return a bool) when successful we need to update the placeables array to not have that unit anymore
+- [ ] Add logic for unit abilities and ability selection (doesnt have to actually be unique but get logic there)
 
 
 ## complete
 
+- [ ] Implement Placement Phase
+- [ ] implement attempt_place_unit
+	a wrapper for attempt move unit that checks if the tile is placeable first and then moves the unit to said tile if so (it should also probably emit a signal or return a bool) when successful we need to update the placeables array to not have that unit anymore
+- [ ] update _unhandled_input_ to match between the battlephases and on placement should use the click to attempt_place_unit at that position
+- [ ] Adjust placement phase to limit which tiles can be placed on (consider using custom tile data)
+- [ ] Modify Battle Maps to have certain tiles be marked as available for starting placement
 - [ ] Fix battles so you cant skip enemy turns with the next turn button (consider enemy override in the next_turn)
 - [ ] update battle_map_controller to queue.free old maps when the battle is over
 - [ ] update battle_map_controller to load a map node instead of a default node
@@ -53,6 +56,7 @@ kanban-plugin: board
 - [ ] add functionality to "unlock" the next node
 - [ ] Adjust map nodes to take a battle map and a progress_node
 - [ ] Add basic AI for enemy units (and the pipeline for enemy AI) that makes them just move to a random spot in range and end their turn
+- [ ] Make the AI follow the closest unit, and attack it off cooldown.
 - [ ] Update Next Turn to only allow player to end turn on their turn
 - [ ] Implement the battle phases
 - [ ] implement death animation
