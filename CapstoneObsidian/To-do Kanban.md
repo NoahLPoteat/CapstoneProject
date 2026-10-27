@@ -12,7 +12,6 @@ kanban-plugin: board
 - [ ] implement a white flash shader on unit damage taken
 - [ ] progression line between map nodes with fun little animation
 - [ ] damage numbers
-- [ ] add a visual to the end of the battle screen when battle won / lost
 - [ ] make a cool shader for the win loss
 - [ ] add functionality for a small cinematic when a map is loaded
 - [ ] make camera pan / center to current unit when the turn changes
@@ -21,8 +20,6 @@ kanban-plugin: board
 
 ## Todo
 
-- [ ] Implement middle mouse hold panning with bounds for the battlemap
-- [ ] Add arrow indicator for current unit
 - [ ] Create tech demo video, push an update to itchio, and make a devlog
 - [ ] reroute enemy ai to be tied to the enemy itself
 - [ ] make 6 unique enemies (make 2 or 3 fodder types)
@@ -35,7 +32,11 @@ kanban-plugin: board
 
 ## in-progress
 
+- [ ] add a visual to the end of the battle screen when battle won / lost
 - [ ] Add logic for unit abilities and ability selection (doesnt have to actually be unique but get logic there)
+- [ ] Modify Map reset to move ally units back off screen before the battle (maybe -100 -100 to be safe)
+- [ ] Implement middle mouse hold panning with bounds for the battlemap
+- [ ] Add arrow indicator for current unit
 
 
 ## complete

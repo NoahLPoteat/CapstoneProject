@@ -17,6 +17,7 @@ kanban-plugin: board
 - [ ] UNIT LOADER DOES NOT GO TO NEXT TURN, HANDLE IN BATTLE PHASE LOGIC
 - [ ] ^^^ DO THIS
 - [ ] when an enemy unit dies, the turn order gets all wonky
+- [ ] When attacking it still shows allied units, \#fixdat
 
 
 ## Fixed
