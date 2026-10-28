@@ -480,6 +480,7 @@ texture = ExtResource("4_r4dsk")
 [node name="MapNodeController" type="Node2D" parent="Game/WorldMapController" node_paths=PackedStringArray("starting_map")]
 script = ExtResource("5_qwj7d")
 starting_map = NodePath("TestMapNode")
+debug_unlock = true
 
 [node name="TestMapNode" parent="Game/WorldMapController/MapNodeController" node_paths=PackedStringArray("post_maps") instance=ExtResource("25_kc0fq")]
 position = Vector2(127, 51)

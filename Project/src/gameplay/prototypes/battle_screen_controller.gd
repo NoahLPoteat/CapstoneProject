@@ -473,6 +473,7 @@ func unload_map():
 	change_battle_state(BATTLE_PHASES.NONE)
 	battle_map_controller.unload_map()
 	battle_active = false
+	old_tiles = []
 
 func _on_battle_map_controller_map_ready():
 	change_battle_state(BATTLE_PHASES.PLACEMENT)
@@ -480,5 +481,6 @@ func _on_battle_map_controller_map_ready():
 
 func _on_placement_done():
 	print("Placement phase over, bsc.gd")
+	
 	init_turn_order()
 	next_turn(true)

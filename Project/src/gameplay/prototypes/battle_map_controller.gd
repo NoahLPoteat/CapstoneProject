@@ -261,6 +261,9 @@ func load_map(map: BattleMapNode):
 func unload_map():
 	nav_sys = AStar2D.new()
 	battle_map.queue_free()
+	for unit: UnitBase in ally_unit_container.get_children():
+		unit.map_position = Vector2i(-100, -100)
+		unit.position = Vector2(-100, -100)
 
 func gen_cell_id(cell: Vector2i):
 	var id = abs(cell.x + cell.y * 114901)

@@ -34,13 +34,13 @@ kanban-plugin: board
 
 - [ ] add a visual to the end of the battle screen when battle won / lost
 - [ ] Add logic for unit abilities and ability selection (doesnt have to actually be unique but get logic there)
-- [ ] Modify Map reset to move ally units back off screen before the battle (maybe -100 -100 to be safe)
 - [ ] Implement middle mouse hold panning with bounds for the battlemap
 - [ ] Add arrow indicator for current unit
 
 
 ## complete
 
+- [ ] Modify Map reset to move ally units back off screen before the battle (maybe -100 -100 to be safe)
 - [ ] Implement Placement Phase
 - [ ] implement attempt_place_unit
 	a wrapper for attempt move unit that checks if the tile is placeable first and then moves the unit to said tile if so (it should also probably emit a signal or return a bool) when successful we need to update the placeables array to not have that unit anymore
