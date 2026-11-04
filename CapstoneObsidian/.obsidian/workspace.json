@@ -60,21 +60,14 @@
             "id": "04dc0633df2e0095",
             "type": "leaf",
             "state": {
-              "type": "kanban",
+              "type": "markdown",
               "state": {
-                "file": "To-do Kanban.md",
-                "kanbanViewState": {
-                  "kanban-plugin": "board",
-                  "list-collapse": [
-                    false,
-                    false,
-                    false,
-                    false
-                  ]
-                }
+                "file": "DevNotes/Ability System.md",
+                "mode": "source",
+                "source": false
               },
-              "icon": "lucide-trello",
-              "title": "To-do Kanban"
+              "icon": "lucide-file",
+              "title": "Ability System"
             }
           }
         ],
@@ -248,15 +241,15 @@
   },
   "active": "04dc0633df2e0095",
   "lastOpenFiles": [
-    "Bugs & Issues.md",
-    "DevNotes/Ability System.md",
+    "To-do Kanban.md",
     "DevNotes/World Map.md",
     "DevNotes/Unit & Class System (Friendly & Enemy).md",
     "DevNotes/Turn Based Combat.md",
     "DevNotes/Placement Phase.md",
     "DevNotes/Party System.md",
     "DevNotes/BattleMaps.md",
-    "To-do Kanban.md",
+    "DevNotes/Ability System.md",
+    "Bugs & Issues.md",
     "TempNotes for Sys2 Do something with LATER.md",
     "General Ideas.md",
     "Pasted image 20260922152706.png",

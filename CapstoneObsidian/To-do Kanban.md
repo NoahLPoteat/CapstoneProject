@@ -16,22 +16,24 @@ kanban-plugin: board
 - [ ] add functionality for a small cinematic when a map is loaded
 - [ ] make camera pan / center to current unit when the turn changes
 - [ ] Adjust Fights to allow for an enemies first toggle
+- [ ] Add saving funtionality
+- [ ] Create tech demo video, push an update to itchio, and make a devlog
 
 
 ## Todo
 
-- [ ] Create tech demo video, push an update to itchio, and make a devlog
-- [ ] reroute enemy ai to be tied to the enemy itself
 - [ ] make 6 unique enemies (make 2 or 3 fodder types)
-- [ ] add some basic single target abilities
-- [ ] Once Abilities are added, update unit placement to have a choice box appear next to the top unit to choose the ability
 - [ ] Amend arrow indicator to show the current unit in placement phase (mainly just for the early placement logic for the ability choice frame)
 - [ ] Give stages a potential for a pre/post fight cutscene (animated sprite and just do it manually)
 - [ ] Give stages the ability to give a unit after
+- [ ] Make a basic title screen that transitions to the world map
+- [ ] reroute enemy ai to be tied to the enemy itself
 
 
 ## in-progress
 
+- [ ] add some basic single target abilities And at least 2 shaped abilities
+- [ ] Once Abilities are added, update unit placement to have a choice box appear next to the top unit to choose the ability
 - [ ] add a visual to the end of the battle screen when battle won / lost
 - [ ] Add logic for unit abilities and ability selection (doesnt have to actually be unique but get logic there)
 - [ ] Implement middle mouse hold panning with bounds for the battlemap

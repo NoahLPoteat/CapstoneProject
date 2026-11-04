@@ -1,0 +1,10 @@
+Since the last meeting I have the win loss logic linked up for map progression
+The map nodes now connect into one another (and support more than 1 branch)
+The placement phase has been finished, and it automatically adjusts to how many units the user has. (each battle map has hardcoded tiles to be placeable)
+
+For the next two weeks I want to:
+Get the ability system backend finished (its started just not fleshed out to the degree I wish)
+Create the GUI for users to select the ability for their unit
+Add in battle map panning (middle mouse)
+
+If there is time I also want to add a quick title screen to start tying things together

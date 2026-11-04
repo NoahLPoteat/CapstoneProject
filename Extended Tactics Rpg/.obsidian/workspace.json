@@ -41,16 +41,30 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Abstract Dev Timeline.md",
+                "file": "Unsorted Inspos.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Abstract Dev Timeline"
+              "title": "Unsorted Inspos"
+            }
+          },
+          {
+            "id": "8f6e342b63570c33",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "OSRS Art Ref Dump.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "OSRS Art Ref Dump"
             }
           }
         ],
-        "currentTab": 2
+        "currentTab": 3
       }
     ],
     "direction": "vertical"
@@ -190,7 +204,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Abstract Dev Timeline.md",
+                "file": "OSRS Art Ref Dump.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -214,7 +228,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300.1666259765625
+    "width": 300.1666259765625,
+    "collapsed": true
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -227,14 +242,26 @@
       "bases:Create new base": false
     }
   },
-  "active": "d560b4f93245d65f",
+  "active": "8f6e342b63570c33",
   "lastOpenFiles": [
-    "Early GDD.md",
-    "Mechanics Abstract.md",
-    "General Idea & Abstract.md",
+    "Pasted image 20261104163042.png",
+    "OSRS Art Refs/Pasted image 20261104162545.png",
+    "OSRS Art Ref Dump.md",
+    "OSRS Art Refs/Pasted image 20261104162539.png",
+    "OSRS Art Refs/Pasted image 20261104152457.png",
+    "OSRS Art Refs/Pasted image 20261104151454.png",
+    "OSRS Art Refs/Pasted image 20261104151341.png",
+    "OSRS Art Refs/Pasted image 20261104151233.png",
+    "OSRS Art Refs/Pasted image 20261104151213.png",
+    "OSRS Art Refs/Pasted image 20261104150839.png",
+    "OSRS Art Refs/Pasted image 20261104150539.png",
+    "OSRS Art Refs/Pasted image 20261104150319.png",
     "Unsorted Inspos.md",
+    "OSRS Art Refs",
+    "General Idea & Abstract.md",
+    "Mechanics Abstract.md",
+    "Early GDD.md",
     "Abstract Dev Timeline.md",
-    "create a link.md",
-    "Untitled"
+    "create a link.md"
   ]
 }

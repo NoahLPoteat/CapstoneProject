@@ -3,7 +3,7 @@
 # High Level
 
 ## Concept Statement
-Permadeath pve semi open world tactics rpg. Broad and abstract build mechanics to promote large diversity between characters and units.
+Permadeath PvE semi open world tactics rpg. Broad build mechanics to promote large diversity between characters and units. Many of the mechanics and systems will be shrouded 
 
 
 # Product Design
