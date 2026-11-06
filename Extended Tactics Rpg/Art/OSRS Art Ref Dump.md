@@ -4,6 +4,11 @@ Sorted by complexity
 [[#Medium]]
 [[#High]]
 
+\[ ] Start with a bunch of shape studies of existing models
+\[ ] Create real 3d models from the shape studies
+\[ ] Flat texture 3d models
+\[ ] Find pinterest art or old concepts and do a shape study into attempting to make it look like the osrs shape studies
+\[ ] Make and texture models from those
 # Refs
 https://x.com/JagexJerv
 https://oldschool.runescape.wiki/w/Mod_Jerv#Gallery
