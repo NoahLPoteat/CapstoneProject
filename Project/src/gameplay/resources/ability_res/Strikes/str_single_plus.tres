@@ -1,6 +1,6 @@
 [gd_resource type="Resource" load_steps=2 format=3 uid="uid://1lwlmrmyxrwk"]
 
-[ext_resource type="Script" uid="uid://yqhs5h61d5b2" path="res://src/gameplay/resources/ability_res/built_abilities/str_single_plus.gd" id="1_s8u4i"]
+[ext_resource type="Script" uid="uid://yqhs5h61d5b2" path="res://src/gameplay/resources/ability_res/Strikes/str_single_plus.gd" id="1_s8u4i"]
 
 [resource]
 script = ExtResource("1_s8u4i")

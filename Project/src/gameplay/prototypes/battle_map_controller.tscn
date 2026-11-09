@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://ct3ui131rw88u" path="res://src/gameplay/prototypes/unit_scene_base.tscn" id="5_ekq22"]
 [ext_resource type="Texture2D" uid="uid://stn5bu8ghnvr" path="res://assets/art/characters/portraitDesign.png" id="6_063d6"]
 [ext_resource type="Script" uid="uid://dh7uvryf2q04a" path="res://src/gameplay/units/unit.gd" id="6_qu2af"]
-[ext_resource type="Script" uid="uid://b10cm1o4txpbm" path="res://src/gameplay/resources/ability_res/built_abilities/str_single_corners.gd" id="7_063d6"]
+[ext_resource type="Script" uid="uid://b10cm1o4txpbm" path="res://src/gameplay/resources/ability_res/Strikes/str_single_corners.gd" id="7_063d6"]
 [ext_resource type="Texture2D" uid="uid://c3t8f5k3ggg8w" path="res://assets/art/characters/CharacterDesignAtl.png" id="7_lqv7j"]
 [ext_resource type="PackedScene" uid="uid://dqxytahl0deg1" path="res://src/gameplay/prototypes/particles/bloodParticle.tscn" id="8_chmxg"]
 [ext_resource type="Texture2D" uid="uid://ddbpxaxdu1ktf" path="res://assets/art/characters/unitDeathAnim.png" id="9_wg132"]
