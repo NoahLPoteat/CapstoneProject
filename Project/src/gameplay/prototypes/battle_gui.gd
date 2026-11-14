@@ -4,8 +4,10 @@ signal placement_done()
 @onready var portrait_gui: TextureRect = $Portrait
 @onready var movement_left_display: Control = $MovementLeftDis
 @onready var health_label: Label = $HealthLabel
+@onready var mana_label: Label = $ManaLabel
 @onready var active_button: Control = $ActiveUnitButtonCtr
 @onready var attack_indicator: AnimatedSprite2D = $Portrait/AnimatedSprite2D
+@onready var abi_selection: Control = $AbiSelection
 
 @onready var placement_container: VBoxContainer = $PlacementCont
 
@@ -20,8 +22,13 @@ func update_gui(new_char: UnitBase, battle_phase: BattleScreen.BATTLE_PHASES, tu
 	portrait_gui.texture = new_char.portrait_texture
 	movement_left_display.update(new_char.movement_left)
 	health_label.text = str(new_char.health) + "/" + str(new_char.max_health)
+	mana_label.text = str(new_char.mana) + "/" + str(new_char.max_mana)
 	if battle_phase == BattleScreen.BATTLE_PHASES.PLACEMENT:
+		abi_selection.visible = true
 		return
+	
+	abi_selection.visible = false
+	
 	
 	active_button.update(turn_state)
 	
@@ -37,6 +44,11 @@ func update_gui(new_char: UnitBase, battle_phase: BattleScreen.BATTLE_PHASES, tu
 ## we need to get the ally char list
 ## then loop through every ally char until we reach the last one
 ##for the first we place a tile for the start of the chain into the container
+##TODO: 
+##	make graphic for the chooseable abilities box
+##	two boxes one for each option
+##	X text area underneath for the name, range, and 'value'
+##	perhaps a little graphic to display damage/healing ones
 func update_placement():
 	print(placeables)
 	attack_indicator.visible = false

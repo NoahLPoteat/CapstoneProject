@@ -14,14 +14,16 @@ kanban-plugin: board
 
 ## In Progress
 
-- [ ] UNIT LOADER DOES NOT GO TO NEXT TURN, HANDLE IN BATTLE PHASE LOGIC
-- [ ] ^^^ DO THIS
-- [ ] when an enemy unit dies, the turn order gets all wonky
 - [ ] When attacking it still shows allied units, \#fixdat
+- [ ] when you have more allies than enemies the enemies go first, you should let the player go first
+- [ ] potentially update ability turn_state_process to not highlight units that arent effectables
 
 
 ## Fixed
 
+- [ ] when an enemy unit dies, the turn order gets all wonky
+- [ ] UNIT LOADER DOES NOT GO TO NEXT TURN, HANDLE IN BATTLE PHASE LOGIC
+- [ ] ^^^ DO THIS
 - [ ] REMOVE DEAD UNITS FROM THE POS DICTS
 - [ ] tile under unit in attack gotta GO
 - [ ] when you end your turn immediately after moving, a tile is leftover under you

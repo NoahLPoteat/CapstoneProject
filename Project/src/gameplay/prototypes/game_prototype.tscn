@@ -1,4 +1,4 @@
-[gd_scene load_steps=51 format=3 uid="uid://vyvnt6xkcn2d"]
+[gd_scene load_steps=54 format=3 uid="uid://vyvnt6xkcn2d"]
 
 [ext_resource type="Script" uid="uid://dsqrh11elmfx5" path="res://src/gameplay/prototypes/game.gd" id="1_4dq4k"]
 [ext_resource type="Script" uid="uid://cyfqqttarqlg6" path="res://src/gameplay/prototypes/battle_screen_controller.gd" id="2_wyd14"]
@@ -31,6 +31,8 @@
 [ext_resource type="Script" uid="uid://b0yty6v8jxua6" path="res://src/gameplay/prototypes/end_turn.gd" id="17_kc0fq"]
 [ext_resource type="Texture2D" uid="uid://co51310qlvewy" path="res://assets/art/ui/battle_map_gui/GUIEndTurnButtonUp.png" id="18_kc0fq"]
 [ext_resource type="PackedScene" uid="uid://bvome6kasaqpr" path="res://src/gameplay/world_maps/map_node.tscn" id="25_kc0fq"]
+[ext_resource type="Texture2D" uid="uid://cswu1gn0sy1ja" path="res://assets/art/ui/battle_map_gui/GUIAbiSelectBG.png" id="25_vh825"]
+[ext_resource type="FontFile" uid="uid://cu2g5pjgbo3d0" path="res://assets/fonts&labels/pixel.ttf" id="26_3moma"]
 [ext_resource type="PackedScene" uid="uid://def0gbs0hdjko" path="res://src/gameplay/battle_maps/testmap.tscn" id="26_h14kp"]
 [ext_resource type="PackedScene" uid="uid://b5dhjfy7248iw" path="res://src/gameplay/battle_maps/test_map2.tscn" id="27_bhsri"]
 [ext_resource type="PackedScene" uid="uid://dn7vyqasmstml" path="res://src/gameplay/battle_maps/test_map3.tscn" id="28_nkpx2"]
@@ -148,6 +150,13 @@ size = Vector2(17, 14)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_h14kp"]
 size = Vector2(59, 16)
 
+[sub_resource type="LabelSettings" id="LabelSettings_d71po"]
+line_spacing = -3.0
+font = ExtResource("26_3moma")
+font_size = 5
+font_color = Color(0.37254903, 0.78039217, 0.3647059, 1)
+shadow_size = 0
+
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_3ykrj"]
 shader = ExtResource("10_3ykrj")
 shader_parameter/intensity = 1.0
@@ -174,7 +183,6 @@ mouse_filter = 1
 script = ExtResource("1_4dq4k")
 
 [node name="BattleScreenController" type="Control" parent="Game"]
-visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -213,7 +221,7 @@ transparent_bg = true
 handle_input_locally = false
 canvas_item_default_texture_filter = 0
 size = Vector2i(228, 158)
-render_target_update_mode = 0
+render_target_update_mode = 4
 
 [node name="BattleMapController" parent="Game/BattleScreenController/SubViewportContainer/SubViewport" instance=ExtResource("2_yhlpg")]
 
@@ -265,7 +273,7 @@ label_settings = ExtResource("6_dmcc4")
 vertical_alignment = 1
 clip_text = true
 
-[node name="SyzygiamLabel" type="Label" parent="Game/BattleScreenController/BattleGUI"]
+[node name="ManaLabel" type="Label" parent="Game/BattleScreenController/BattleGUI"]
 layout_mode = 0
 offset_left = 22.0
 offset_top = 94.0
@@ -447,7 +455,46 @@ offset_right = 105.0
 offset_bottom = 167.0
 theme_override_constants/separation = 0
 
+[node name="AbiSelection" type="Control" parent="Game/BattleScreenController/BattleGUI"]
+custom_minimum_size = Vector2(94, 56)
+anchors_preset = 0
+offset_left = 107.0
+offset_top = 20.0
+offset_right = 129.0
+offset_bottom = 20.0
+
+[node name="AbiSelectBG" type="TextureRect" parent="Game/BattleScreenController/BattleGUI/AbiSelection"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("25_vh825")
+
+[node name="AbiNameLabel" type="Label" parent="Game/BattleScreenController/BattleGUI/AbiSelection"]
+layout_mode = 0
+offset_left = 6.0
+offset_top = 24.0
+offset_right = 92.0
+offset_bottom = 31.0
+text = "Ability Name..."
+label_settings = ExtResource("6_dmcc4")
+clip_text = true
+
+[node name="AbiDescLabel" type="Label" parent="Game/BattleScreenController/BattleGUI/AbiSelection"]
+layout_mode = 0
+offset_left = 7.0
+offset_top = 29.0
+offset_right = 92.0
+offset_bottom = 54.0
+text = "Ability Description ...
+You could fit so many words in here"
+label_settings = SubResource("LabelSettings_d71po")
+autowrap_mode = 2
+
 [node name="WorldMapController" type="Control" parent="Game"]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0

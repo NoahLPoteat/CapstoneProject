@@ -1,0 +1,5 @@
+I spent the first week finishing up the backend for the ability system. I initially made it a bit too complex and had big visions for it but realized it didn't really fit with the rest of the games simplicity so I toned it back a lot.
+Now there's support for damaging and healing abilities (I may add back target / caster displacement) with both self, single, and aoe targeting. 
+They use some simple math to determine cast range, and cast shape (this should/will be turned into a mini library later so I can just pull from that, but for testing its hardcoded into each one)
+
+This last week I focused a lot of time on other classes and this kind of took a backseat, but I have started work on the graphics of the ability choice in the placement phase. I have a good bit of the logic for choosing the ability set in place, but without the ui there yet you cant actually choose it.

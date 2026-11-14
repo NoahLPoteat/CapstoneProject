@@ -1,6 +1,6 @@
 TODO:
 - [x] Setup the advanced abilities base class
-- [ ] Create a simple aoe enemy damaging ability
+- [x] Create a simple aoe enemy damaging ability
 - [ ] Create a single target enemy damaging ability
 - [ ] Create a single target ally heal
 - [ ] Create a self target heal

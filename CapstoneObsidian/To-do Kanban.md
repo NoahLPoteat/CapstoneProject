@@ -6,6 +6,8 @@ kanban-plugin: board
 
 ## Todo - Stretch
 
+- [ ] Add arrow indicator for current unit
+- [ ] add a visual to the end of the battle screen when battle won / lost
 - [ ] override mouse to custom mouse
 - [ ] Rewrite hovering_tile in battle_map_controller to use the highlight_tile function
 - [ ] Make units play a little animation on death
@@ -22,26 +24,29 @@ kanban-plugin: board
 
 ## Todo
 
+- [ ] YOU FORGOT TO ADDDDD MANA COSTSS TO THE ABILITIES YOU BUFFOON
 - [ ] make 6 unique enemies (make 2 or 3 fodder types)
-- [ ] Amend arrow indicator to show the current unit in placement phase (mainly just for the early placement logic for the ability choice frame)
 - [ ] Give stages a potential for a pre/post fight cutscene (animated sprite and just do it manually)
 - [ ] Give stages the ability to give a unit after
 - [ ] Make a basic title screen that transitions to the world map
 - [ ] reroute enemy ai to be tied to the enemy itself
+- [ ] Increase size of abi selection box to accommodate more text in the description (4 words aint enough)
 
 
 ## in-progress
 
-- [ ] add some basic single target abilities And at least 2 shaped abilities
 - [ ] Once Abilities are added, update unit placement to have a choice box appear next to the top unit to choose the ability
-- [ ] add a visual to the end of the battle screen when battle won / lost
-- [ ] Add logic for unit abilities and ability selection (doesnt have to actually be unique but get logic there)
+- [ ] Modify Abilities to have a sprite that appears in the choice box
+- [ ] Finish sprites for Ability selection box
+- [ ] Add the abi selection bg sprite to godot and have it appear during the placement phase
+- [ ] Modify the abi selection box to have 2 buttons (similar to other buttons currently used) that changes the units chosen ability
+- [ ] Add name desc and other information into the proper areas
 - [ ] Implement middle mouse hold panning with bounds for the battlemap
-- [ ] Add arrow indicator for current unit
 
 
 ## complete
 
+- [ ] add some basic abilities for testing
 - [ ] Modify Map reset to move ally units back off screen before the battle (maybe -100 -100 to be safe)
 - [ ] Implement Placement Phase
 - [ ] implement attempt_place_unit

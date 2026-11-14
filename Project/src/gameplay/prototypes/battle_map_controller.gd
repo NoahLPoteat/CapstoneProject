@@ -63,9 +63,80 @@ func attempt_strike_unit(to_pos_global: Vector2, user: UnitBase, iso: Vector2i =
 	if is_same_side or target_unit.unit_dead: return
 	
 	## from here we are in a valid state to perform the attack
-	strike.effect(target_unit)
+	strike.effect(target_unit, user)
 	user.ability_use_left -= 1
 
+##TODO:
+##	check if ability is self, area, or single target
+##		if self apply effect to self
+##	else
+##	get iso pos of center of user click
+##	check all tiles in ability get tiles for ALL units in range (make arr)
+##	pass to ability to filter out non effectables
+##	if aoe,
+##		then call apply_effect_on_list to that list
+##	if single,
+##		pick a random unit from whats left, and apply effect to that
+##	decrement user.ability_left
+func attempt_use_ability(tar_pos: Vector2 , user:UnitBase):
+	var abi: AdvancedAbility = user.get_chosen_ability()
+	
+	var tar_pos_iso: Vector2i = iso_from_global(tar_pos)
+	var abi_r = abi.abi_range
+	
+	var to_check: Vector2i = tar_pos_iso - user.map_position
+	var tc_val = abs(to_check.x) + abs(to_check.y)
+	if  tc_val > abi_r or tc_val == 0: ##INVALID STRIKE ZONE
+		return
+	
+	if not user.has_enough_mana(abi.mana_cost):
+		return
+	
+	if abi.target_type == AdvancedAbility.TARGET_TYPE.SELF:
+		abi.effect(user, user)
+		user.ability_use_left -= 1
+		user.spend_mana(abi.mana_cost)
+		return
+	
+	var effectee_list: Array[UnitBase] = []
+	
+	
+	
+	
+	##TODO: caster can cast outside of cast range
+	##	update like attempt_strike to have a bounding (for tar_pos_iso)
+	
+	for tile: Vector2i in abi.get_shape():
+		var post_offset = tar_pos_iso + tile
+		if unit_from_pos.has(post_offset):
+			effectee_list.append(unit_from_pos[post_offset])
+	
+	
+	#checks all effectees and returns a list of valid ones
+	effectee_list = abi.get_effectable(user, effectee_list)
+	
+	#no units in cast range (still 'cast' anyways)
+	if len(effectee_list) == 0:
+		user.ability_use_left -= 1
+		return
+	
+	
+	if abi.target_type == AdvancedAbility.TARGET_TYPE.AREA:
+		for target: UnitBase in effectee_list:
+			abi.effect(target, user) 
+	elif abi.target_type == AdvancedAbility.TARGET_TYPE.SINGLE:
+		var closest: UnitBase = effectee_list[0]
+		var closest_dist: float = closest.map_position.distance_squared_to(tar_pos_iso)
+		for unit in effectee_list:
+			var dist: float = unit.map_position.distance_squared_to(tar_pos_iso)
+			if dist < closest_dist:
+				closest = unit
+				closest_dist = dist
+		
+		abi.effect(closest, user)
+	
+	user.spend_mana(abi.mana_cost)
+	user.ability_use_left -= 1
 func tile_has_unit(to_pos: Vector2i):
 	if unit_from_pos.has(to_pos): return true
 	return false
@@ -223,7 +294,6 @@ func remove_unit(unit: UnitBase):
 func get_nav_sys():
 	return nav_sys
 
-
 ##generates the navigation system, and extracts the units from the map
 func load_map(map: BattleMapNode):
 	battle_map = map
@@ -269,7 +339,6 @@ func gen_cell_id(cell: Vector2i):
 	var id = abs(cell.x + cell.y * 114901)
 	return id
 
-
 func _on_map_container_need_nav() -> void:
 	map_container.update_nav_mesh(nav_sys)
 
@@ -278,8 +347,6 @@ func get_units_arr():
 	var enemy_arr = battle_map.get_enemy_units()
 	var ally_arr = ally_unit_container.get_children()
 	return [ally_arr, enemy_arr]
-
-
 
 func iso_from_global(pos: Vector2):
 	var local_pos = battle_map.main_tile.to_local(pos)

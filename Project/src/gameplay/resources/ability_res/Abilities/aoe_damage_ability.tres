@@ -1,0 +1,14 @@
+[gd_resource type="Resource" load_steps=2 format=3 uid="uid://epby5ddrbo62"]
+
+[ext_resource type="Script" uid="uid://j4v14suchl8v" path="res://src/gameplay/resources/ability_res/Abilities/aoe_damage_ability.gd" id="1_q7jpx"]
+
+[resource]
+script = ExtResource("1_q7jpx")
+affect_enemy = true
+mana_cost = 25
+ability_name = "test"
+ability_desc = "test"
+target_type = 2
+abi_range = 3
+val = 15
+metadata/_custom_type_script = "uid://bmoei356uv52o"

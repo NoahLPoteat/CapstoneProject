@@ -4,16 +4,20 @@ class_name AdvancedAbility extends AbilityBase
 @export var affect_enemy: bool = false
 @export var affect_ally : bool = false
 @export var shape : Array[Vector2i]
-@export var range_shape : Array[Vector2i]
+@export var mana_cost: int = 0
 
+##over ridden by the abilities themselves
+##	do math to make shape
 func get_tiles():
-	return range_shape
+	return []
 
+##consider updating this to be math based too
 func get_shape():
-	return shape
+	return []
 
-func get_effectable(caster: UnitBase, targets: Array[UnitBase]):
-	var out_array = []
+
+func get_effectable(caster: UnitBase, targets: Array[UnitBase]) -> Array[UnitBase]:
+	var out_array: Array[UnitBase] = []
 	
 	if affect_self: out_array.append(caster)
 	
@@ -26,6 +30,3 @@ func get_effectable(caster: UnitBase, targets: Array[UnitBase]):
 			out_array.append(unit)
 	
 	return out_array
-
-func apply_effect_to_list(targets: Array[UnitBase]):
-	for unit in targets: effect(unit)

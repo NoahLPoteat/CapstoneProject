@@ -1,8 +1,8 @@
 extends AbilityBase
 
 
-func effect(target_unit: UnitBase):
-	super(target_unit)
+func effect(target_unit: UnitBase, caster: UnitBase):
+	super(target_unit, caster)
 	target_unit.take_damage(val)
 
 func get_tiles():

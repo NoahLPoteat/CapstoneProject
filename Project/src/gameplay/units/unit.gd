@@ -24,6 +24,7 @@ var map_position: Vector2i = Vector2i(0, 0)
 @export var health: int = 100
 @export var max_health: int = 100
 @export var mana: int = 0
+@export var max_mana: int = 100
 @export var mana_recovery: int = 0
 @export var movement_left: int = 3
 
@@ -54,6 +55,7 @@ var facing: DIR = DIR.RIGHT
 #Initialize
 func pre_fight_init():
 	res(max_health)
+	restore_mana(max_mana)
 
 func take_damage(val: int):
 	if unit_dead:
@@ -94,6 +96,22 @@ func get_strike():
 	else:
 		return null
 
+func get_chosen_ability():
+	if chosen_ability != null:
+		return chosen_ability
+	else:
+		return null
+
+func has_enough_mana(to_have: int):
+	if mana >= to_have: return true 
+	return false
+
+func spend_mana(to_spend: int):
+	mana = max(0, mana - to_spend)
+
+func get_abilities_array():
+	return available_abilities
+
 func can_use_ability():
 	if ability_use_left > 0:
 		return true
@@ -103,7 +121,10 @@ func can_use_ability():
 func reset_turn():
 	movement_left = 3
 	ability_use_left = max_ability_uses
+	restore_mana(mana_recovery)
 
+func restore_mana(to_restore: int):
+	mana = min(max_mana, mana + to_restore)
 
 func hide_sprite():
 	sprite_node.visible = false

@@ -219,6 +219,7 @@ func exit_battle_state(old_state: BATTLE_PHASES):
 		BATTLE_PHASES.NONE:
 			pass
 
+var hovered_iso: Vector2i = Vector2i(-1000, -1000)
 var current_turn_state: TURN_STATES
 func turn_state_process():
 	for tile in old_tiles:
@@ -260,10 +261,33 @@ func turn_state_process():
 			
 			pass
 		TURN_STATES.ABILITY:
-			## Get units current chosen ability, mark all tiles in range
-			for tile in old_tiles:
-				battle_map_controller.highlight_tile(battle_map_controller.atlas_enum.DEF, tile, true)
-			old_tiles = []
+			var abi: AdvancedAbility = current_unit.chosen_ability
+			if abi == null:
+				return
+			var can_use_abi: bool = current_unit.can_use_ability()
+			if not can_use_abi:
+				return
+			
+			#print("IM HERE", current_unit.chosen_ability)
+			
+			var tiles = abi.get_tiles()
+			for t in tiles:
+				var t_off = current_unit.map_position + t
+				if t_off == current_unit.map_position:
+					continue
+				
+				battle_map_controller.highlight_tile(
+					battle_map_controller.atlas_enum.ATTACKABLE, t_off, true
+				)
+				old_tiles.append(t_off)
+			
+			tiles = abi.get_shape()
+			for t in tiles:
+				var t_off = hovered_iso + t
+				battle_map_controller.highlight_tile(
+					BattleMapControl.atlas_enum.WALKABLE, t_off, true
+				)
+				old_tiles.append(t_off)
 			
 			pass
 		_:
@@ -313,12 +337,18 @@ func _unhandled_input(event: InputEvent) -> void:
 									battle_map_controller.attempt_strike_unit(pos, current_unit)
 									update_gui()
 					TURN_STATES.ABILITY:
+						if event is InputEventMouseButton:
+							if event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
+								if  current_unit.can_use_ability():
+									battle_map_controller.attempt_use_ability(pos, current_unit)
+								update_gui()
 						pass
 					_:
 						pass
 				if event is InputEventMouseMotion:
+					hovered_iso = battle_map_controller.iso_from_global(pos)
 					battle_map_controller.hovering_tile(pos)
-			
+					
 			if current_battle_state == BATTLE_PHASES.PLACEMENT:
 				if event is InputEventMouseButton:
 					#attempt place_unit
