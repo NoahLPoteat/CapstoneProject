@@ -1,0 +1,14 @@
+[gd_resource type="Resource" load_steps=2 format=3 uid="uid://dg777d5hwab8q"]
+
+[ext_resource type="Script" uid="uid://j4v14suchl8v" path="res://src/gameplay/resources/ability_res/Abilities/aoe_damage_ability.gd" id="1_y3ljr"]
+
+[resource]
+script = ExtResource("1_y3ljr")
+affect_enemy = true
+mana_cost = 25
+ability_name = "test3"
+ability_desc = "This is a test3 description, ability does aoe damage."
+target_type = 2
+abi_range = 3
+val = 15
+metadata/_custom_type_script = "uid://bmoei356uv52o"

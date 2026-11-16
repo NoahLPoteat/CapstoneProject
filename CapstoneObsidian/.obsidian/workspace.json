@@ -41,11 +41,10 @@
             "state": {
               "type": "kanban",
               "state": {
-                "file": "To-do Kanban.md",
+                "file": "Bugs & Issues.md",
                 "kanbanViewState": {
                   "kanban-plugin": "board",
                   "list-collapse": [
-                    false,
                     false,
                     false,
                     false
@@ -53,11 +52,23 @@
                 }
               },
               "icon": "lucide-trello",
-              "title": "To-do Kanban"
+              "title": "Bugs & Issues"
+            }
+          },
+          {
+            "id": "0e9871a9ab9b19b1",
+            "type": "leaf",
+            "state": {
+              "type": "release-notes",
+              "state": {
+                "currentVersion": "1.15.1"
+              },
+              "icon": "lucide-book-up",
+              "title": "Release Notes 1.15.1"
             }
           }
         ],
-        "currentTab": 2
+        "currentTab": 3
       }
     ],
     "direction": "vertical"
@@ -225,16 +236,16 @@
       "obsidian-kanban:Create new board": false
     }
   },
-  "active": "04dc0633df2e0095",
+  "active": "0e9871a9ab9b19b1",
   "lastOpenFiles": [
-    "Bugs & Issues.md",
+    "DevNotes/World Map.md",
+    "DevNotes/Unit & Class System (Friendly & Enemy).md",
     "To-do Kanban.md",
+    "Bugs & Issues.md",
     "General Ideas.md",
     "DevNotes/Ability System.md",
     "Pasted image 20260922152706.png",
     "TempNotes for Sys2 Do something with LATER.md",
-    "DevNotes/World Map.md",
-    "DevNotes/Unit & Class System (Friendly & Enemy).md",
     "DevNotes/Turn Based Combat.md",
     "DevNotes/Placement Phase.md",
     "DevNotes/Party System.md",

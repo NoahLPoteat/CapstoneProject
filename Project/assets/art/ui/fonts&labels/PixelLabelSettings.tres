@@ -1,6 +1,6 @@
 [gd_resource type="LabelSettings" load_steps=2 format=3 uid="uid://ccfs6ugu3pcqr"]
 
-[ext_resource type="FontFile" uid="uid://dmlw1g48os6em" path="res://assets/fonts&labels/dogicapixel.ttf" id="1_jblaw"]
+[ext_resource type="FontFile" uid="uid://dmlw1g48os6em" path="res://assets/art/ui/fonts&labels/dogicapixel.ttf" id="1_jblaw"]
 
 [resource]
 font = ExtResource("1_jblaw")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://cu0oyqg0re8sc"]
+[gd_scene load_steps=34 format=3 uid="uid://cu0oyqg0re8sc"]
 
 [ext_resource type="Script" uid="uid://3dlg7spf66qq" path="res://src/gameplay/prototypes/battle_map_controller.gd" id="1_k8cae"]
 [ext_resource type="Script" uid="uid://cobbp30l8tm5a" path="res://src/gameplay/prototypes/map_container.gd" id="2_gj81i"]
@@ -8,9 +8,13 @@
 [ext_resource type="Script" uid="uid://dh7uvryf2q04a" path="res://src/gameplay/units/unit.gd" id="6_qu2af"]
 [ext_resource type="Script" uid="uid://b10cm1o4txpbm" path="res://src/gameplay/resources/ability_res/Strikes/str_single_corners.gd" id="7_063d6"]
 [ext_resource type="Texture2D" uid="uid://c3t8f5k3ggg8w" path="res://assets/art/characters/CharacterDesignAtl.png" id="7_lqv7j"]
+[ext_resource type="Script" uid="uid://mpukm3krw8pq" path="res://src/gameplay/resources/ability_res/ability_base.gd" id="7_wg132"]
 [ext_resource type="PackedScene" uid="uid://dqxytahl0deg1" path="res://src/gameplay/prototypes/particles/bloodParticle.tscn" id="8_chmxg"]
+[ext_resource type="Resource" uid="uid://b8xa4bjkye2e8" path="res://src/gameplay/resources/ability_res/Abilities/aoe_damage_ability_test_2.tres" id="8_expod"]
+[ext_resource type="Resource" uid="uid://bdcrqg8sahwu2" path="res://src/gameplay/resources/ability_res/Abilities/aoe_damage_ability_test_4.tres" id="9_ngspu"]
 [ext_resource type="Texture2D" uid="uid://ddbpxaxdu1ktf" path="res://assets/art/characters/unitDeathAnim.png" id="9_wg132"]
 [ext_resource type="Texture2D" uid="uid://bjti2gkvkyp00" path="res://assets/art/characters/GraveStone.png" id="10_txffx"]
+[ext_resource type="Resource" uid="uid://dg777d5hwab8q" path="res://src/gameplay/resources/ability_res/Abilities/aoe_damage_ability_test_3.tres" id="11_35mnb"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_chmxg"]
 atlas = ExtResource("6_063d6")
@@ -148,6 +152,7 @@ max_health = 125
 mana_recovery = 10
 strike = SubResource("Resource_chmxg")
 chosen_ability = ExtResource("6_lqv7j")
+available_abilities = Array[ExtResource("7_wg132")]([ExtResource("6_lqv7j"), ExtResource("8_expod")])
 
 [node name="Sprite2D" parent="AllyUnitContainer/Sharri" index="0"]
 frame = 0
@@ -159,6 +164,8 @@ is_ally = true
 starting_pos = Vector2i(9, 3)
 movement_left = 4
 strike = SubResource("Resource_063d6")
+chosen_ability = ExtResource("8_expod")
+available_abilities = Array[ExtResource("7_wg132")]([ExtResource("8_expod"), ExtResource("9_ngspu")])
 
 [node name="Sprite2D" parent="AllyUnitContainer/Unit2" index="0"]
 frame = 1
@@ -173,6 +180,8 @@ is_ally = true
 starting_pos = Vector2i(9, 3)
 movement_left = 4
 strike = SubResource("Resource_063d6")
+chosen_ability = ExtResource("6_lqv7j")
+available_abilities = Array[ExtResource("7_wg132")]([ExtResource("6_lqv7j"), ExtResource("11_35mnb")])
 
 [node name="Sprite2D" type="Sprite2D" parent="AllyUnitContainer/Unit3"]
 y_sort_enabled = true

@@ -7,7 +7,7 @@ signal placement_done()
 @onready var mana_label: Label = $ManaLabel
 @onready var active_button: Control = $ActiveUnitButtonCtr
 @onready var attack_indicator: AnimatedSprite2D = $Portrait/AnimatedSprite2D
-@onready var abi_selection: Control = $AbiSelection
+@onready var abi_selection: AbiSlectionContainer = $AbiSelection
 
 @onready var placement_container: VBoxContainer = $PlacementCont
 
@@ -17,6 +17,7 @@ signal placement_done()
 @export var end_cont: PackedScene
 
 var placeables: Array = []
+var need_to_init_abi : bool = false
 
 func update_gui(new_char: UnitBase, battle_phase: BattleScreen.BATTLE_PHASES, turn_state: BattleScreen.TURN_STATES):
 	portrait_gui.texture = new_char.portrait_texture
@@ -64,16 +65,6 @@ func update_placement():
 	var sprite_box: Sprite2D
 	var unit : UnitBase
 	
-	#if len(placeables) == 1:
-		#print("In here")
-		#t = solo_cont.instantiate()
-		#sprite_box = t.get_child(0)
-		#unit = placeables[0]
-		#sprite_box.frame_coords = unit.sprite_node.frame_coords
-		#placement_container.add_child(t)
-		#
-		#update_gui(unit, BattleScreen.BATTLE_PHASES.PLACEMENT, BattleScreen.TURN_STATES.MOVING)
-		#return
 	
 	if len(placeables) == 1:
 		t = solo_cont.instantiate()
@@ -85,6 +76,10 @@ func update_placement():
 	sprite_box.frame_coords = unit.sprite_node.frame_coords
 	placement_container.add_child(t)
 	update_gui(unit, BattleScreen.BATTLE_PHASES.PLACEMENT, BattleScreen.TURN_STATES.MOVING)
+	if need_to_init_abi:
+		abi_selection.update_ability_options(unit.get_abilities_array())
+		need_to_init_abi = false
+	
 	
 	if len(placeables) == 1: return
 	
@@ -105,3 +100,6 @@ func update_placement():
 
 func set_placeables(to: Array):
 	placeables = to
+
+func init_abi_selection():
+	need_to_init_abi = true

@@ -76,9 +76,21 @@
               "icon": "lucide-file",
               "title": "OSRS Art Ref Dump"
             }
+          },
+          {
+            "id": "c2c75b4cc10c47f5",
+            "type": "leaf",
+            "state": {
+              "type": "release-notes",
+              "state": {
+                "currentVersion": "1.15.1"
+              },
+              "icon": "lucide-book-up",
+              "title": "Release Notes 1.15.1"
+            }
           }
         ],
-        "currentTab": 4
+        "currentTab": 5
       }
     ],
     "direction": "vertical"
@@ -256,7 +268,7 @@
       "bases:Create new base": false
     }
   },
-  "active": "b972ba63a9c28173",
+  "active": "c2c75b4cc10c47f5",
   "lastOpenFiles": [
     "Art/Things to Make to Learn.md",
     "Art/OSRS Art Ref Dump.md",

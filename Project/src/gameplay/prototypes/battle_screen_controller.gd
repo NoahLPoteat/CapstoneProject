@@ -196,6 +196,7 @@ func change_battle_state(new_state: BATTLE_PHASES):
 	match new_state:
 		BATTLE_PHASES.PLACEMENT:
 			var arr = retrieve_units()
+			overlay_node.init_abi_selection()
 			overlay_node.set_placeables(arr[0])
 		BATTLE_PHASES.ALLY_TURN:
 			pass
@@ -358,6 +359,7 @@ func _unhandled_input(event: InputEvent) -> void:
 					if event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
 						if battle_map_controller.attempt_place_unit(unit, to_pos_iso):
 							overlay_node.placeables.remove_at(0)
+							overlay_node.init_abi_selection()
 				
 				if event is InputEventMouseMotion:
 					battle_map_controller.hovering_tile(pos)
@@ -514,3 +516,15 @@ func _on_placement_done():
 	
 	init_turn_order()
 	next_turn(true)
+
+
+func _on_abi_selection_abi_selected(choice: AbiSlectionContainer.options):
+	if current_unit == null: return
+	
+	var abi_arr: Array[AbilityBase] = current_unit.get_abilities_array()
+	
+	match choice:
+		AbiSlectionContainer.options.ABI_ONE:
+			current_unit.chosen_ability = abi_arr[0]
+		AbiSlectionContainer.options.ABI_TWO:
+			current_unit.chosen_ability = abi_arr[1]

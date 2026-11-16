@@ -6,6 +6,9 @@ kanban-plugin: board
 
 ## Problems
 
+- [ ] when you have more allies than enemies the enemies go first, you should let the player go first
+- [ ] When attacking it still shows allied units, \#fixdat
+- [ ] potentially update ability turn_state_process to not highlight units that arent effectables
 - [ ] On the world map, if you spam click the map nodes the transition will reset itself early and you can stay prevent the transition
 - [ ] Attack indicator isnt lined up for every unit, consider letting them store an (eye position) where the anim will sit (potentially also just keep it top right)
 - [ ] If theres gaps in the map, movement and attacks highlight over it. use the astar2d and the unit position to calculate which of the tiles should be accessible and have a flag on highlight_tiles for over_gaps = false. And if false we skip over tiles inaccessible from the unit, else we do current method. (this could also mean a complete redo of our movement radius solving algorithm.)
@@ -14,9 +17,6 @@ kanban-plugin: board
 
 ## In Progress
 
-- [ ] When attacking it still shows allied units, \#fixdat
-- [ ] when you have more allies than enemies the enemies go first, you should let the player go first
-- [ ] potentially update ability turn_state_process to not highlight units that arent effectables
 
 
 ## Fixed
