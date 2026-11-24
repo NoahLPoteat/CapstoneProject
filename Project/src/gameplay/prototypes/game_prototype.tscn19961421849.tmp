@@ -1,0 +1,847 @@
+[gd_scene load_steps=69 format=3 uid="uid://vyvnt6xkcn2d"]
+
+[ext_resource type="Script" uid="uid://dsqrh11elmfx5" path="res://src/gameplay/prototypes/game.gd" id="1_4dq4k"]
+[ext_resource type="Script" uid="uid://cyfqqttarqlg6" path="res://src/gameplay/prototypes/battle_screen_controller.gd" id="2_wyd14"]
+[ext_resource type="PackedScene" uid="uid://cu0oyqg0re8sc" path="res://src/gameplay/prototypes/battle_map_controller.tscn" id="2_yhlpg"]
+[ext_resource type="Texture2D" uid="uid://cxh3p0hntn5kn" path="res://assets/art/ui/world_map_gui/WorldMap_proto_inner.png" id="3_e6p4r"]
+[ext_resource type="Script" uid="uid://b67ca813sx6pc" path="res://src/gameplay/prototypes/world_map_controller.gd" id="3_qwj7d"]
+[ext_resource type="Texture2D" uid="uid://b53aq5ur204uh" path="res://assets/art/ui/world_map_gui/WorldMap_proto_frame.png" id="4_r4dsk"]
+[ext_resource type="Script" uid="uid://bhu0m2jj72ojx" path="res://src/gameplay/prototypes/battle_gui.gd" id="4_r80b6"]
+[ext_resource type="PackedScene" uid="uid://beyr2ejxm1bse" path="res://src/gameplay/prototypes/placement_phase/placement_solo.tscn" id="5_ckvyo"]
+[ext_resource type="Texture2D" uid="uid://clwnq2p75x744" path="res://assets/art/ui/battle_map_gui/GUI Design Prototype BG.png" id="5_ooegf"]
+[ext_resource type="Script" uid="uid://0etskjq4ec44" path="res://src/gameplay/prototypes/map_node_controller.gd" id="5_qwj7d"]
+[ext_resource type="LabelSettings" uid="uid://ccfs6ugu3pcqr" path="res://assets/art/ui/fonts&labels/PixelLabelSettings.tres" id="6_dmcc4"]
+[ext_resource type="Texture2D" uid="uid://d1c1e2djcx32u" path="res://assets/art/ui/battle_map_gui/attackIndicatorAnim.png" id="6_h14kp"]
+[ext_resource type="PackedScene" uid="uid://dldac0uastitt" path="res://src/gameplay/prototypes/placement_phase/placement_start.tscn" id="6_vh825"]
+[ext_resource type="PackedScene" uid="uid://b60srafrpvp6p" path="res://src/gameplay/prototypes/placement_phase/placement_mid.tscn" id="7_3moma"]
+[ext_resource type="Script" uid="uid://djgiplfhdvyh3" path="res://src/gameplay/prototypes/movement_left_dis.gd" id="7_dmcc4"]
+[ext_resource type="Script" uid="uid://csyh78wqgu78n" path="res://src/gameplay/prototypes/active_unit_button_ctr.gd" id="7_yrn74"]
+[ext_resource type="Texture2D" uid="uid://l17dyuel7t7v" path="res://assets/art/ui/battle_map_gui/GUIMovementSelectNodeDown.png" id="8_00fvs"]
+[ext_resource type="PackedScene" uid="uid://6wwwv5a33qky" path="res://src/gameplay/prototypes/placement_phase/placement_end.tscn" id="8_d71po"]
+[ext_resource type="Script" uid="uid://dwub30v4f55mc" path="res://src/gameplay/prototypes/abi_selection.gd" id="9_d71po"]
+[ext_resource type="Texture2D" uid="uid://cvjvfn3xo0jbn" path="res://assets/art/ui/battle_map_gui/GUIMovementLeftNodeDown.png" id="9_igv4w"]
+[ext_resource type="Texture2D" uid="uid://rtw8wietsedn" path="res://assets/art/ui/battle_map_gui/GUIMovementSelectNodeUp.png" id="9_p7w2p"]
+[ext_resource type="Shader" uid="uid://bvp114koaqxce" path="res://shaders/dither_trans.gdshader" id="10_3ykrj"]
+[ext_resource type="Texture2D" uid="uid://cc1b7xxubswau" path="res://assets/art/ui/battle_map_gui/GUIStrikeSelectNodeDown.png" id="10_iufsc"]
+[ext_resource type="Texture2D" uid="uid://bhtw1dj5g3jjy" path="res://assets/art/ui/battle_map_gui/GUIMovementLeftNodeUp.png" id="10_u71m5"]
+[ext_resource type="Script" uid="uid://dlakwuuc8rn70" path="res://src/gameplay/prototypes/transition_node.gd" id="10_yhlpg"]
+[ext_resource type="Texture2D" uid="uid://ch55vtkgv4jly" path="res://assets/art/ui/battle_map_gui/GUIStrikeSelectNodeUp.png" id="11_kc0fq"]
+[ext_resource type="Texture2D" uid="uid://b0pgvv2da6nqn" path="res://assets/art/ui/battle_map_gui/GUIAbilitySelectNodeDown.png" id="12_h14kp"]
+[ext_resource type="Texture2D" uid="uid://v4y6tgjim53t" path="res://assets/art/ui/battle_map_gui/BattleGUIFrame_abi_selection_button_up.png" id="13_4b6cf"]
+[ext_resource type="Texture2D" uid="uid://cnpt5ovr5lfqd" path="res://assets/art/ui/battle_map_gui/GUIAbilitySelectNodeUp.png" id="13_bhsri"]
+[ext_resource type="Texture2D" uid="uid://dlbratv5iy7ut" path="res://assets/art/ui/battle_map_gui/BattleGUIFrame_abi_selection_button_down.png" id="14_xx34k"]
+[ext_resource type="Texture2D" uid="uid://622v3iyoy0yj" path="res://assets/art/ui/battle_map_gui/GUIEndTurnButtonDown.png" id="17_iufsc"]
+[ext_resource type="Script" uid="uid://b0yty6v8jxua6" path="res://src/gameplay/prototypes/end_turn.gd" id="17_kc0fq"]
+[ext_resource type="Texture2D" uid="uid://co51310qlvewy" path="res://assets/art/ui/battle_map_gui/GUIEndTurnButtonUp.png" id="18_kc0fq"]
+[ext_resource type="PackedScene" uid="uid://bvome6kasaqpr" path="res://src/gameplay/world_maps/map_node.tscn" id="25_kc0fq"]
+[ext_resource type="Texture2D" uid="uid://cswu1gn0sy1ja" path="res://assets/art/ui/battle_map_gui/GUIAbiSelectBG.png" id="25_vh825"]
+[ext_resource type="FontFile" uid="uid://cu2g5pjgbo3d0" path="res://assets/art/ui/fonts&labels/pixel.ttf" id="26_3moma"]
+[ext_resource type="PackedScene" uid="uid://def0gbs0hdjko" path="res://src/gameplay/battle_maps/testmap.tscn" id="26_h14kp"]
+[ext_resource type="PackedScene" uid="uid://b5dhjfy7248iw" path="res://src/gameplay/battle_maps/test_map2.tscn" id="27_bhsri"]
+[ext_resource type="PackedScene" uid="uid://dn7vyqasmstml" path="res://src/gameplay/battle_maps/test_map3.tscn" id="28_nkpx2"]
+[ext_resource type="Texture2D" uid="uid://c2vj080bdahqk" path="res://assets/art/ui/main_menu/MainMenuPrototype_bg_static.png" id="38_crujp"]
+[ext_resource type="Script" uid="uid://glo57owjjvir" path="res://src/gameplay/prototypes/title_screen.gd" id="38_nc4bc"]
+[ext_resource type="Texture2D" uid="uid://ch7jq5bvor7gj" path="res://assets/art/ui/main_menu/MainMenuPrototype_mountain_static.png" id="39_nc4bc"]
+[ext_resource type="Texture2D" uid="uid://bs4qrhb5dgwfa" path="res://assets/art/ui/main_menu/MainMenuPrototype_title_static.png" id="40_14ahm"]
+[ext_resource type="Texture2D" uid="uid://biod3mwqdlytg" path="res://assets/art/ui/main_menu/MainMenuPrototype_options_temp.png" id="41_50fdx"]
+[ext_resource type="Texture2D" uid="uid://d1jaeeb1n0j4e" path="res://assets/art/ui/main_menu/MainMenuPrototype_border_static.png" id="42_fgkta"]
+[ext_resource type="Texture2D" uid="uid://b7iyucgcgl4pm" path="res://assets/art/ui/main_menu/MainMenuPrototype_back_button.png" id="43_14ahm"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_d71po"]
+line_spacing = -3.0
+font = ExtResource("26_3moma")
+font_size = 5
+font_color = Color(0.37254903, 0.78039217, 0.3647059, 1)
+shadow_size = 0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3moma"]
+size = Vector2(16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bhsri"]
+atlas = ExtResource("6_h14kp")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nkpx2"]
+atlas = ExtResource("6_h14kp")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sv2x8"]
+atlas = ExtResource("6_h14kp")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xi4e4"]
+atlas = ExtResource("6_h14kp")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tyefx"]
+atlas = ExtResource("6_h14kp")
+region = Rect2(64, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ckvyo"]
+atlas = ExtResource("6_h14kp")
+region = Rect2(80, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vh825"]
+atlas = ExtResource("6_h14kp")
+region = Rect2(96, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3moma"]
+atlas = ExtResource("6_h14kp")
+region = Rect2(112, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d71po"]
+atlas = ExtResource("6_h14kp")
+region = Rect2(128, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rxidj"]
+atlas = ExtResource("6_h14kp")
+region = Rect2(144, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_4b6cf"]
+animations = [{
+"frames": [],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bhsri")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nkpx2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sv2x8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xi4e4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tyefx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ckvyo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vh825")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3moma")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3moma")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3moma")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3moma")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3moma")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3moma")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3moma")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3moma")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3moma")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d71po")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rxidj")
+}],
+"loop": true,
+"name": &"new_animation",
+"speed": 10.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_00fvs"]
+size = Vector2(17, 14)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_h14kp"]
+size = Vector2(59, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_14ahm"]
+size = Vector2(31, 10)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_50fdx"]
+size = Vector2(36, 10)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fgkta"]
+size = Vector2(28, 10)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fdegs"]
+size = Vector2(6, 7)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_3ykrj"]
+shader = ExtResource("10_3ykrj")
+shader_parameter/intensity = 1.0
+
+[sub_resource type="Gradient" id="Gradient_yhlpg"]
+offsets = PackedFloat32Array(0)
+colors = PackedColorArray(0.05882353, 0.019607844, 0.1764706, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_wyd14"]
+gradient = SubResource("Gradient_yhlpg")
+width = 320
+height = 180
+
+[node name="root" type="Node"]
+
+[node name="Game" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+script = ExtResource("1_4dq4k")
+
+[node name="BattleScreenController" type="Control" parent="Game"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+script = ExtResource("2_wyd14")
+
+[node name="TrueBG" type="ColorRect" parent="Game/BattleScreenController"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+color = Color(0.05882353, 0.019607844, 0.1764706, 1)
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="Game/BattleScreenController"]
+clip_contents = true
+custom_minimum_size = Vector2(228, 158)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.25300002
+anchor_top = 0.061000004
+anchor_right = 0.966
+anchor_bottom = 0.93900007
+offset_left = 0.039993286
+offset_top = 0.019999504
+offset_right = -0.11999512
+offset_bottom = -0.020019531
+
+[node name="SubViewport" type="SubViewport" parent="Game/BattleScreenController/SubViewportContainer"]
+transparent_bg = true
+handle_input_locally = false
+canvas_item_default_texture_filter = 0
+size = Vector2i(228, 158)
+render_target_update_mode = 0
+
+[node name="BattleMapController" parent="Game/BattleScreenController/SubViewportContainer/SubViewport" instance=ExtResource("2_yhlpg")]
+
+[node name="BattleGUI" type="Control" parent="Game/BattleScreenController"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+script = ExtResource("4_r80b6")
+solo_cont = ExtResource("5_ckvyo")
+start_cont = ExtResource("6_vh825")
+mid_cont = ExtResource("7_3moma")
+end_cont = ExtResource("8_d71po")
+
+[node name="AbiSelection" type="Control" parent="Game/BattleScreenController/BattleGUI"]
+custom_minimum_size = Vector2(94, 56)
+anchors_preset = 0
+offset_left = 107.0
+offset_top = 20.0
+offset_right = 201.0
+offset_bottom = 76.0
+script = ExtResource("9_d71po")
+
+[node name="AbiSelectBG" type="TextureRect" parent="Game/BattleScreenController/BattleGUI/AbiSelection"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("25_vh825")
+
+[node name="AbiNameLabel" type="Label" parent="Game/BattleScreenController/BattleGUI/AbiSelection"]
+layout_mode = 0
+offset_left = 6.0
+offset_top = 24.0
+offset_right = 92.0
+offset_bottom = 31.0
+text = "Ability Name..."
+label_settings = ExtResource("6_dmcc4")
+clip_text = true
+
+[node name="AbiDescLabel" type="Label" parent="Game/BattleScreenController/BattleGUI/AbiSelection"]
+layout_mode = 0
+offset_left = 7.0
+offset_top = 29.0
+offset_right = 92.0
+offset_bottom = 54.0
+text = "Ability Description ...
+You could fit so many words in here"
+label_settings = SubResource("LabelSettings_d71po")
+autowrap_mode = 2
+
+[node name="AbiButtonCont1" type="Control" parent="Game/BattleScreenController/BattleGUI/AbiSelection"]
+anchors_preset = 0
+offset_left = 6.0
+offset_top = 5.0
+offset_right = 22.0
+offset_bottom = 21.0
+
+[node name="BgOff" type="TextureRect" parent="Game/BattleScreenController/BattleGUI/AbiSelection/AbiButtonCont1"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("13_4b6cf")
+
+[node name="BgOn" type="TextureRect" parent="Game/BattleScreenController/BattleGUI/AbiSelection/AbiButtonCont1"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("14_xx34k")
+
+[node name="AbiIcon" type="TextureRect" parent="Game/BattleScreenController/BattleGUI/AbiSelection/AbiButtonCont1"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MouseDetect" type="Area2D" parent="Game/BattleScreenController/BattleGUI/AbiSelection/AbiButtonCont1"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Game/BattleScreenController/BattleGUI/AbiSelection/AbiButtonCont1/MouseDetect"]
+position = Vector2(8, 8)
+shape = SubResource("RectangleShape2D_3moma")
+
+[node name="AbiButtonCont2" type="Control" parent="Game/BattleScreenController/BattleGUI/AbiSelection"]
+anchors_preset = 0
+offset_left = 25.0
+offset_top = 5.0
+offset_right = 41.0
+offset_bottom = 21.0
+
+[node name="BgOff" type="TextureRect" parent="Game/BattleScreenController/BattleGUI/AbiSelection/AbiButtonCont2"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("13_4b6cf")
+
+[node name="BgOn" type="TextureRect" parent="Game/BattleScreenController/BattleGUI/AbiSelection/AbiButtonCont2"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("14_xx34k")
+
+[node name="AbiIcon" type="TextureRect" parent="Game/BattleScreenController/BattleGUI/AbiSelection/AbiButtonCont2"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MouseDetect" type="Area2D" parent="Game/BattleScreenController/BattleGUI/AbiSelection/AbiButtonCont2"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Game/BattleScreenController/BattleGUI/AbiSelection/AbiButtonCont2/MouseDetect"]
+position = Vector2(8, 8)
+shape = SubResource("RectangleShape2D_3moma")
+
+[node name="BattleOverlayBG" type="TextureRect" parent="Game/BattleScreenController/BattleGUI"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("5_ooegf")
+
+[node name="Portrait" type="TextureRect" parent="Game/BattleScreenController/BattleGUI"]
+layout_mode = 0
+offset_left = 11.0
+offset_top = 11.0
+offset_right = 70.0
+offset_bottom = 70.0
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Game/BattleScreenController/BattleGUI/Portrait"]
+position = Vector2(51, 8)
+sprite_frames = SubResource("SpriteFrames_4b6cf")
+animation = &"new_animation"
+autoplay = "new_animation"
+
+[node name="HealthLabel" type="Label" parent="Game/BattleScreenController/BattleGUI"]
+layout_mode = 0
+offset_left = 22.0
+offset_top = 77.0
+offset_right = 70.0
+offset_bottom = 87.0
+mouse_filter = 1
+text = "000/000"
+label_settings = ExtResource("6_dmcc4")
+vertical_alignment = 1
+clip_text = true
+
+[node name="ManaLabel" type="Label" parent="Game/BattleScreenController/BattleGUI"]
+layout_mode = 0
+offset_left = 22.0
+offset_top = 94.0
+offset_right = 70.0
+offset_bottom = 104.0
+mouse_filter = 1
+text = "000/000"
+label_settings = ExtResource("6_dmcc4")
+vertical_alignment = 1
+
+[node name="ActiveUnitButtonCtr" type="Control" parent="Game/BattleScreenController/BattleGUI"]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+mouse_filter = 1
+script = ExtResource("7_yrn74")
+
+[node name="MoveButtonDown" type="TextureRect" parent="Game/BattleScreenController/BattleGUI/ActiveUnitButtonCtr"]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 110.0
+offset_right = 27.0
+offset_bottom = 124.0
+texture = ExtResource("8_00fvs")
+
+[node name="MoveButtonUp" type="TextureRect" parent="Game/BattleScreenController/BattleGUI/ActiveUnitButtonCtr"]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 110.0
+offset_right = 27.0
+offset_bottom = 124.0
+texture = ExtResource("9_p7w2p")
+
+[node name="MovButDetec" type="Area2D" parent="Game/BattleScreenController/BattleGUI/ActiveUnitButtonCtr"]
+position = Vector2(10, 110)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Game/BattleScreenController/BattleGUI/ActiveUnitButtonCtr/MovButDetec"]
+position = Vector2(8.5, 7)
+shape = SubResource("RectangleShape2D_00fvs")
+
+[node name="StrikeButtonDown" type="TextureRect" parent="Game/BattleScreenController/BattleGUI/ActiveUnitButtonCtr"]
+layout_mode = 0
+offset_left = 32.0
+offset_top = 110.0
+offset_right = 49.0
+offset_bottom = 124.0
+texture = ExtResource("10_iufsc")
+
+[node name="StrikeButtonUp" type="TextureRect" parent="Game/BattleScreenController/BattleGUI/ActiveUnitButtonCtr"]
+layout_mode = 0
+offset_left = 32.0
+offset_top = 110.0
+offset_right = 49.0
+offset_bottom = 124.0
+texture = ExtResource("11_kc0fq")
+
+[node name="StrButDetect" type="Area2D" parent="Game/BattleScreenController/BattleGUI/ActiveUnitButtonCtr"]
+position = Vector2(32, 110)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Game/BattleScreenController/BattleGUI/ActiveUnitButtonCtr/StrButDetect"]
+position = Vector2(8.5, 7)
+shape = SubResource("RectangleShape2D_00fvs")
+
+[node name="AbilityButtonDown" type="TextureRect" parent="Game/BattleScreenController/BattleGUI/ActiveUnitButtonCtr"]
+layout_mode = 0
+offset_left = 54.0
+offset_top = 110.0
+offset_right = 71.0
+offset_bottom = 124.0
+texture = ExtResource("12_h14kp")
+
+[node name="AbilityButtonUp" type="TextureRect" parent="Game/BattleScreenController/BattleGUI/ActiveUnitButtonCtr"]
+layout_mode = 0
+offset_left = 54.0
+offset_top = 110.0
+offset_right = 71.0
+offset_bottom = 124.0
+texture = ExtResource("13_bhsri")
+
+[node name="AbiButDetec" type="Area2D" parent="Game/BattleScreenController/BattleGUI/ActiveUnitButtonCtr"]
+position = Vector2(54, 110)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Game/BattleScreenController/BattleGUI/ActiveUnitButtonCtr/AbiButDetec"]
+position = Vector2(8.5, 7)
+shape = SubResource("RectangleShape2D_00fvs")
+
+[node name="MovementLeftDis" type="Control" parent="Game/BattleScreenController/BattleGUI"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 10.0
+offset_top = 131.0
+offset_right = -249.0
+offset_bottom = -33.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+script = ExtResource("7_dmcc4")
+
+[node name="MovePanelDown1" type="TextureRect" parent="Game/BattleScreenController/BattleGUI/MovementLeftDis"]
+layout_mode = 0
+offset_right = 16.0
+offset_bottom = 16.0
+texture = ExtResource("9_igv4w")
+expand_mode = 1
+
+[node name="MovePanelUp1" type="TextureRect" parent="Game/BattleScreenController/BattleGUI/MovementLeftDis"]
+layout_mode = 0
+offset_right = 16.0
+offset_bottom = 16.0
+texture = ExtResource("10_u71m5")
+expand_mode = 1
+
+[node name="MovePanelDown2" type="TextureRect" parent="Game/BattleScreenController/BattleGUI/MovementLeftDis"]
+layout_mode = 0
+offset_left = 23.0
+offset_right = 39.0
+offset_bottom = 16.0
+texture = ExtResource("9_igv4w")
+expand_mode = 1
+
+[node name="MovePanelUp2" type="TextureRect" parent="Game/BattleScreenController/BattleGUI/MovementLeftDis"]
+layout_mode = 0
+offset_left = 23.0
+offset_right = 39.0
+offset_bottom = 16.0
+texture = ExtResource("10_u71m5")
+expand_mode = 1
+
+[node name="MovePanelDown3" type="TextureRect" parent="Game/BattleScreenController/BattleGUI/MovementLeftDis"]
+layout_mode = 0
+offset_left = 45.0
+offset_right = 61.0
+offset_bottom = 16.0
+texture = ExtResource("9_igv4w")
+expand_mode = 1
+
+[node name="MovePanelUp3" type="TextureRect" parent="Game/BattleScreenController/BattleGUI/MovementLeftDis"]
+layout_mode = 0
+offset_left = 45.0
+offset_right = 61.0
+offset_bottom = 16.0
+texture = ExtResource("10_u71m5")
+expand_mode = 1
+
+[node name="EndTurn" type="Control" parent="Game/BattleScreenController/BattleGUI"]
+anchors_preset = 0
+offset_left = 10.0
+offset_top = 152.0
+offset_right = 71.0
+offset_bottom = 170.0
+script = ExtResource("17_kc0fq")
+
+[node name="EndDown" type="TextureRect" parent="Game/BattleScreenController/BattleGUI/EndTurn"]
+layout_mode = 0
+offset_right = 61.0
+offset_bottom = 18.0
+texture = ExtResource("17_iufsc")
+
+[node name="EndUp" type="TextureRect" parent="Game/BattleScreenController/BattleGUI/EndTurn"]
+layout_mode = 0
+offset_right = 61.0
+offset_bottom = 18.0
+texture = ExtResource("18_kc0fq")
+
+[node name="Area2D" type="Area2D" parent="Game/BattleScreenController/BattleGUI/EndTurn"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Game/BattleScreenController/BattleGUI/EndTurn/Area2D"]
+position = Vector2(30.5, 9)
+shape = SubResource("RectangleShape2D_h14kp")
+
+[node name="PlacementCont" type="VBoxContainer" parent="Game/BattleScreenController/BattleGUI"]
+clip_contents = true
+layout_mode = 0
+offset_left = 83.0
+offset_top = 13.0
+offset_right = 105.0
+offset_bottom = 167.0
+theme_override_constants/separation = 0
+
+[node name="WorldMapController" type="Control" parent="Game"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+script = ExtResource("3_qwj7d")
+
+[node name="MapBg" type="TextureRect" parent="Game/WorldMapController"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 11.0
+offset_top = 11.0
+offset_right = -11.0
+offset_bottom = -11.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("3_e6p4r")
+
+[node name="Border" type="TextureRect" parent="Game/WorldMapController"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("4_r4dsk")
+
+[node name="MapNodeController" type="Node2D" parent="Game/WorldMapController" node_paths=PackedStringArray("starting_map")]
+script = ExtResource("5_qwj7d")
+starting_map = NodePath("TestMapNode")
+
+[node name="TestMapNode" parent="Game/WorldMapController/MapNodeController" node_paths=PackedStringArray("post_maps") instance=ExtResource("25_kc0fq")]
+position = Vector2(127, 51)
+linked_battle_map = ExtResource("26_h14kp")
+post_maps = [NodePath("../TestMapNode2")]
+
+[node name="TestMapNode2" parent="Game/WorldMapController/MapNodeController" node_paths=PackedStringArray("post_maps") instance=ExtResource("25_kc0fq")]
+position = Vector2(132, 82)
+linked_battle_map = ExtResource("27_bhsri")
+post_maps = [NodePath("../MapNodeT2")]
+
+[node name="MapNodeT2" parent="Game/WorldMapController/MapNodeController" instance=ExtResource("25_kc0fq")]
+position = Vector2(111, 97)
+linked_battle_map = ExtResource("28_nkpx2")
+
+[node name="TitleScreen" type="Control" parent="Game"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+script = ExtResource("38_nc4bc")
+
+[node name="BG" type="TextureRect" parent="Game/TitleScreen"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("38_crujp")
+
+[node name="FG" type="TextureRect" parent="Game/TitleScreen"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("39_nc4bc")
+
+[node name="TitleCard" type="TextureRect" parent="Game/TitleScreen"]
+layout_mode = 1
+offset_left = 17.0
+offset_top = 15.0
+offset_right = 171.0
+offset_bottom = 70.0
+texture = ExtResource("40_14ahm")
+
+[node name="MainMenuContainter" type="Control" parent="Game/TitleScreen"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MenuOptions" type="Control" parent="Game/TitleScreen/MainMenuContainter"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TempOptions" type="TextureRect" parent="Game/TitleScreen/MainMenuContainter/MenuOptions"]
+texture_filter = 1
+layout_mode = 0
+offset_left = 38.0
+offset_top = 71.0
+offset_right = 78.0
+offset_bottom = 111.0
+texture = ExtResource("41_50fdx")
+stretch_mode = 2
+
+[node name="StartButtonDetec" type="Area2D" parent="Game/TitleScreen/MainMenuContainter/MenuOptions"]
+position = Vector2(46, 75)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Game/TitleScreen/MainMenuContainter/MenuOptions/StartButtonDetec"]
+position = Vector2(5.5, 0)
+shape = SubResource("RectangleShape2D_14ahm")
+
+[node name="OptionButtonDetec" type="Area2D" parent="Game/TitleScreen/MainMenuContainter/MenuOptions"]
+position = Vector2(54, 87)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Game/TitleScreen/MainMenuContainter/MenuOptions/OptionButtonDetec"]
+position = Vector2(0, -1)
+shape = SubResource("RectangleShape2D_50fdx")
+
+[node name="ExitButtonDetec" type="Area2D" parent="Game/TitleScreen/MainMenuContainter/MenuOptions"]
+position = Vector2(54, 99)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Game/TitleScreen/MainMenuContainter/MenuOptions/ExitButtonDetec"]
+position = Vector2(-4, -2)
+shape = SubResource("RectangleShape2D_fgkta")
+
+[node name="CreditsButtonDetec" type="Area2D" parent="Game/TitleScreen/MainMenuContainter/MenuOptions"]
+position = Vector2(256, 162)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Game/TitleScreen/MainMenuContainter/MenuOptions/CreditsButtonDetec"]
+shape = SubResource("RectangleShape2D_14ahm")
+
+[node name="OptionsContainer" type="Control" parent="Game/TitleScreen"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="BackButton" type="TextureRect" parent="Game/TitleScreen/OptionsContainer"]
+layout_mode = 0
+offset_left = 28.0
+offset_top = 70.0
+offset_right = 34.0
+offset_bottom = 77.0
+texture = ExtResource("43_14ahm")
+stretch_mode = 2
+
+[node name="BackToMenuButton" type="Area2D" parent="Game/TitleScreen/OptionsContainer"]
+position = Vector2(28, 70)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Game/TitleScreen/OptionsContainer/BackToMenuButton"]
+position = Vector2(3, 3.5)
+shape = SubResource("RectangleShape2D_fdegs")
+
+[node name="CreditsContainer" type="Control" parent="Game/TitleScreen"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="BackButton" type="TextureRect" parent="Game/TitleScreen/CreditsContainer"]
+layout_mode = 0
+offset_left = 28.0
+offset_top = 70.0
+offset_right = 34.0
+offset_bottom = 77.0
+texture = ExtResource("43_14ahm")
+stretch_mode = 2
+
+[node name="BackToMenuButton" type="Area2D" parent="Game/TitleScreen/CreditsContainer"]
+position = Vector2(28, 70)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Game/TitleScreen/CreditsContainer/BackToMenuButton"]
+position = Vector2(3, 3.5)
+shape = SubResource("RectangleShape2D_fdegs")
+
+[node name="Border" type="TextureRect" parent="Game/TitleScreen"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("42_fgkta")
+
+[node name="TransitionNode" type="Control" parent="Game"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+script = ExtResource("10_yhlpg")
+trans_time = 1.5
+ease_type = 2
+trans_type = 5
+
+[node name="TextureRect" type="TextureRect" parent="Game/TransitionNode"]
+material = SubResource("ShaderMaterial_3ykrj")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture2D_wyd14")
+
+[connection signal="game_over" from="Game/BattleScreenController" to="Game" method="_on_battle_screen_controller_game_over"]
+[connection signal="map_ready" from="Game/BattleScreenController/SubViewportContainer/SubViewport/BattleMapController" to="Game/BattleScreenController" method="_on_battle_map_controller_map_ready"]
+[connection signal="update_gui" from="Game/BattleScreenController/SubViewportContainer/SubViewport/BattleMapController" to="Game/BattleScreenController" method="update_gui"]
+[connection signal="placement_done" from="Game/BattleScreenController/BattleGUI" to="Game/BattleScreenController" method="_on_placement_done"]
+[connection signal="abi_selected" from="Game/BattleScreenController/BattleGUI/AbiSelection" to="Game/BattleScreenController" method="_on_abi_selection_abi_selected"]
+[connection signal="input_event" from="Game/BattleScreenController/BattleGUI/AbiSelection/AbiButtonCont1/MouseDetect" to="Game/BattleScreenController/BattleGUI/AbiSelection" method="_on_mouse_detect_input_event"]
+[connection signal="input_event" from="Game/BattleScreenController/BattleGUI/AbiSelection/AbiButtonCont2/MouseDetect" to="Game/BattleScreenController/BattleGUI/AbiSelection" method="_on_mouse_detect_input_event_abi_2"]
+[connection signal="button_pressed" from="Game/BattleScreenController/BattleGUI/ActiveUnitButtonCtr" to="Game/BattleScreenController" method="_on_active_unit_button_ctr_button_pressed"]
+[connection signal="input_event" from="Game/BattleScreenController/BattleGUI/ActiveUnitButtonCtr/MovButDetec" to="Game/BattleScreenController/BattleGUI/ActiveUnitButtonCtr" method="_on_mov_but_detec_input_event"]
+[connection signal="input_event" from="Game/BattleScreenController/BattleGUI/ActiveUnitButtonCtr/StrButDetect" to="Game/BattleScreenController/BattleGUI/ActiveUnitButtonCtr" method="_on_str_but_detect_input_event"]
+[connection signal="input_event" from="Game/BattleScreenController/BattleGUI/ActiveUnitButtonCtr/AbiButDetec" to="Game/BattleScreenController/BattleGUI/ActiveUnitButtonCtr" method="_on_abi_but_detec_input_event"]
+[connection signal="end_turn_button_pressed" from="Game/BattleScreenController/BattleGUI/EndTurn" to="Game/BattleScreenController" method="_on_end_turn_end_turn_button_pressed"]
+[connection signal="input_event" from="Game/BattleScreenController/BattleGUI/EndTurn/Area2D" to="Game/BattleScreenController/BattleGUI/EndTurn" method="_on_area_2d_input_event"]
+[connection signal="mouse_exited" from="Game/BattleScreenController/BattleGUI/EndTurn/Area2D" to="Game/BattleScreenController/BattleGUI/EndTurn" method="_on_area_2d_mouse_exited"]
+[connection signal="map_node_clicked" from="Game/WorldMapController" to="Game" method="_on_world_map_controller_map_node_clicked"]
+[connection signal="node_clicked" from="Game/WorldMapController/MapNodeController" to="Game/WorldMapController" method="_on_map_node_controller_node_clicked"]
+[connection signal="input_event" from="Game/TitleScreen/MainMenuContainter/MenuOptions/StartButtonDetec" to="Game/TitleScreen" method="_on_start_button_detec_input_event"]
+[connection signal="input_event" from="Game/TitleScreen/MainMenuContainter/MenuOptions/OptionButtonDetec" to="Game/TitleScreen" method="_on_option_button_detec_input_event"]
+[connection signal="input_event" from="Game/TitleScreen/MainMenuContainter/MenuOptions/ExitButtonDetec" to="Game/TitleScreen" method="_on_exit_button_detec_input_event"]
+[connection signal="input_event" from="Game/TitleScreen/MainMenuContainter/MenuOptions/CreditsButtonDetec" to="Game/TitleScreen" method="_on_credits_button_detec_input_event"]
+[connection signal="input_event" from="Game/TitleScreen/OptionsContainer/BackToMenuButton" to="Game/TitleScreen" method="_on_back_to_menu_button_input_event"]

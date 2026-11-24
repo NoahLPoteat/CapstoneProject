@@ -1,4 +1,4 @@
-[gd_scene load_steps=58 format=3 uid="uid://vyvnt6xkcn2d"]
+[gd_scene load_steps=74 format=3 uid="uid://vyvnt6xkcn2d"]
 
 [ext_resource type="Script" uid="uid://dsqrh11elmfx5" path="res://src/gameplay/prototypes/game.gd" id="1_4dq4k"]
 [ext_resource type="Script" uid="uid://cyfqqttarqlg6" path="res://src/gameplay/prototypes/battle_screen_controller.gd" id="2_wyd14"]
@@ -39,6 +39,18 @@
 [ext_resource type="PackedScene" uid="uid://def0gbs0hdjko" path="res://src/gameplay/battle_maps/testmap.tscn" id="26_h14kp"]
 [ext_resource type="PackedScene" uid="uid://b5dhjfy7248iw" path="res://src/gameplay/battle_maps/test_map2.tscn" id="27_bhsri"]
 [ext_resource type="PackedScene" uid="uid://dn7vyqasmstml" path="res://src/gameplay/battle_maps/test_map3.tscn" id="28_nkpx2"]
+[ext_resource type="Texture2D" uid="uid://c2vj080bdahqk" path="res://assets/art/ui/main_menu/MainMenuPrototype_bg_static.png" id="38_crujp"]
+[ext_resource type="Script" uid="uid://glo57owjjvir" path="res://src/gameplay/prototypes/title_screen.gd" id="38_nc4bc"]
+[ext_resource type="PackedScene" uid="uid://d0sg2upwfn1u6" path="res://src/gameplay/battle_maps/test_map4.tscn" id="38_wj6xv"]
+[ext_resource type="PackedScene" uid="uid://b2oncykonx4jj" path="res://src/gameplay/battle_maps/test_map5.tscn" id="39_ku33t"]
+[ext_resource type="Texture2D" uid="uid://ch7jq5bvor7gj" path="res://assets/art/ui/main_menu/MainMenuPrototype_mountain_static.png" id="39_nc4bc"]
+[ext_resource type="PackedScene" uid="uid://bwog2wthfwvbx" path="res://src/gameplay/battle_maps/test_map6.tscn" id="40_4st3s"]
+[ext_resource type="Texture2D" uid="uid://bs4qrhb5dgwfa" path="res://assets/art/ui/main_menu/MainMenuPrototype_title_static.png" id="40_14ahm"]
+[ext_resource type="Texture2D" uid="uid://biod3mwqdlytg" path="res://assets/art/ui/main_menu/MainMenuPrototype_options_temp.png" id="41_50fdx"]
+[ext_resource type="PackedScene" uid="uid://dn268d75ufro7" path="res://src/gameplay/battle_maps/test_map7.tscn" id="41_tao0g"]
+[ext_resource type="Texture2D" uid="uid://d1jaeeb1n0j4e" path="res://assets/art/ui/main_menu/MainMenuPrototype_border_static.png" id="42_fgkta"]
+[ext_resource type="Texture2D" uid="uid://b7iyucgcgl4pm" path="res://assets/art/ui/main_menu/MainMenuPrototype_back_button.png" id="43_14ahm"]
+[ext_resource type="Script" uid="uid://r8nxqd8w40hh" path="res://src/gameplay/autoloads/audio_handler.gd" id="47_50fdx"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_d71po"]
 line_spacing = -3.0
@@ -163,9 +175,21 @@ size = Vector2(17, 14)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_h14kp"]
 size = Vector2(59, 16)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_14ahm"]
+size = Vector2(31, 10)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_50fdx"]
+size = Vector2(36, 10)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fgkta"]
+size = Vector2(28, 10)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fdegs"]
+size = Vector2(6, 7)
+
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_3ykrj"]
 shader = ExtResource("10_3ykrj")
-shader_parameter/intensity = 1.0
+shader_parameter/intensity = 0.0
 
 [sub_resource type="Gradient" id="Gradient_yhlpg"]
 offsets = PackedFloat32Array(0)
@@ -173,8 +197,8 @@ colors = PackedColorArray(0.05882353, 0.019607844, 0.1764706, 1)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_wyd14"]
 gradient = SubResource("Gradient_yhlpg")
-width = 320
-height = 180
+width = 298
+height = 158
 
 [node name="root" type="Node"]
 
@@ -412,7 +436,8 @@ vertical_alignment = 1
 
 [node name="ActiveUnitButtonCtr" type="Control" parent="Game/BattleScreenController/BattleGUI"]
 anchors_preset = 0
-offset_right = 40.0
+offset_left = 1.0
+offset_right = 41.0
 offset_bottom = 40.0
 mouse_filter = 1
 script = ExtResource("7_yrn74")
@@ -442,22 +467,22 @@ shape = SubResource("RectangleShape2D_00fvs")
 
 [node name="StrikeButtonDown" type="TextureRect" parent="Game/BattleScreenController/BattleGUI/ActiveUnitButtonCtr"]
 layout_mode = 0
-offset_left = 32.0
+offset_left = 31.0
 offset_top = 110.0
-offset_right = 49.0
+offset_right = 48.0
 offset_bottom = 124.0
 texture = ExtResource("10_iufsc")
 
 [node name="StrikeButtonUp" type="TextureRect" parent="Game/BattleScreenController/BattleGUI/ActiveUnitButtonCtr"]
 layout_mode = 0
-offset_left = 32.0
+offset_left = 31.0
 offset_top = 110.0
-offset_right = 49.0
+offset_right = 48.0
 offset_bottom = 124.0
 texture = ExtResource("11_kc0fq")
 
 [node name="StrButDetect" type="Area2D" parent="Game/BattleScreenController/BattleGUI/ActiveUnitButtonCtr"]
-position = Vector2(32, 110)
+position = Vector2(31, 110)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Game/BattleScreenController/BattleGUI/ActiveUnitButtonCtr/StrButDetect"]
 position = Vector2(8.5, 7)
@@ -465,22 +490,22 @@ shape = SubResource("RectangleShape2D_00fvs")
 
 [node name="AbilityButtonDown" type="TextureRect" parent="Game/BattleScreenController/BattleGUI/ActiveUnitButtonCtr"]
 layout_mode = 0
-offset_left = 54.0
+offset_left = 53.0
 offset_top = 110.0
-offset_right = 71.0
+offset_right = 70.0
 offset_bottom = 124.0
 texture = ExtResource("12_h14kp")
 
 [node name="AbilityButtonUp" type="TextureRect" parent="Game/BattleScreenController/BattleGUI/ActiveUnitButtonCtr"]
 layout_mode = 0
-offset_left = 54.0
+offset_left = 53.0
 offset_top = 110.0
-offset_right = 71.0
+offset_right = 70.0
 offset_bottom = 124.0
 texture = ExtResource("13_bhsri")
 
 [node name="AbiButDetec" type="Area2D" parent="Game/BattleScreenController/BattleGUI/ActiveUnitButtonCtr"]
-position = Vector2(54, 110)
+position = Vector2(53, 110)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Game/BattleScreenController/BattleGUI/ActiveUnitButtonCtr/AbiButDetec"]
 position = Vector2(8.5, 7)
@@ -502,14 +527,16 @@ script = ExtResource("7_dmcc4")
 
 [node name="MovePanelDown1" type="TextureRect" parent="Game/BattleScreenController/BattleGUI/MovementLeftDis"]
 layout_mode = 0
-offset_right = 16.0
+offset_left = 1.0
+offset_right = 17.0
 offset_bottom = 16.0
 texture = ExtResource("9_igv4w")
 expand_mode = 1
 
 [node name="MovePanelUp1" type="TextureRect" parent="Game/BattleScreenController/BattleGUI/MovementLeftDis"]
 layout_mode = 0
-offset_right = 16.0
+offset_left = 1.0
+offset_right = 17.0
 offset_bottom = 16.0
 texture = ExtResource("10_u71m5")
 expand_mode = 1
@@ -618,23 +645,43 @@ texture = ExtResource("4_r4dsk")
 
 [node name="MapNodeController" type="Node2D" parent="Game/WorldMapController" node_paths=PackedStringArray("starting_map")]
 script = ExtResource("5_qwj7d")
-starting_map = NodePath("TestMapNode")
+starting_map = NodePath("MapNode1")
 
-[node name="TestMapNode" parent="Game/WorldMapController/MapNodeController" node_paths=PackedStringArray("post_maps") instance=ExtResource("25_kc0fq")]
+[node name="MapNode1" parent="Game/WorldMapController/MapNodeController" node_paths=PackedStringArray("post_maps") instance=ExtResource("25_kc0fq")]
 position = Vector2(127, 51)
 linked_battle_map = ExtResource("26_h14kp")
-post_maps = [NodePath("../TestMapNode2")]
+post_maps = [NodePath("../MapNode2")]
 
-[node name="TestMapNode2" parent="Game/WorldMapController/MapNodeController" node_paths=PackedStringArray("post_maps") instance=ExtResource("25_kc0fq")]
+[node name="MapNode2" parent="Game/WorldMapController/MapNodeController" node_paths=PackedStringArray("post_maps") instance=ExtResource("25_kc0fq")]
 position = Vector2(132, 82)
 linked_battle_map = ExtResource("27_bhsri")
-post_maps = [NodePath("../MapNodeT2")]
+post_maps = [NodePath("../MapNode3")]
 
-[node name="MapNodeT2" parent="Game/WorldMapController/MapNodeController" instance=ExtResource("25_kc0fq")]
+[node name="MapNode3" parent="Game/WorldMapController/MapNodeController" node_paths=PackedStringArray("post_maps") instance=ExtResource("25_kc0fq")]
 position = Vector2(111, 97)
 linked_battle_map = ExtResource("28_nkpx2")
+post_maps = [NodePath("../MapNode4")]
 
-[node name="MainMenu" type="Control" parent="Game"]
+[node name="MapNode4" parent="Game/WorldMapController/MapNodeController" node_paths=PackedStringArray("post_maps") instance=ExtResource("25_kc0fq")]
+position = Vector2(105, 110)
+linked_battle_map = ExtResource("38_wj6xv")
+post_maps = [NodePath("../MapNode5")]
+
+[node name="MapNode5" parent="Game/WorldMapController/MapNodeController" node_paths=PackedStringArray("post_maps") instance=ExtResource("25_kc0fq")]
+position = Vector2(100, 130)
+linked_battle_map = ExtResource("39_ku33t")
+post_maps = [NodePath("../MapNode6")]
+
+[node name="MapNode6" parent="Game/WorldMapController/MapNodeController" node_paths=PackedStringArray("post_maps") instance=ExtResource("25_kc0fq")]
+position = Vector2(85, 144)
+linked_battle_map = ExtResource("40_4st3s")
+post_maps = [NodePath("../MapNode7")]
+
+[node name="MapNode7" parent="Game/WorldMapController/MapNodeController" instance=ExtResource("25_kc0fq")]
+position = Vector2(110, 154)
+linked_battle_map = ExtResource("41_tao0g")
+
+[node name="TitleScreen" type="Control" parent="Game"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -642,37 +689,155 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 1
+script = ExtResource("38_nc4bc")
 
-[node name="Border" type="TextureRect" parent="Game/MainMenu"]
+[node name="BG" type="TextureRect" parent="Game/TitleScreen"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("38_crujp")
+
+[node name="FG" type="TextureRect" parent="Game/TitleScreen"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("39_nc4bc")
+
+[node name="TitleCard" type="TextureRect" parent="Game/TitleScreen"]
+layout_mode = 1
+offset_left = 17.0
+offset_top = 15.0
+offset_right = 171.0
+offset_bottom = 70.0
+texture = ExtResource("40_14ahm")
+
+[node name="MainMenuContainter" type="Control" parent="Game/TitleScreen"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MenuOptions" type="Control" parent="Game/TitleScreen/MainMenuContainter"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TempOptions" type="TextureRect" parent="Game/TitleScreen/MainMenuContainter/MenuOptions"]
+texture_filter = 1
 layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+offset_left = 38.0
+offset_top = 71.0
+offset_right = 78.0
+offset_bottom = 111.0
+texture = ExtResource("41_50fdx")
+stretch_mode = 2
 
-[node name="BG" type="TextureRect" parent="Game/MainMenu"]
+[node name="StartButtonDetec" type="Area2D" parent="Game/TitleScreen/MainMenuContainter/MenuOptions"]
+position = Vector2(46, 75)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Game/TitleScreen/MainMenuContainter/MenuOptions/StartButtonDetec"]
+position = Vector2(5.5, 0)
+shape = SubResource("RectangleShape2D_14ahm")
+
+[node name="OptionButtonDetec" type="Area2D" parent="Game/TitleScreen/MainMenuContainter/MenuOptions"]
+position = Vector2(54, 87)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Game/TitleScreen/MainMenuContainter/MenuOptions/OptionButtonDetec"]
+position = Vector2(0, -1)
+shape = SubResource("RectangleShape2D_50fdx")
+
+[node name="ExitButtonDetec" type="Area2D" parent="Game/TitleScreen/MainMenuContainter/MenuOptions"]
+position = Vector2(54, 99)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Game/TitleScreen/MainMenuContainter/MenuOptions/ExitButtonDetec"]
+position = Vector2(-4, -2)
+shape = SubResource("RectangleShape2D_fgkta")
+
+[node name="CreditsButtonDetec" type="Area2D" parent="Game/TitleScreen/MainMenuContainter/MenuOptions"]
+position = Vector2(256, 162)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Game/TitleScreen/MainMenuContainter/MenuOptions/CreditsButtonDetec"]
+shape = SubResource("RectangleShape2D_14ahm")
+
+[node name="OptionsContainer" type="Control" parent="Game/TitleScreen"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="BackButton" type="TextureRect" parent="Game/TitleScreen/OptionsContainer"]
 layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+offset_left = 28.0
+offset_top = 70.0
+offset_right = 34.0
+offset_bottom = 77.0
+texture = ExtResource("43_14ahm")
+stretch_mode = 2
 
-[node name="FG" type="TextureRect" parent="Game/MainMenu"]
+[node name="BackToMenuButton" type="Area2D" parent="Game/TitleScreen/OptionsContainer"]
+position = Vector2(28, 70)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Game/TitleScreen/OptionsContainer/BackToMenuButton"]
+position = Vector2(3, 3.5)
+shape = SubResource("RectangleShape2D_fdegs")
+
+[node name="CreditsContainer" type="Control" parent="Game/TitleScreen"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="BackButton" type="TextureRect" parent="Game/TitleScreen/CreditsContainer"]
 layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+offset_left = 28.0
+offset_top = 70.0
+offset_right = 34.0
+offset_bottom = 77.0
+texture = ExtResource("43_14ahm")
+stretch_mode = 2
 
-[node name="TitleCard" type="TextureRect" parent="Game/MainMenu"]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+[node name="BackToMenuButton" type="Area2D" parent="Game/TitleScreen/CreditsContainer"]
+position = Vector2(28, 70)
 
-[node name="Control" type="Control" parent="Game/MainMenu"]
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Game/TitleScreen/CreditsContainer/BackToMenuButton"]
+position = Vector2(3, 3.5)
+shape = SubResource("RectangleShape2D_fdegs")
+
+[node name="Border" type="TextureRect" parent="Game/TitleScreen"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("42_fgkta")
 
 [node name="TransitionNode" type="Control" parent="Game"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = 11.0
+offset_top = 11.0
+offset_right = -11.0
+offset_bottom = -11.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 1
@@ -691,6 +856,9 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = SubResource("GradientTexture2D_wyd14")
 
+[node name="AudioHandler" type="Node" parent="."]
+script = ExtResource("47_50fdx")
+
 [connection signal="game_over" from="Game/BattleScreenController" to="Game" method="_on_battle_screen_controller_game_over"]
 [connection signal="map_ready" from="Game/BattleScreenController/SubViewportContainer/SubViewport/BattleMapController" to="Game/BattleScreenController" method="_on_battle_map_controller_map_ready"]
 [connection signal="update_gui" from="Game/BattleScreenController/SubViewportContainer/SubViewport/BattleMapController" to="Game/BattleScreenController" method="update_gui"]
@@ -707,3 +875,11 @@ texture = SubResource("GradientTexture2D_wyd14")
 [connection signal="mouse_exited" from="Game/BattleScreenController/BattleGUI/EndTurn/Area2D" to="Game/BattleScreenController/BattleGUI/EndTurn" method="_on_area_2d_mouse_exited"]
 [connection signal="map_node_clicked" from="Game/WorldMapController" to="Game" method="_on_world_map_controller_map_node_clicked"]
 [connection signal="node_clicked" from="Game/WorldMapController/MapNodeController" to="Game/WorldMapController" method="_on_map_node_controller_node_clicked"]
+[connection signal="close_game" from="Game/TitleScreen" to="Game" method="close_game"]
+[connection signal="start_game" from="Game/TitleScreen" to="Game" method="_on_title_screen_start_game"]
+[connection signal="input_event" from="Game/TitleScreen/MainMenuContainter/MenuOptions/StartButtonDetec" to="Game/TitleScreen" method="_on_start_button_detec_input_event"]
+[connection signal="input_event" from="Game/TitleScreen/MainMenuContainter/MenuOptions/OptionButtonDetec" to="Game/TitleScreen" method="_on_option_button_detec_input_event"]
+[connection signal="input_event" from="Game/TitleScreen/MainMenuContainter/MenuOptions/ExitButtonDetec" to="Game/TitleScreen" method="_on_exit_button_detec_input_event"]
+[connection signal="input_event" from="Game/TitleScreen/MainMenuContainter/MenuOptions/CreditsButtonDetec" to="Game/TitleScreen" method="_on_credits_button_detec_input_event"]
+[connection signal="input_event" from="Game/TitleScreen/OptionsContainer/BackToMenuButton" to="Game/TitleScreen" method="_on_back_to_menu_button_input_event"]
+[connection signal="input_event" from="Game/TitleScreen/CreditsContainer/BackToMenuButton" to="Game/TitleScreen" method="_on_back_to_menu_button_input_event"]

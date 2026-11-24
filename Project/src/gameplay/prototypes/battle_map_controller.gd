@@ -25,6 +25,8 @@ func _ready():
 	#print(nav_sys.get_point_count())
 	_on_map_container_need_nav()
 
+func give_player_unit(to_add: UnitBase):
+	ally_unit_container.add_child(to_add)
 
 func start_battle():
 	pass
@@ -99,12 +101,6 @@ func attempt_use_ability(tar_pos: Vector2 , user:UnitBase):
 		return
 	
 	var effectee_list: Array[UnitBase] = []
-	
-	
-	
-	
-	##TODO: caster can cast outside of cast range
-	##	update like attempt_strike to have a bounding (for tar_pos_iso)
 	
 	for tile: Vector2i in abi.get_shape():
 		var post_offset = tar_pos_iso + tile

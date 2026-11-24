@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://bwog2wthfwvbx"]
+
+[ext_resource type="Script" uid="uid://b8cfkjif4u2r0" path="res://src/gameplay/battle_maps/map.gd" id="1_5771x"]
+[ext_resource type="TileSet" uid="uid://byqahne7l5q25" path="res://assets/art/world/tilesets/custom_tile_set.tres" id="2_v015r"]
+
+[node name="Map" type="Node2D"]
+script = ExtResource("1_5771x")
+
+[node name="MainTile" type="TileMapLayer" parent="."]
+y_sort_enabled = true
+tile_set = ExtResource("2_v015r")
+
+[node name="TileDeco" type="TileMapLayer" parent="."]
+y_sort_enabled = true
+tile_set = ExtResource("2_v015r")
+y_sort_origin = -8
+
+[node name="EnemyUnits" type="Node2D" parent="."]

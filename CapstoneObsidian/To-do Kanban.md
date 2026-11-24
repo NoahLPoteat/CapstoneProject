@@ -6,6 +6,9 @@ kanban-plugin: board
 
 ## Todo - Stretch
 
+- [ ] reroute enemy ai to be tied to the enemy itself
+- [ ] Make the battle gui panel (the one that shows the unit and abis) tween out of the side after you load into battle, then make the placement + abi select come out after
+- [ ] Consider making the battle gui have equal padding on both sides
 - [ ] Add arrow indicator for current unit
 - [ ] add a visual to the end of the battle screen when battle won / lost
 - [ ] override mouse to custom mouse
@@ -24,28 +27,46 @@ kanban-plugin: board
 
 ## Todo
 
-- [ ] YOU FORGOT TO ADDDDD MANA COSTSS TO THE ABILITIES YOU BUFFOON
+- [ ] Change the border to be global
 - [ ] make 6 unique enemies (make 2 or 3 fodder types)
-- [ ] Give stages a potential for a pre/post fight cutscene (animated sprite and just do it manually)
-- [ ] Give stages the ability to give a unit after
-- [ ] Make a basic title screen that transitions to the world map
-- [ ] reroute enemy ai to be tied to the enemy itself
-- [ ] Increase size of abi selection box to accommodate more text in the description (4 words aint enough)
+- [ ] Implement middle mouse hold panning with bounds for the battlemap
+- [ ] Fully Populate each battlemap with enemies
+- [ ] Finish sprites for Ability selection box
+- [ ] Add the polish to the main menu
+- [ ] Make a godot splash screen (just pixel robot face laughing or something with MADE IN GODOT under it)
+- [ ] Start Tech Doc (do a rough outline)
+- [ ] Start Slideshow (rough outline)
+- [ ] Replace default splash screen with the border + blank screen.
+- [ ] After splash screen, play a cartridge insert animation, followed by making the lights in the bottom right animate. Then play a startup sound transition to the custom made in godot splash. Then transition to the title screen and play the menu music
 
 
 ## in-progress
 
-- [ ] Once Abilities are added, update unit placement to have a choice box appear next to the top unit to choose the ability
+- [ ] Add placement zones to each battlemap
+- [ ] Make the 3 other units you'll be given
+- [ ] Finish custom abilities for each play unit (don't make any for enemies yet they wont have the ai to use them)
+- [ ] Fill each battlemap with enemy units
+- [ ] Make all the maps a have custom shapes
+- [ ] Make a autoload for a future sound system that the options menu modifies
+- [ ] Fill out the options menu
+- [ ] Fill out the credits menu
 - [ ] Modify Abilities to have a sprite that appears in the choice box
-- [ ] Finish sprites for Ability selection box
-- [ ] Add the abi selection bg sprite to godot and have it appear during the placement phase
-- [ ] Modify the abi selection box to have 2 buttons (similar to other buttons currently used) that changes the units chosen ability
-- [ ] Add name desc and other information into the proper areas
-- [ ] Implement middle mouse hold panning with bounds for the battlemap
+- [ ] Add a title song, world map song, and finally an in battle song (modify battle maps to allow different maps to have different songs)
 
 
 ## complete
 
+- [ ] Add battlemaps to each mapnode
+- [ ] Give stages the ability to give a unit after
+- [ ] Make a basic title screen that transitions to the world map
+- [ ] YOU FORGOT TO ADDDDD MANA COSTSS TO THE ABILITIES YOU BUFFOON
+- [ ] Add functionality to start and exit buttons in the main menu
+- [ ] Add functionality to the credits and options button (screen transition and whatnot)
+- [ ] Implement a static tile screen with fake buttons
+- [ ] Add name desc and other information into the proper areas
+- [ ] Modify the abi selection box to have 2 buttons (similar to other buttons currently used) that changes the units chosen ability
+- [ ] Add the abi selection bg sprite to godot and have it appear during the placement phase
+- [ ] Once Abilities are added, update unit placement to have a choice box appear next to the top unit to choose the ability
 - [ ] add some basic abilities for testing
 - [ ] Modify Map reset to move ally units back off screen before the battle (maybe -100 -100 to be safe)
 - [ ] Implement Placement Phase

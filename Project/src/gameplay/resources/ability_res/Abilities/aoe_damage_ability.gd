@@ -21,7 +21,7 @@ func get_shape():
 		for y in range(r * -1, r + 1):
 			var axy = abs(x) + abs(y)
 			
-			if axy <= r and axy != 0:
+			if axy <= r:
 				out.append(Vector2i(x,y))
 	
 	return out

@@ -66,9 +66,30 @@
               "icon": "lucide-book-up",
               "title": "Release Notes 1.15.1"
             }
+          },
+          {
+            "id": "0fb661154b7bbaef",
+            "type": "leaf",
+            "state": {
+              "type": "kanban",
+              "state": {
+                "file": "To-do Kanban.md",
+                "kanbanViewState": {
+                  "kanban-plugin": "board",
+                  "list-collapse": [
+                    false,
+                    false,
+                    false,
+                    false
+                  ]
+                }
+              },
+              "icon": "lucide-trello",
+              "title": "To-do Kanban"
+            }
           }
         ],
-        "currentTab": 3
+        "currentTab": 4
       }
     ],
     "direction": "vertical"
@@ -236,16 +257,16 @@
       "obsidian-kanban:Create new board": false
     }
   },
-  "active": "0e9871a9ab9b19b1",
+  "active": "0fb661154b7bbaef",
   "lastOpenFiles": [
+    "Bugs & Issues.md",
+    "To-do Kanban.md",
+    "TempNotes for Sys2 Do something with LATER.md",
     "DevNotes/World Map.md",
     "DevNotes/Unit & Class System (Friendly & Enemy).md",
-    "To-do Kanban.md",
-    "Bugs & Issues.md",
     "General Ideas.md",
     "DevNotes/Ability System.md",
     "Pasted image 20260922152706.png",
-    "TempNotes for Sys2 Do something with LATER.md",
     "DevNotes/Turn Based Combat.md",
     "DevNotes/Placement Phase.md",
     "DevNotes/Party System.md",

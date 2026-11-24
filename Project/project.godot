@@ -15,6 +15,10 @@ run/main_scene="uid://vyvnt6xkcn2d"
 config/features=PackedStringArray("4.5", "GL Compatibility")
 config/icon="res://icon.svg"
 
+[autoload]
+
+GlobalAudio="*res://src/gameplay/autoloads/audio_handler.gd"
+
 [display]
 
 window/size/viewport_width=320
