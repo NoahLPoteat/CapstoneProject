@@ -820,15 +820,6 @@ position = Vector2(28, 70)
 position = Vector2(3, 3.5)
 shape = SubResource("RectangleShape2D_fdegs")
 
-[node name="Border" type="TextureRect" parent="Game/TitleScreen"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("42_fgkta")
-
 [node name="TransitionNode" type="Control" parent="Game"]
 layout_mode = 1
 anchors_preset = 15
@@ -855,6 +846,15 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = SubResource("GradientTexture2D_wyd14")
+
+[node name="Border" type="TextureRect" parent="Game"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("42_fgkta")
 
 [node name="AudioHandler" type="Node" parent="."]
 script = ExtResource("47_50fdx")
