@@ -5,10 +5,9 @@
 [resource]
 script = ExtResource("1_y3ljr")
 affect_enemy = true
-mana_cost = 25
-ability_name = "test3"
-ability_desc = "This is a test3 description, ability does aoe damage."
+mana_cost = 75
+ability_name = "Summon: Wormhole"
+ability_desc = "Create a wormhole inside the chest of target unit within one tile."
 target_type = 2
-abi_range = 3
-val = 15
+val = 125
 metadata/_custom_type_script = "uid://bmoei356uv52o"

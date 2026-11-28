@@ -1,7 +1,7 @@
-[gd_scene load_steps=26 format=3 uid="uid://cimtfdbsib7gb"]
+[gd_scene load_steps=25 format=3 uid="uid://cimtfdbsib7gb"]
 
 [ext_resource type="Script" uid="uid://dh7uvryf2q04a" path="res://src/gameplay/units/unit.gd" id="1_qriac"]
-[ext_resource type="Texture2D" uid="uid://stn5bu8ghnvr" path="res://assets/art/characters/portraitDesign.png" id="2_l0d4x"]
+[ext_resource type="Texture2D" uid="uid://bixe0ec7g12fi" path="res://src/gameplay/units/unit_portrait_atlas.tres" id="2_qriac"]
 [ext_resource type="Script" uid="uid://b10cm1o4txpbm" path="res://src/gameplay/resources/ability_res/Strikes/str_single_corners.gd" id="3_50dyc"]
 [ext_resource type="Resource" uid="uid://epby5ddrbo62" path="res://src/gameplay/resources/ability_res/Abilities/aoe_damage_ability.tres" id="4_qudpy"]
 [ext_resource type="Script" uid="uid://mpukm3krw8pq" path="res://src/gameplay/resources/ability_res/ability_base.gd" id="5_yengv"]
@@ -10,10 +10,6 @@
 [ext_resource type="PackedScene" uid="uid://dqxytahl0deg1" path="res://src/gameplay/prototypes/particles/bloodParticle.tscn" id="8_26rct"]
 [ext_resource type="Texture2D" uid="uid://ddbpxaxdu1ktf" path="res://assets/art/characters/unitDeathAnim.png" id="9_ixx7b"]
 [ext_resource type="Texture2D" uid="uid://bjti2gkvkyp00" path="res://assets/art/characters/GraveStone.png" id="10_tx3nw"]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_lqv7j"]
-atlas = ExtResource("2_l0d4x")
-region = Rect2(236, 0, 59, 59)
 
 [sub_resource type="Resource" id="Resource_063d6"]
 script = ExtResource("3_50dyc")
@@ -118,7 +114,7 @@ animations = [{
 y_sort_enabled = true
 script = ExtResource("1_qriac")
 unit_name = "Test A 1"
-portrait_texture = SubResource("AtlasTexture_lqv7j")
+portrait_texture = ExtResource("2_qriac")
 is_ally = true
 starting_pos = Vector2i(9, 3)
 movement_left = 4

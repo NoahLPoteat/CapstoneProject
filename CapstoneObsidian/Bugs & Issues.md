@@ -21,6 +21,7 @@ kanban-plugin: board
 
 ## Fixed
 
+- [ ] Ability selection isn't working. It selects the ability for the current unit
 - [ ] 1 ranged area moves do not work properly (wasnt targeting at absxy (0, 0))
 - [ ] when an enemy unit dies, the turn order gets all wonky
 - [ ] UNIT LOADER DOES NOT GO TO NEXT TURN, HANDLE IN BATTLE PHASE LOGIC

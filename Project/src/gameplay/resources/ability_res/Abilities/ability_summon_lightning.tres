@@ -1,0 +1,14 @@
+[gd_resource type="Resource" load_steps=2 format=3 uid="uid://d172jipfulk0t"]
+
+[ext_resource type="Script" uid="uid://j4v14suchl8v" path="res://src/gameplay/resources/ability_res/Abilities/aoe_damage_ability.gd" id="1_v25uk"]
+
+[resource]
+script = ExtResource("1_v25uk")
+aoe_size = 0
+affect_enemy = true
+mana_cost = 25
+ability_name = "Lightning"
+ability_desc = "Summon a bolt of lightning from your staff hitting a unit up to 5 tiles away."
+abi_range = 5
+val = 15
+metadata/_custom_type_script = "uid://bmoei356uv52o"

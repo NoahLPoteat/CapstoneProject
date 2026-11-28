@@ -518,13 +518,15 @@ func _on_placement_done():
 	next_turn(true)
 
 
-func _on_abi_selection_abi_selected(choice: AbiSlectionContainer.options):
-	if current_unit == null: return
+func _on_abi_selection_abi_selected(choice: AbiSlectionContainer.options, unit: UnitBase):
+	if unit == null: return
 	
-	var abi_arr: Array[AbilityBase] = current_unit.get_abilities_array()
+	var abi_arr: Array[AbilityBase] = unit.get_abilities_array()
 	
 	match choice:
 		AbiSlectionContainer.options.ABI_ONE:
-			current_unit.chosen_ability = abi_arr[0]
+			unit.chosen_ability = abi_arr[0]
+			print(unit.unit_name, "ability 1 chosen")
 		AbiSlectionContainer.options.ABI_TWO:
-			current_unit.chosen_ability = abi_arr[1]
+			unit.chosen_ability = abi_arr[1]
+			print(unit.unit_name, "ability 2 chosen")

@@ -1,5 +1,6 @@
 class_name BattleGUI extends Control
 signal placement_done()
+signal abi_selected(choice: AbiSlectionContainer.options, unit: UnitBase)
 
 @onready var portrait_gui: TextureRect = $Portrait
 @onready var movement_left_display: Control = $MovementLeftDis
@@ -103,3 +104,7 @@ func set_placeables(to: Array):
 
 func init_abi_selection():
 	need_to_init_abi = true
+
+
+func _on_abi_selection_abi_selected(choice: AbiSlectionContainer.options) -> void:
+	abi_selected.emit(choice, placeables[0])

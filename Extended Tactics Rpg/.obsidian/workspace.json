@@ -81,12 +81,14 @@
             "id": "c2c75b4cc10c47f5",
             "type": "leaf",
             "state": {
-              "type": "release-notes",
+              "type": "markdown",
               "state": {
-                "currentVersion": "1.15.1"
+                "file": "Art/OSRS Art Ref Dump.md",
+                "mode": "source",
+                "source": false
               },
-              "icon": "lucide-book-up",
-              "title": "Release Notes 1.15.1"
+              "icon": "lucide-file",
+              "title": "OSRS Art Ref Dump"
             }
           }
         ],
@@ -271,10 +273,14 @@
   "active": "c2c75b4cc10c47f5",
   "lastOpenFiles": [
     "Art/Things to Make to Learn.md",
-    "Art/OSRS Art Ref Dump.md",
     "Abstract Dev Timeline.md",
     "Art Decisions.md",
-    "Pasted image 20261109121418.png",
+    "Mechanics Abstract.md",
+    "Unsorted Inspos.md",
+    "Early GDD.md",
+    "General Idea & Abstract.md",
+    "Art/OSRS Art Ref Dump.md",
+    "OSRS Art Refs/Pasted image 20261109121418.png",
     "OSRS Art Refs/Pasted image 20261104150319.png",
     "OSRS Art Refs/Pasted image 20261104150539.png",
     "OSRS Art Refs/Pasted image 20261104150839.png",
@@ -285,11 +291,7 @@
     "OSRS Art Refs/Pasted image 20261104152457.png",
     "OSRS Art Refs/Pasted image 20261104162539.png",
     "Art",
-    "Unsorted Inspos.md",
     "OSRS Art Refs",
-    "General Idea & Abstract.md",
-    "Mechanics Abstract.md",
-    "Early GDD.md",
     "create a link.md"
   ]
 }

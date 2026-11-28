@@ -42,7 +42,6 @@ kanban-plugin: board
 
 ## in-progress
 
-- [ ] Add placement zones to each battlemap
 - [ ] Make the 3 other units you'll be given
 - [ ] Finish custom abilities for each play unit (don't make any for enemies yet they wont have the ai to use them)
 - [ ] Fill each battlemap with enemy units
@@ -50,6 +49,7 @@ kanban-plugin: board
 - [ ] Make a autoload for a future sound system that the options menu modifies
 - [ ] Fill out the options menu
 - [ ] Fill out the credits menu
+- [ ] Add placement zones to each battlemap
 - [ ] Modify Abilities to have a sprite that appears in the choice box
 - [ ] Add a title song, world map song, and finally an in battle song (modify battle maps to allow different maps to have different songs)
 

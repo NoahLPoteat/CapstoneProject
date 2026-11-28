@@ -1,5 +1,6 @@
 extends AdvancedAbility
 
+@export var aoe_size: int = 1
 
 func get_tiles():
 	var r = abi_range
@@ -15,7 +16,7 @@ func get_tiles():
 
 ##TODO: CHANGE THIS TO NOT BE MAGIC WORKS FO NOW
 func get_shape():
-	var r = 2
+	var r = aoe_size
 	var out = []
 	for x in range(r * -1, r + 1):
 		for y in range(r * -1, r + 1):

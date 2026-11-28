@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://cu0oyqg0re8sc"]
+[gd_scene load_steps=13 format=3 uid="uid://cu0oyqg0re8sc"]
 
 [ext_resource type="Script" uid="uid://3dlg7spf66qq" path="res://src/gameplay/prototypes/battle_map_controller.gd" id="1_k8cae"]
 [ext_resource type="Script" uid="uid://cobbp30l8tm5a" path="res://src/gameplay/prototypes/map_container.gd" id="2_gj81i"]
@@ -9,7 +9,7 @@
 [ext_resource type="Script" uid="uid://mpukm3krw8pq" path="res://src/gameplay/resources/ability_res/ability_base.gd" id="7_wg132"]
 [ext_resource type="PackedScene" uid="uid://dqxytahl0deg1" path="res://src/gameplay/prototypes/particles/bloodParticle.tscn" id="8_chmxg"]
 [ext_resource type="Resource" uid="uid://b8xa4bjkye2e8" path="res://src/gameplay/resources/ability_res/Abilities/aoe_damage_ability_test_2.tres" id="8_expod"]
-[ext_resource type="Resource" uid="uid://bdcrqg8sahwu2" path="res://src/gameplay/resources/ability_res/Abilities/aoe_damage_ability_test_4.tres" id="9_ngspu"]
+[ext_resource type="PackedScene" uid="uid://dsv74gencybjb" path="res://src/gameplay/units/AllyUnits/wizard_unit.tscn" id="9_qu2af"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_chmxg"]
 atlas = ExtResource("6_063d6")
@@ -20,17 +20,6 @@ script = ExtResource("7_063d6")
 ability_name = "Strike"
 ability_desc = "Single Target Strike, Range and Damage Varies per unit"
 val = 35
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_qu2af"]
-atlas = ExtResource("6_063d6")
-region = Rect2(118, 0, 59, 59)
-
-[sub_resource type="Resource" id="Resource_063d6"]
-script = ExtResource("7_063d6")
-ability_name = "Strike"
-ability_desc = "Single Target Strike, Range and Damage Varies per unit"
-abi_range = 4
-val = 20
 
 [node name="BattleMapController" type="Node2D"]
 script = ExtResource("1_k8cae")
@@ -56,18 +45,7 @@ available_abilities = Array[ExtResource("7_wg132")]([ExtResource("6_lqv7j"), Ext
 [node name="Sprite2D" parent="AllyUnitContainer/Sharri" index="0"]
 frame = 0
 
-[node name="Unit2" parent="AllyUnitContainer" instance=ExtResource("5_ekq22")]
-position = Vector2(-11, -19)
-portrait_texture = SubResource("AtlasTexture_qu2af")
-is_ally = true
-starting_pos = Vector2i(9, 3)
-movement_left = 4
-strike = SubResource("Resource_063d6")
-chosen_ability = ExtResource("8_expod")
-available_abilities = Array[ExtResource("7_wg132")]([ExtResource("8_expod"), ExtResource("9_ngspu")])
-
-[node name="Sprite2D" parent="AllyUnitContainer/Unit2" index="0"]
-frame = 1
+[node name="WizardUnit" parent="AllyUnitContainer" instance=ExtResource("9_qu2af")]
 
 [node name="Node2D" parent="." instance=ExtResource("8_chmxg")]
 position = Vector2(160, 51)
@@ -76,4 +54,3 @@ explosiveness = 0.8
 [connection signal="need_nav" from="MapContainer" to="." method="_on_map_container_need_nav"]
 
 [editable path="AllyUnitContainer/Sharri"]
-[editable path="AllyUnitContainer/Unit2"]

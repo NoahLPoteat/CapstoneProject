@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://d1v850lii6waf"]
+
+[ext_resource type="Script" uid="uid://dh7uvryf2q04a" path="res://src/gameplay/units/unit.gd" id="1_e0uhn"]
+
+[node name="Asd" type="Node2D"]
+script = ExtResource("1_e0uhn")
+metadata/_custom_type_script = "uid://dh7uvryf2q04a"

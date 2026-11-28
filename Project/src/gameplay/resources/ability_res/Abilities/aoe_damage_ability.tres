@@ -6,8 +6,9 @@
 script = ExtResource("1_q7jpx")
 affect_enemy = true
 mana_cost = 25
-ability_name = "test"
-ability_desc = "This is a test description, ability does aoe damage."
+ability_name = "Summon: Lightning"
+ability_desc = "Summon a bolt of lightning from your staff, hitting a unit up to 5 tiles away."
 target_type = 2
+abi_range = 5
 val = 15
 metadata/_custom_type_script = "uid://bmoei356uv52o"

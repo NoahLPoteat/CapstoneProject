@@ -1,0 +1,13 @@
+[gd_resource type="Resource" load_steps=2 format=3 uid="uid://nvqn5dk6qsam"]
+
+[ext_resource type="Script" uid="uid://j4v14suchl8v" path="res://src/gameplay/resources/ability_res/Abilities/aoe_damage_ability.gd" id="1_q8kls"]
+
+[resource]
+script = ExtResource("1_q8kls")
+aoe_size = 0
+affect_enemy = true
+mana_cost = 75
+ability_name = "Wormhole"
+ability_desc = "Create a wormhole inside the chest of target unit within one tile."
+val = 125
+metadata/_custom_type_script = "uid://bmoei356uv52o"
